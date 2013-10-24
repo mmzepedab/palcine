@@ -11,19 +11,16 @@ return array(
 
 	// application components
 	'components'=>array(
+		
 		'db'=>array(
-			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
-		),
-		// uncomment the following to use a MySQL database
-		/*
-		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=testdrive',
-			'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => '',
-			'charset' => 'utf8',
-		),
-		*/
+                            'connectionString' => 'mysql:host=localhost;dbname=palcineweb',
+                            'emulatePrepare' => true,
+                            'username' => 'root',
+                            'password' => '',
+                            'charset' => 'utf8',
+                            'tablePrefix' => 'pal_',
+                    ),
+            
 		'log'=>array(
 			'class'=>'CLogRouter',
 			'routes'=>array(
@@ -34,4 +31,15 @@ return array(
 			),
 		),
 	),
+    
+        // Command Map
+          'commandMap'=>array(
+            'migrate'=>array(
+              'class'=>'system.cli.commands.MigrateCommand',
+              'migrationPath'=>'application.migrations',
+              'migrationTable'=>'pal_migration',
+              'connectionID'=>'db',
+              'templateFile'=>'application.migrations.template',
+            ),
+          ),
 );
