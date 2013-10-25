@@ -16,19 +16,23 @@ class m131024_214700_create_database_structure extends CDbMigration
                                 'probability'=>'INT(1) NOT NULL',
 			), 'ENGINE=InnoDB');
                 
-                $this->createTable('pal_city',
-			array(
-				'id'=>'VARCHAR(5) ',
-				'name'=>'VARCHAR(255) NOT NULL',
-				'country_id'=>'VARCHAR(2) NOT NULL',
-			), 'ENGINE=InnoDB');
+                
                 
                 $this->createTable('pal_country',
 			array(
 				'id'=>'pk',
 				'name'=>'VARCHAR(255) NOT NULL',
 				'dial_code'=>'VARCHAR(2) NOT NULL',
-			), 'ENGINE=InnoDB');
+			));
+                
+                $this->createTable('pal_city',
+			array(
+				'id'=>'VARCHAR(5) ',
+				'name'=>'VARCHAR(255) NOT NULL',
+				'country_id'=>'VARCHAR(2)',
+			));
+                $this->addForeignKey('fk_city_country', 'pal_city', 'country_id', 'pal_country', 'id','CASCADE','CASCADE');
+
                 
                 $this->createTable('pal_franchise',
 			array(
@@ -64,6 +68,31 @@ class m131024_214700_create_database_structure extends CDbMigration
                                 'update_time'=>'datetime DEFAULT NULL',
 				'update_user'=>'INT (11) DEFAULT NULL',
 			), 'ENGINE=InnoDB');
+                $this->addForeignKey('fk_movie_genre', 'pal_movie', 'genre_id', 'pal_genre', 'id','CASCADE','CASCADE');
+                
+                $this->createTable('pal_user',
+			array(
+				'id'=>'pk',
+                                'username'=>'VARCHAR(50) NOT NULL',
+                                'password'=>'VARCHAR(500) NOT NULL',
+                                'temp_password'=>'VARCHAR(500) NOT NULL',
+				'first_name'=>'VARCHAR(100) NOT NULL',
+                                'last_name'=>'VARCHAR(100) NOT NULL',
+                                'email'=>'VARCHAR(100) NOT NULL',
+                                'bbpin'=>'VARCHAR(50) NOT NULL',
+                                'phone_number'=>'VARCHAR(50) NOT NULL',
+                                'create_time'=>'datetime DEFAULT NULL',
+				'create_user'=>'INT (11) DEFAULT NULL',
+                                'update_time'=>'datetime DEFAULT NULL',
+				'update_user'=>'INT (11) DEFAULT NULL',
+                                'last_login'=>'datetime DEFAULT NULL',
+                                'is_validated'=>'INT (1) NOT NULL',
+                                'validation_code'=>'VARCHAR(100) NOT NULL',
+                                'is_active'=>'INT (1) NOT NULL',
+                                'platform'=>'VARCHAR(50) NOT NULL',
+                                'country_id'=>'VARCHAR(2) NOT NULL',
+                                'city_id'=>'VARCHAR(5) NOT NULL',
+			), 'ENGINE=InnoDB');
                 
                 $this->createTable('pal_movie_comment',
 			array(
@@ -73,6 +102,9 @@ class m131024_214700_create_database_structure extends CDbMigration
 				'comment'=>'VARCHAR(500) NOT NULL',
                                 'create_time'=>'datetime DEFAULT NULL',
 			), 'ENGINE=InnoDB');
+                $this->addForeignKey('fk_movie_comment', 'pal_movie_comment', 'movie_id', 'pal_movie', 'id','CASCADE','CASCADE');
+                $this->addForeignKey('fk_movie_comment_user', 'pal_movie_comment', 'user_id', 'pal_user', 'id','CASCADE','CASCADE');
+
                 
                 $this->createTable('pal_movie_vote',
 			array(
@@ -84,6 +116,9 @@ class m131024_214700_create_database_structure extends CDbMigration
                                 'UNIQUE KEY `movie_id` (`movie_id`)',
                                 'UNIQUE KEY `user_id` (`user_id`)',
 			), 'ENGINE=InnoDB');
+                $this->addForeignKey('fk_movie_vote', 'pal_movie_vote', 'movie_id', 'pal_movie', 'id','CASCADE','CASCADE');
+                $this->addForeignKey('fk_movie_vote_user', 'pal_movie_vote', 'user_id', 'pal_user', 'id','CASCADE','CASCADE');
+
                 
                 $this->createTable('pal_new',
 			array(
@@ -108,24 +143,7 @@ class m131024_214700_create_database_structure extends CDbMigration
                                 'alias'=>'VARCHAR(100) NOT NULL',
 			), 'ENGINE=InnoDB');
                 
-                $this->createTable('pal_room',
-			array(
-				'id'=>'pk',
-				'name'=>'VARCHAR(100) NOT NULL',
-                                'theater_id'=>'INT(11) NOT NULL',
-                                'is_3d'=>'INT(1) NOT NULL',
-			), 'ENGINE=InnoDB');
-                
-                 $this->createTable('pal_room_time',
-			array(
-				'id'=>'pk',
-                                'room_id'=>'INT(11) NOT NULL',
-                                'time'=>'time DEFAULT NULL',
-                                'movie_id'=>'INT(11) NOT NULL',
-                                'UNIQUE KEY (`room_id`, `movie_id`)'
-			), 'ENGINE=InnoDB');
-                 
-                 $this->createTable('pal_movie',
+                $this->createTable('pal_theater',
 			array(
 				'id'=>'pk',
                                 'franchise_id'=>'INT(11) NOT NULL',
@@ -143,14 +161,63 @@ class m131024_214700_create_database_structure extends CDbMigration
                                 'update_time'=>'datetime DEFAULT NULL',
 				'update_user'=>'INT (11) DEFAULT NULL',
 			), 'ENGINE=InnoDB');
+                
+                $this->createTable('pal_room',
+			array(
+				'id'=>'pk',
+				'name'=>'VARCHAR(100) NOT NULL',
+                                'theater_id'=>'INT(11) NOT NULL',
+                                'is_3d'=>'INT(1) NOT NULL',
+			), 'ENGINE=InnoDB');
+                $this->addForeignKey('fk_room_theater', 'pal_room', 'theater_id', 'pal_theater', 'id','CASCADE','CASCADE');
+
+                
+                 $this->createTable('pal_room_time',
+			array(
+				'id'=>'pk',
+                                'room_id'=>'INT(11) NOT NULL',
+                                'time'=>'time DEFAULT NULL',
+                                'movie_id'=>'INT(11) NOT NULL',
+                                /*'UNIQUE KEY (`room_id`, `movie_id`)'*/
+			), 'ENGINE=InnoDB');
+                 $this->addForeignKey('fk_room_time', 'pal_room_time', 'room_id', 'pal_room', 'id','CASCADE','CASCADE');
+                 $this->addForeignKey('fk_room_movie', 'pal_room_time', 'movie_id', 'pal_movie', 'id','CASCADE','CASCADE');
+
+                 
+                 
+                 
+                 
+                 
+                 
 	}
 
 	public function down()
 	{
-		$this->dropTable('pal_movie');
+            
+		$this->dropForeignKey('fk_country', 'pal_city');
+                $this->dropForeignKey('fk_movie_genre', 'pal_movie');
+                $this->dropForeignKey('fk_movie_comment', 'pal_movie_comment');
+                $this->dropForeignKey('fk_movie_comment_user', 'pal_movie_comment');
+                $this->dropForeignKey('fk_movie_vote', 'pal_movie_vote'); 
+                $this->dropForeignKey('fk_movie_vote_user', 'pal_movie_vote');
+                $this->dropForeignKey('fk_room_theater', 'pal_room');
+                $this->dropForeignKey('fk_room_time', 'pal_room_time');
+                $this->dropForeignKey('fk_room_movie', 'pal_room_time');        
+                        
                 $this->dropTable('pal_banner');
                 $this->dropTable('pal_city');
                 $this->dropTable('pal_country');
+                $this->dropTable('pal_franchise');
+                $this->dropTable('pal_genre');
+                $this->dropTable('pal_movie');
+                $this->dropTable('pal_movie_comment');
+                $this->dropTable('pal_movie_vote');
+                $this->dropTable('pal_new');
+                $this->dropTable('pal_page');
+                $this->dropTable('pal_room');
+                $this->dropTable('pal_room_time');
+                $this->dropTable('pal_theater');
+                $this->dropTable('pal_user');
 		//echo "m130604_174032_create_question_table does not support migration down.\n";
 		//return false;
 	}
