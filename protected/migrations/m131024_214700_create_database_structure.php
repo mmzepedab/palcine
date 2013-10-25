@@ -98,9 +98,9 @@ class m131024_214700_create_database_structure extends CDbMigration
 			array(
 				'id'=>'pk',
                                 'movie_id'=>'INT(11) NOT NULL',
-                                'user_id'=>'INT(11) NOT NULL',
-				'comment'=>'VARCHAR(500) NOT NULL',
+                                'user_id'=>'INT(11) NOT NULL',                                
                                 'create_time'=>'datetime DEFAULT NULL',
+				'comment'=>'VARCHAR(500) NOT NULL',
 			), 'ENGINE=InnoDB');
                 $this->addForeignKey('fk_movie_comment', 'pal_movie_comment', 'movie_id', 'pal_movie', 'id','CASCADE','CASCADE');
                 $this->addForeignKey('fk_movie_comment_user', 'pal_movie_comment', 'user_id', 'pal_user', 'id','CASCADE','CASCADE');
@@ -125,11 +125,11 @@ class m131024_214700_create_database_structure extends CDbMigration
 				'id'=>'pk',
 				'title'=>'VARCHAR(100) NOT NULL',
 				'description'=>'VARCHAR(500) NOT NULL',
+                                'create_time'=>'datetime DEFAULT NULL',
 				'is_published'=>'INT (1)',
 				'url'=>'VARCHAR(500) NOT NULL',
 				'image_thumbnail'=>'VARCHAR(500) NOT NULL',
 				'image_thumbnail2x'=>'VARCHAR(500) NOT NULL',
-                                'create_time'=>'datetime DEFAULT NULL',
 				'create_user'=>'INT (11) DEFAULT NULL',
                                 'update_time'=>'datetime DEFAULT NULL',
 				'update_user'=>'INT (11) DEFAULT NULL',

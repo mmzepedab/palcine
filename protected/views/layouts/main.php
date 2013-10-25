@@ -14,26 +14,36 @@
 
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
+        
+        <!-- Carousel -->
+        <!-- CSS files -->
+        <link rel="stylesheet" type="text/css" href="touchcarousel/touchcarousel.css" />
+        <!-- Skin Stylesheet -->
+        <link rel="stylesheet" type="text/css" href="touchcarousel/grey-blue-skin/grey-blue-skin.css" />
 
-	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
+        <!-- JS files -->
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+        <script type="text/javascript" src="touchcarousel/jquery.touchcarousel-1.2.min.js"></script>
+	
+        <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
 <body>
-
+<div id="main_sub">
 <div class="container" id="page">
 
 	<div id="header">
-		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
+            <a href="./"><div id="logo"></div></a>
 	</div><!-- header -->
 
 	<div id="mainmenu">
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
-				array('label'=>'Home', 'url'=>array('/site/index')),
-				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-				array('label'=>'Contact', 'url'=>array('/site/contact')),
+				array('label'=>'Inicio', 'url'=>array('/site/index')),
+				array('label'=>'Acerca de', 'url'=>array('/site/page', 'view'=>'about')),
+				array('label'=>'Contacto', 'url'=>array('/site/contact')),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+				array('label'=>'Cerrar Sesion ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
 		)); ?>
 	</div><!-- mainmenu -->
@@ -54,6 +64,6 @@
 	</div><!-- footer -->
 
 </div><!-- page -->
-
+</div>
 </body>
 </html>
