@@ -47,14 +47,25 @@ return array(
 			),
 		),
 		*/
+		 //MySQL database on PC Server
+//                'db'=>array(
+//                            'connectionString' => 'mysql:host=localhost;dbname=palcineweb',
+//                            'emulatePrepare' => true,
+//                            'username' => 'root',
+//                            'password' => '',
+//                            'charset' => 'utf8',
+//                            'tablePrefix' => 'pal_',
+//                    ),
+            
+                //MySQL database on MAC Server
 		'db'=>array(
-                            'connectionString' => 'mysql:host=localhost;dbname=palcineweb',
-                            'emulatePrepare' => true,
-                            'username' => 'root',
-                            'password' => '',
-                            'charset' => 'utf8',
-                            'tablePrefix' => 'pal_',
-                    ),
+			'connectionString' => 'mysql:host=127.0.0.1;port=8889;dbname=palcineweb;unix_socket:/Applications/MAMP/tmp/mysql/mysql.sock',
+                        'emulatePrepare' => true,
+			'username' => 'root',
+			'password' => 'root',
+			'charset' => 'utf8',
+                        'tablePrefix' => 'pal_',
+		),
 		
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
