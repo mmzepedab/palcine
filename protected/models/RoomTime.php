@@ -96,4 +96,19 @@ class RoomTime extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        public function view_room_times($id)
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+//		$criteria=new CDbCriteria;
+//
+//		$criteria->compare('idSolicitud',$id);
+		
+                return new CActiveDataProvider($this, array(
+                            'criteria'=>array(
+                            'condition'=>'room_id='.$id,
+                            ),
+		));
+	}
 }

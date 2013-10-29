@@ -19,18 +19,18 @@ $this->menu=array(
 
 ?>
 
-<h1>Ver Franquicia #<?php echo $model->id; ?></h1>
+<h1><?php echo $model->name; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id',
+		/*'id',*/
 		'name',
 		'description',
 	),
 )); ?>
 
-
+<h2>Salas</h2>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'theaters-grid',
 	'dataProvider'=> Theater::model()->view_franchise_theaters($model->id) ,
@@ -52,7 +52,7 @@ $this->menu=array(
                                 'label'=>'Ver Cine',  
                                 'imageUrl'=>Yii::app()->request->baseUrl.'/images/view.png',
                                 //'url'=>'Yii::app()->createUrl("respuestas/view", array("id"=>$data->id))',
-                                'url'=>'Yii::app()->request->baseUrl.\'/index.php?r=/issueResponse/view&id=\'.$data->id',
+                                'url'=>'Yii::app()->request->baseUrl.\'/index.php?r=/theater/view&id=\'.$data->id',
                             ),
                         ),
                     ),

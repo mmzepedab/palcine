@@ -52,13 +52,13 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'price'); ?>
-		<?php echo $form->textField($model,'price',array('size'=>50,'maxlength'=>50)); ?>
+		<?php echo $form->textField($model,'price',array('size'=>10,'maxlength'=>50)); ?>
 		<?php echo $form->error($model,'price'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'price_3d'); ?>
-		<?php echo $form->textField($model,'price_3d',array('size'=>50,'maxlength'=>50)); ?>
+		<?php echo $form->textField($model,'price_3d',array('size'=>10,'maxlength'=>50)); ?>
 		<?php echo $form->error($model,'price_3d'); ?>
 	</div>
 
@@ -71,39 +71,21 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'country_id'); ?>
-		<?php echo $form->textField($model,'country_id',array('size'=>2,'maxlength'=>2)); ?>
+                <?php echo $form->dropDownList($model,'country_id', CHtml::listData(Country::model()->findAll(), 'id', 'name'), array('empty'=>'Seleccionar...')); ?>
+
+		<?php /*echo $form->textField($model,'country_id',array('size'=>2,'maxlength'=>2)); */?>
 		<?php echo $form->error($model,'country_id'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'city_id'); ?>
-		<?php echo $form->textField($model,'city_id',array('size'=>5,'maxlength'=>5)); ?>
+                <?php echo $form->dropDownList($model,'city_id', CHtml::listData(City::model()->findAll(), 'id', 'name'), array('empty'=>'Seleccionar...')); ?>
+
+		<?php //echo $form->textField($model,'city_id',array('size'=>5,'maxlength'=>5)); ?>
 		<?php echo $form->error($model,'city_id'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'create_time'); ?>
-		<?php echo $form->textField($model,'create_time'); ?>
-		<?php echo $form->error($model,'create_time'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'create_user'); ?>
-		<?php echo $form->textField($model,'create_user'); ?>
-		<?php echo $form->error($model,'create_user'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'update_time'); ?>
-		<?php echo $form->textField($model,'update_time'); ?>
-		<?php echo $form->error($model,'update_time'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'update_user'); ?>
-		<?php echo $form->textField($model,'update_user'); ?>
-		<?php echo $form->error($model,'update_user'); ?>
-	</div>
+	
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>

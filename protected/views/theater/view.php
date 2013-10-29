@@ -3,38 +3,63 @@
 /* @var $model Theater */
 
 $this->breadcrumbs=array(
-	'Theaters'=>array('index'),
+        $model->franchise->name=>array('franchise/view','id'=>$model->franchise_id),
+	/*'Cines'=>array('index'),*/
 	$model->name,
 );
 
 $this->menu=array(
-	array('label'=>'List Theater', 'url'=>array('index')),
-	array('label'=>'Create Theater', 'url'=>array('create')),
-	array('label'=>'Update Theater', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Theater', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Theater', 'url'=>array('admin')),
+	/*array('label'=>'Listar Cines', 'url'=>array('index')),*/
+	/*array('label'=>'Create Cine', 'url'=>array('create')),*/
+        array('label'=>'Crear Sala', 'url'=>array('room/create','t_id'=>$model->id)),
+	array('label'=>'Actualizar Cine', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Eliminar Cine', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	/*array('label'=>'Manage Cine', 'url'=>array('admin')),*/
 );
 ?>
 
-<h1>View Theater #<?php echo $model->id; ?></h1>
+<h1><?php echo $model->name; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
 		'id',
-		'franchise_id',
+                array(
+                   'label'=>'Franquicia',
+                   'value'=>$model->franchise->name,
+                 ),
+		/*'franchise.name',*/
 		'name',
-		'address',
-		'latitude',
-		'longitude',
-		'price',
-		'price_3d',
-		'is_tuesday_half_price',
-		'country_id',
-		'city_id',
-		'create_time',
-		'create_user',
-		'update_time',
-		'update_user',
+	),
+)); ?>
+
+</br>
+</br>
+<h2>Salas</h2>
+<?php $this->widget('zii.widgets.grid.CGridView', array(
+	'id'=>'theaters-grid',
+	'dataProvider'=> Room::model()->view_theater_rooms($model->id) ,
+//	'filter'=>Respuestas::model(),
+	'columns'=>array(
+		'id',
+		'name',
+		/*
+		'adjuntos',
+		*/
+		array
+                    (
+                        'class'=>'CButtonColumn',
+                        'template'=>'{view}',
+                        'buttons'=>array
+                        (
+                            'view' => array
+                            (
+                                'label'=>'Ver Sala',  
+                                'imageUrl'=>Yii::app()->request->baseUrl.'/images/view.png',
+                                //'url'=>'Yii::app()->createUrl("respuestas/view", array("id"=>$data->id))',
+                                'url'=>'Yii::app()->request->baseUrl.\'/index.php?r=/room/view&id=\'.$data->id',
+                            ),
+                        ),
+                    ),
 	),
 )); ?>

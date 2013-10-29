@@ -16,7 +16,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>View RoomTime #<?php echo $model->id; ?></h1>
+<h1>Ver Tanda #<?php echo $model->id; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
@@ -24,6 +24,6 @@ $this->menu=array(
 		'id',
 		'room_id',
 		'time',
-		'movie_id',
+		'movie.name',
 	),
 )); ?>

@@ -1,6 +1,6 @@
 <?php
 
-class RoomTimeController extends Controller
+class CountryController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -62,17 +62,16 @@ class RoomTimeController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new RoomTime;
+		$model=new Country;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['RoomTime']))
+		if(isset($_POST['Country']))
 		{
-			$model->attributes=$_POST['RoomTime'];
+			$model->attributes=$_POST['Country'];
 			if($model->save())
-				//$this->redirect(array('view','id'=>$model->id));
-                                $this->redirect(array('room/view','id'=>$model->room_id));
+				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('create',array(
@@ -92,9 +91,9 @@ class RoomTimeController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['RoomTime']))
+		if(isset($_POST['Country']))
 		{
-			$model->attributes=$_POST['RoomTime'];
+			$model->attributes=$_POST['Country'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -123,7 +122,7 @@ class RoomTimeController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('RoomTime');
+		$dataProvider=new CActiveDataProvider('Country');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -134,10 +133,10 @@ class RoomTimeController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new RoomTime('search');
+		$model=new Country('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['RoomTime']))
-			$model->attributes=$_GET['RoomTime'];
+		if(isset($_GET['Country']))
+			$model->attributes=$_GET['Country'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -148,12 +147,12 @@ class RoomTimeController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return RoomTime the loaded model
+	 * @return Country the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=RoomTime::model()->findByPk($id);
+		$model=Country::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -161,11 +160,11 @@ class RoomTimeController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param RoomTime $model the model to be validated
+	 * @param Country $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='room-time-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='country-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

@@ -1,24 +1,22 @@
 <?php
 
 /**
- * This is the model class for table "{{room}}".
+ * This is the model class for table "{{city}}".
  *
- * The followings are the available columns in table '{{room}}':
- * @property integer $id
+ * The followings are the available columns in table '{{city}}':
+ * @property string $id
  * @property string $name
- * @property integer $theater_id
- * @property integer $is_3d
+ * @property string $country_id
  *
  * The followings are the available model relations:
- * @property Theater $theater
- * @property RoomTime[] $roomTimes
+ * @property Country $country
  */
-class Room extends CActiveRecord
+class City extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return Room the static model class
+	 * @return City the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -30,7 +28,7 @@ class Room extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{room}}';
+		return '{{city}}';
 	}
 
 	/**
@@ -41,12 +39,13 @@ class Room extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, theater_id, is_3d', 'required'),
-			array('theater_id, is_3d', 'numerical', 'integerOnly'=>true),
-			array('name', 'length', 'max'=>100),
+			array('name, country_id, id', 'required'),
+			array('id', 'length', 'max'=>5),
+			array('name', 'length', 'max'=>255),
+			array('country_id', 'length', 'max'=>2),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, theater_id, is_3d', 'safe', 'on'=>'search'),
+			array('id, name, country_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -58,8 +57,7 @@ class Room extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'theater' => array(self::BELONGS_TO, 'Theater', 'theater_id'),
-			'roomTimes' => array(self::HAS_MANY, 'RoomTime', 'room_id'),
+			'country' => array(self::BELONGS_TO, 'Country', 'country_id'),
 		);
 	}
 
@@ -70,9 +68,8 @@ class Room extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'Nombre',
-			'theater_id' => 'Cine',
-			'is_3d' => 'Es 3D',
+			'name' => 'Name',
+			'country_id' => 'Country',
 		);
 	}
 
@@ -87,28 +84,12 @@ class Room extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('id',$this->id,true);
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('theater_id',$this->theater_id);
-		$criteria->compare('is_3d',$this->is_3d);
+		$criteria->compare('country_id',$this->country_id,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
-		));
-	}
-        
-        public function view_theater_rooms($id)
-	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
-
-//		$criteria=new CDbCriteria;
-//
-//		$criteria->compare('idSolicitud',$id);
-		
-                return new CActiveDataProvider($this, array(
-                            'criteria'=>array(
-                            'condition'=>'theater_id='.$id,
-                            ),
 		));
 	}
 }
