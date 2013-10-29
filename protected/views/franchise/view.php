@@ -3,17 +3,20 @@
 /* @var $model Franchise */
 
 $this->breadcrumbs=array(
-	'Franchises'=>array('index'),
+	'Franquicias'=>array('index'),
 	$model->name,
 );
 
 $this->menu=array(
-	array('label'=>'List Franchise', 'url'=>array('index')),
-	array('label'=>'Create Franchise', 'url'=>array('create')),
-	array('label'=>'Update Franchise', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Franchise', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Franchise', 'url'=>array('admin')),
+        array('label'=>'Crear Cine', 'url'=>array('theater/create','f_id'=>$model->id)),
+	array('label'=>'Listar Franquicias', 'url'=>array('index')),
+	array('label'=>'Crear Franquicia', 'url'=>array('create')),
+	array('label'=>'Actualizar Franquicia', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Eliminar Franquicia', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Administrar Franquicia', 'url'=>array('admin')),
 );
+
+
 ?>
 
 <h1>Ver Franquicia #<?php echo $model->id; ?></h1>

@@ -17,7 +17,11 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'franchise_id'); ?>
-                <?php echo $form->dropDownList($model,'franchise_id', CHtml::listData(Franchise::model()->findAll(), 'id', 'name'), array('empty'=>'Seleccionar...')); ?>
+                <?php echo $form->dropDownList($model,'franchise_id', 
+                        CHtml::listData(Franchise::model()->findAll(), 'id', 'name'),                        
+                        array('options' => array($_GET['f_id']=>array('selected'=>true))),
+                        array('empty'=>'Seleccionar...')
+                        ); ?>
 		<?php /*echo $form->textField($model,'franchise_id'); */?>
 		<?php echo $form->error($model,'franchise_id'); ?>
 	</div>

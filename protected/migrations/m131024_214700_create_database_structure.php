@@ -198,8 +198,8 @@ class m131024_214700_create_database_structure extends CDbMigration
 	public function down()
 	{
                 
-                //$this->dropIndex('city_pk', 'pal_city');
-                //$this->dropIndex('country_pk', 'pal_country');
+                $this->dropIndex('city_pk', 'pal_city');
+                $this->dropIndex('country_pk', 'pal_country');
             
 		
                 $this->dropForeignKey('fk_movie_genre', 'pal_movie');
