@@ -70,9 +70,9 @@ class RoomTime extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'room_id' => 'Room',
-			'time' => 'Time',
-			'movie_id' => 'Movie',
+			'room_id' => 'Sala',
+			'time' => 'Hora',
+			'movie_id' => 'Pelicula',
 		);
 	}
 

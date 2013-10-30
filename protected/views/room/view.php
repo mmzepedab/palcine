@@ -3,6 +3,8 @@
 /* @var $model Room */
 
 $this->breadcrumbs=array(
+        'Franquicias'=>array('franchise/index'),
+        $model->theater->franchise->name=>array('franchise/view','id'=>$model->theater->franchise_id),
 	$model->theater->name=>array('theater/view','id'=>$model->theater_id),
 	$model->name,
 );
@@ -11,7 +13,7 @@ $this->menu=array(
 	/*array('label'=>'Listar Room', 'url'=>array('index')),*/
 	/*array('label'=>'Create Room', 'url'=>array('create')),*/
         array('label'=>'Crear Tanda', 'url'=>array('roomTime/create', 'r_id'=>$model->id)),
-	array('label'=>'Actualizar Sala', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Actualizar Sala', 'url'=>array('update', 'id'=>$model->id,'t_id'=>$model->theater_id)),
 	array('label'=>'Eliminar Sala', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Administrar Salas', 'url'=>array('admin')),
 );

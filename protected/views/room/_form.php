@@ -34,7 +34,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'is_3d'); ?>
-                <?php echo $form->dropDownList($model,'is_3d',array(1=>'Si',0=>'No')); ?>
+                <?php echo $form->dropDownList($model,'is_3d',array(0=>'No',1=>'Si')); ?>
 		<?php //echo $form->textField($model,'is_3d'); ?>
 		<?php echo $form->error($model,'is_3d'); ?>
 	</div>

@@ -29,7 +29,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'dial_code'); ?>
-		<?php echo $form->textField($model,'dial_code',array('size'=>2,'maxlength'=>2)); ?>
+		<?php echo $form->textField($model,'dial_code',array('size'=>3,'maxlength'=>3)); ?>
 		<?php echo $form->error($model,'dial_code'); ?>
 	</div>
 
