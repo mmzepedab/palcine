@@ -31,10 +31,6 @@ $this->pageTitle=Yii::app()->name;
 
 <div id="palcine_time">
     </br>
-    <?php $form=$this->beginWidget('CActiveForm', array(
-            'id'=>'issue-form',
-            'enableAjaxValidation'=>false,
-    )); ?>  
     <table border="1"  width="100">
         <thead>
             <tr>
@@ -47,8 +43,13 @@ $this->pageTitle=Yii::app()->name;
         <tbody>            
             <tr>
                 <td>
-                    <?php $list=CHtml::listData(Movie::model()->findAll(), 'id', 'name'); ?>
-                    <?php echo $form->DropdownList(Movie::model(),'id', $list); ?>                    
+                    <select name="movies">
+                        <option>Nemo</option>
+                        <option>Toy Story</option>
+                        <option>Cars</option>
+                        <option>Planes</option>
+                        <option>Toy Story 2</option>
+                    </select>
                     
                     </br>
                     </br>
@@ -89,7 +90,7 @@ $this->pageTitle=Yii::app()->name;
             </tr>
         </tbody>
     </table>
-<?php $this->endWidget(); ?>
+
 </div>
 
 </br>
@@ -118,31 +119,108 @@ $this->pageTitle=Yii::app()->name;
                             foreach($models as $model)
                                    $rows[] = $model->attributes;
 
-                            foreach($rows as $row){
+                            foreach($rows as $row)
+                               print_r($row);
+
+                            ?>
                             
-                            print_r('<li class="touchcarousel-item">
+				<li class="touchcarousel-item">
 					<a class="item-block" href="#">
-					    <h4>'.$row['name'].'</h4>
+					    <h4>El planeta de los simios  </h4>
                                             
-                                            <img id="myImage" src="images/170x230/'.$row['image'].'" width="170" height="230" />
+                                            <img id="myImage" src="images/170x230/2.jpg" width="170" height="230" />
                                             <div id="stars">
-                                                <img class="my-item-block"src="images/stars'.intval($row['raiting']).'.png" width="170" height="30"/>
+                                                <img class="my-item-block"src="images/stars4.png" width="170" height="30"/>
                                             </div>
 					       
                                             </a>
                                     <div align="center">
-                                        <a href="<?php echo Yii::app()->createAbsoluteUrl(\'Issue/myAdmin\'); ?>" class="blue smallButton">Horarios</a>
+                                        <a href="<?php echo Yii::app()->createAbsoluteUrl('Issue/myAdmin'); ?>" class="blue smallButton">Horarios</a>
                                     </div>
                                     </br>
                                     <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-width="The pixel width of the plugin" data-height="The pixel height of the plugin" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="true"></div>
 				
-                                </li>'
-                                    
-                                    );
-                            }
-                            ?>
-                            
+                                </li>
+				<li class="touchcarousel-item">
+					<a class="item-block" href="#">
+                                            <h4>The Last Airbender </h4>
+					    <img id="myImage" src="images/170x230/3.jpg" width="170" height="230" />
+                                            <div id="stars">
+                                                <img class="my-item-block"src="images/stars3.png" width="170" height="30"/>
+                                            </div>
+					    
+					</a>
+                                    <div align="center">
+                                        <a href="<?php echo Yii::app()->createAbsoluteUrl('Issue/myAdmin'); ?>" class="blue smallButton">Horarios</a>
+                                    </div>
+                                    </br>
+                                    <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-width="The pixel width of the plugin" data-height="The pixel height of the plugin" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="true"></div>
 				
+				</li>
+				<li class="touchcarousel-item">
+					<a class="item-block" href="#">
+                                            <h4>Discurso del Rey</h4>  
+					    <img src="images/170x230/4.jpg" width="170" height="230" />
+                                            <div id="stars">
+                                                <img class="my-item-block"src="images/stars1.png" width="170" height="30"/>
+                                            </div>
+					      
+					</a>
+                                        <div align="center">
+                                        <a href="<?php echo Yii::app()->createAbsoluteUrl('Issue/myAdmin'); ?>" class="blue smallButton">Horarios</a>
+                                    </div>
+                                    </br>
+                                    <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-width="The pixel width of the plugin" data-height="The pixel height of the plugin" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="true"></div>
+				</li>
+				<li class="touchcarousel-item">
+					<a class="item-block" href="#">
+                                            <h4>Love</h4>  
+					    <img src="images/170x230/5.jpg" width="170" height="230" />
+                                            <div id="stars">
+                                                <img class="my-item-block"src="images/stars3.png" width="170" height="30"/>
+                                            </div>
+					      
+						
+					</a>
+                                    <div align="center">
+                                        <a href="<?php echo Yii::app()->createAbsoluteUrl('Issue/myAdmin'); ?>" class="blue smallButton">Horarios</a>
+                                    </div>
+                                    </br>
+                                    <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-width="The pixel width of the plugin" data-height="The pixel height of the plugin" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="true"></div>
+				</li>
+				<li class="touchcarousel-item">
+					<a class="item-block" href="#">
+                                            <h4>Thunderbolt</h4>  
+					    <img src="images/170x230/6.jpg" width="170" height="230" />
+                                            <div id="stars">
+                                                <img class="my-item-block"src="images/stars5.png" width="170" height="30"/>
+                                            </div>
+					      
+					</a>
+                                    <div align="center">
+                                        <a href="<?php echo Yii::app()->createAbsoluteUrl('Issue/myAdmin'); ?>" class="blue smallButton">Horarios</a>
+                                    </div>
+                                    </br>
+                                    <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-width="The pixel width of the plugin" data-height="The pixel height of the plugin" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="true"></div>
+				
+				</li>
+                                <li class="touchcarousel-item">
+					<a class="item-block" href="#">
+					    <h4>El planeta de los simios  </h4>
+                                            
+                                            <img id="myImage" src="images/170x230/2.jpg" width="170" height="230" />
+                                            <div id="stars">
+                                                <img class="my-item-block"src="images/stars4.png" width="170" height="30"/>
+                                            </div>
+					       
+                                            </a>
+                                    <div align="center">
+                                        <a href="<?php echo Yii::app()->createAbsoluteUrl('Issue/myAdmin'); ?>" class="blue smallButton">Horarios</a>
+                                    </div>
+                                    </br>
+                                    <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-width="The pixel width of the plugin" data-height="The pixel height of the plugin" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="true"></div>
+				
+                                </li>
 							
 								
 			</ul> 

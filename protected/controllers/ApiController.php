@@ -54,9 +54,13 @@ class ApiController extends Controller
             case 'rooms': // {{{ 
                 $models = Room::model()->findAll();
                 break; // }}}
-                case 'roomTimes': // {{{ 
-                $models = RoomTime::model()->findAll();
-                break; // }}}
+            case 'roomTimes': // {{{ 
+            $models = RoomTime::model()->findAll();
+            break; // }}}
+            case 'movies': // {{{ 
+            $models = Movie::model()->findAll();
+            break; // }}}
+            
             default: // {{{ 
                 $this->_sendResponse(501, sprintf('Error: Mode <b>list</b> is not implemented for model <b>%s</b>',$_GET['model']) );
                 exit; // }}} 
