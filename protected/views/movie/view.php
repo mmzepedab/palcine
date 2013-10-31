@@ -3,20 +3,20 @@
 /* @var $model Movie */
 
 $this->breadcrumbs=array(
-	'Movies'=>array('index'),
+	'Peliculas'=>array('index'),
 	$model->name,
 );
 
 $this->menu=array(
-	array('label'=>'List Movie', 'url'=>array('index')),
-	array('label'=>'Create Movie', 'url'=>array('create')),
-	array('label'=>'Update Movie', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Movie', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Movie', 'url'=>array('admin')),
+	array('label'=>'Listar Peliculas', 'url'=>array('index')),
+	array('label'=>'Crear Pelicula', 'url'=>array('create')),
+	array('label'=>'Actualizar Pelicula', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Eliminar Pelicula', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Administrar Peliculas', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View Movie #<?php echo $model->id; ?></h1>
+<h1><?php echo $model->name; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

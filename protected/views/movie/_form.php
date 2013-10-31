@@ -9,9 +9,10 @@
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'movie-form',
 	'enableAjaxValidation'=>false,
+        'htmlOptions' => array('enctype' => 'multipart/form-data'),
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Los campos con <span class="required">*</span>son requeridos.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
@@ -74,19 +75,23 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'image'); ?>
-		<?php echo $form->textField($model,'image',array('size'=>60,'maxlength'=>500)); ?>
+		<?php echo $form->fileField($model,'image'); ?>
+                <?php /*echo $form->textField($model,'image',array('size'=>60,'maxlength'=>500)); */?>
+                <?php /*echo CHtml::activeFileField($model, 'image'); */?>
 		<?php echo $form->error($model,'image'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'image_thumbnail'); ?>
-		<?php echo $form->textField($model,'image_thumbnail',array('size'=>60,'maxlength'=>500)); ?>
+                <?php echo $form->fileField($model,'image_thumbnail'); ?>
+		<?php /*echo $form->textField($model,'image_thumbnail',array('size'=>60,'maxlength'=>500)); */?>
 		<?php echo $form->error($model,'image_thumbnail'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'image_thumbnail2x'); ?>
-		<?php echo $form->textField($model,'image_thumbnail2x',array('size'=>60,'maxlength'=>500)); ?>
+                <?php echo $form->fileField($model,'image_thumbnail2x'); ?>
+		<?php /*echo $form->textField($model,'image_thumbnail2x',array('size'=>60,'maxlength'=>500)); */?>
 		<?php echo $form->error($model,'image_thumbnail2x'); ?>
 	</div>
 

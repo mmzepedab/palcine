@@ -3,19 +3,19 @@
 /* @var $model Movie */
 
 $this->breadcrumbs=array(
-	'Movies'=>array('index'),
+	'Peliculas'=>array('index'),
 	$model->name=>array('view','id'=>$model->id),
-	'Update',
+	'Actualizar',
 );
 
 $this->menu=array(
-	array('label'=>'List Movie', 'url'=>array('index')),
-	array('label'=>'Create Movie', 'url'=>array('create')),
-	array('label'=>'View Movie', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Movie', 'url'=>array('admin')),
+	array('label'=>'Listar Peliculas', 'url'=>array('index')),
+	array('label'=>'Crear Pelicula', 'url'=>array('create')),
+	array('label'=>'Ver Pelicula', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'Administrar Peliculas', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Update Movie <?php echo $model->id; ?></h1>
+<h1>Actualizar Pelicula <?php echo $model->id; ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

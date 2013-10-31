@@ -18,7 +18,7 @@ article, aside, details, figcaption, figure, dialog, footer, header, hgroup, men
 body {line-height:1.5;background:white;}
 table {/*border-collapse:separate;border-spacing:0;*/border-width: 1px; border-style: solid;border-color: #e5e5e5;}
 caption, th, td {text-align:left;font-weight:normal;float:none !important;}
-table, th, td {vertical-align:middle;}
+table, th, td {vertical-align:top;}
 blockquote:before, blockquote:after, q:before, q:after {content:'';}
 blockquote, q {quotes:"" "";}
 a img {border:none;}

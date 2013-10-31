@@ -66,40 +66,12 @@ class MovieController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-                
+
 		if(isset($_POST['Movie']))
 		{
 			$model->attributes=$_POST['Movie'];
-                        $uploadedImage=CUploadedFile::getInstance($model,'image');
-                        $model->image = $uploadedImage->getName();
-                        $uploadedThumbnail=CUploadedFile::getInstance($model,'image_thumbnail');
-                        $model->image_thumbnail = $uploadedThumbnail->getName();
-                        $uploadedThumbnail2x=CUploadedFile::getInstance($model,'image_thumbnail2x');
-                        $model->image_thumbnail2x = $uploadedThumbnail2x->getName();
-                        
-                        if($model->save()){
-                            //Upload Images and Resize
-                            $nameImage = dirname(Yii::app()->request->scriptFile).'/images/movies/'.$model->image;
-                            $uploadedImage->saveAs($nameImage, true);
-                            $nameImage = Yii::app()->image->load($nameImage);
-                            $nameImage->resize(170, 230);
-                            $nameImage->save();
-                            
-                            $nameThumbnail = dirname(Yii::app()->request->scriptFile).'/images/movies/thumbnails/'.$model->image_thumbnail;
-                            $uploadedThumbnail->saveAs($nameThumbnail, true);
-                            $nameThumbnail = Yii::app()->image->load($nameThumbnail);
-                            $nameThumbnail->resize(100, 100);
-                            $nameThumbnail->save();
-                            
-                            $nameThumbnail2x = dirname(Yii::app()->request->scriptFile).'/images/movies/thumbnails/2x/'.$model->image_thumbnail2x;
-                            $uploadedThumbnail2x->saveAs($nameThumbnail2x, true);
-                            $nameThumbnail2x = Yii::app()->image->load($nameThumbnail2x);
-                            $nameThumbnail2x->resize(200, 200);
-                            $nameThumbnail2x->save();
-    
-                            //$model->image->saveAs('../images');
-                            $this->redirect(array('view','id'=>$model->id));
-                        }
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('create',array(

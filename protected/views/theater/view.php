@@ -58,7 +58,7 @@ $this->menu=array(
                                 'label'=>'Ver Sala',  
                                 'imageUrl'=>Yii::app()->request->baseUrl.'/images/view.png',
                                 //'url'=>'Yii::app()->createUrl("respuestas/view", array("id"=>$data->id))',
-                                'url'=>'Yii::app()->request->baseUrl.\'/index.php?r=/room/view&id=\'.$data->id',
+                                'url'=>'Yii::app()->request->baseUrl.\'/index.php/room/view/\'.$data->id',
                             ),
                         ),
                     ),

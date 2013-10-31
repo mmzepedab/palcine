@@ -111,4 +111,14 @@ class Room extends CActiveRecord
                             ),
 		));
 	}
+        
+        public function getConcatenedRoom()
+        {
+                if($this->is_3d == 1){
+                    return $this->theater->name.' - '.$this->name.' (3D) ';
+                }else{
+                    return $this->theater->name.' - '.$this->name;
+                }
+                
+        }
 }

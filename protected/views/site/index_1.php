@@ -124,22 +124,22 @@ $this->pageTitle=Yii::app()->name;
                             foreach($rows as $row){
                             
                             $movieName = $row['name'];
-                            if(strlen($movieName)>24){
-                                $movieName = substr($movieName, 0, 21);
+                            if(strlen($movieName)>25){
+                                $movieName = substr($movieName, 0, 23);
                                 $movieName.=  "...";
                             }
                             print_r('<li class="touchcarousel-item">
 					<a class="item-block" href="#">
 					    <h4>'.$movieName.'</h4>
                                             
-                                            <img id="myImage" src="images/movies/'.$row['image'].'" width="170" height="230" />
+                                            <img id="myImage" src="images/170x230/'.$row['image'].'" width="170" height="230" />
                                             <div id="stars">
                                                 <img class="my-item-block"src="images/stars'.intval($row['raiting']).'.png" width="170" height="30"/>
                                             </div>
 					       
                                             </a>
                                     <div align="center">
-                                        <a href="'.Yii::app()->createAbsoluteUrl('movie/index') .'" class="blue smallButton">Horarios</a>
+                                        <a href="<?php echo Yii::app()->createAbsoluteUrl(\'Issue/myAdmin\'); ?>" class="blue smallButton">Horarios</a>
                                     </div>
                                     </br>
                                     <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-width="The pixel width of the plugin" data-height="The pixel height of the plugin" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="true"></div>
