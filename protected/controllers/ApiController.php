@@ -39,7 +39,7 @@ class ApiController extends Controller
     // {{{ actionList
     public function actionList()
     {
-        //$this->_checkAuth();
+        $this->_checkAuth();
         switch($_GET['model'])
         {
             case 'posts': // {{{ 
@@ -85,7 +85,7 @@ class ApiController extends Controller
      */
     public function actionView()
     {
-        $this->_checkAuth();
+        //$this->_checkAuth();
         // Check if id was submitted via GET
         if(!isset($_GET['id']))
             $this->_sendResponse(500, 'Error: Parameter <b>id</b> is missing' );
@@ -95,6 +95,9 @@ class ApiController extends Controller
             // Find respective model    
             case 'posts': // {{{ 
                 $model = Post::model()->findByPk($_GET['id']);
+                break; // }}}
+            case 'movies': // {{{ 
+                $model = Movie::model()->findByPk($_GET['id']);
                 break; // }}} 
             default: // {{{ 
                 $this->_sendResponse(501, sprintf('Mode <b>view</b> is not implemented for model <b>%s</b>',$_GET['model']) );

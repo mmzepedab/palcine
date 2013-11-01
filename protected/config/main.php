@@ -49,36 +49,41 @@ return array(
 		'urlManager'=>array(
 			'urlFormat'=>'path',
 			'rules'=>array(
-				// Other controllers
+                                'movie/<id:\d+>'=>'movie/view',
+                                'movies/<tag:.*?>'=>'movie/index',
+				
+                            
+                                // REST patterns
+                                array('api/list', 'pattern'=>'api/<model:\w+>', 'verb'=>'GET'),
+                                array('api/view', 'pattern'=>'api/<model:\w+>/<id:\d+>', 'verb'=>'GET'),
+                            
+                                // Other controllers
                                 '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
                                 '<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
-                            
-                                // REST patterns
-                                array('api/list', 'pattern'=>'api/<model:\w+>', 'verb'=>'GET'),
 			),
 		),
 		
 		 //MySQL database on PC Server
-                'db'=>array(
-                            'connectionString' => 'mysql:host=localhost;dbname=palcineweb',
-                            'emulatePrepare' => true,
-                            'username' => 'root',
-                            'password' => '',
-                            'charset' => 'utf8',
-                            'tablePrefix' => 'pal_',
-                    ),
+//                'db'=>array(
+//                            'connectionString' => 'mysql:host=localhost;dbname=palcineweb',
+//                            'emulatePrepare' => true,
+//                            'username' => 'root',
+//                            'password' => '',
+//                            'charset' => 'utf8',
+//                            'tablePrefix' => 'pal_',
+//                    ),
             
 ////                //MySQL database on MAC Server
-//		'db'=>array(
-//			'connectionString' => 'mysql:host=127.0.0.1;port=8889;dbname=palcineweb;unix_socket:/Applications/MAMP/tmp/mysql/mysql.sock',
-//                        'emulatePrepare' => true,
-//			'username' => 'root',
-//			'password' => 'root',
-//			'charset' => 'utf8',
-//                        'tablePrefix' => 'pal_',
-//		),
+		'db'=>array(
+			'connectionString' => 'mysql:host=127.0.0.1;port=8889;dbname=palcineweb;unix_socket:/Applications/MAMP/tmp/mysql/mysql.sock',
+                        'emulatePrepare' => true,
+			'username' => 'root',
+			'password' => 'root',
+			'charset' => 'utf8',
+                        'tablePrefix' => 'pal_',
+		),
 		
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors

@@ -115,7 +115,7 @@ $this->pageTitle=Yii::app()->name;
 <div id="carousel-image-and-text" class="touchcarousel grey-blue">       
 			<ul class="touchcarousel-container">
                             <?php 
-                            $models = Movie::model()->findAll();
+                            $models = Movie::model()->findAll(array('order'=>'id DESC'));
 
                             $rows = array();
                             foreach($models as $model)
@@ -129,7 +129,7 @@ $this->pageTitle=Yii::app()->name;
                                 $movieName.=  "...";
                             }
                             print_r('<li class="touchcarousel-item">
-					<a class="item-block" href="#">
+					<a class="item-block" title="'.$row['name'].'" href="'.Yii::app()->createAbsoluteUrl('movie/view',array('id'=>$row['id'])) .'">
 					    <h4>'.$movieName.'</h4>
                                             
                                             <img id="myImage" src="images/movies/'.$row['image'].'" width="170" height="230" />
