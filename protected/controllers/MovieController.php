@@ -198,4 +198,16 @@ class MovieController extends Controller
 			Yii::app()->end();
 		}
 	}
+        
+        public function actionMovieRoomTimes(){
+            $data=  RoomTime::model()->findAll('movie_id=:movie_id', 
+                          array(':movie_id'=>(int) $_POST['country_id']));
+
+            $data=CHtml::listData($data,'id','name');
+            foreach($data as $value=>$name)
+            {
+                echo CHtml::tag('option',
+                           array('value'=>$value),CHtml::encode($name),true);
+            }
+        }
 }

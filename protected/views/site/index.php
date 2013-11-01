@@ -47,40 +47,46 @@ $this->pageTitle=Yii::app()->name;
         <tbody>            
             <tr>
                 <td valign="top">
-                    <?php $list=CHtml::listData(Movie::model()->findAll(), 'id', 'name'); ?>
-                    <?php echo $form->DropdownList(Movie::model(),
+                    <?php /*$list=CHtml::listData(Movie::model()->findAll(), 'id', 'name'); */ ?>
+                    <?php /*echo $form->DropdownList(Movie::model(),
                             'id', 
                             $list,
                             array('id'=>'movieList','empty'=>'Seleccionar...')                            
-                            ); ?>                    
-                    
+                            ); */ ?>                    
+                    <select name="movieList" id="movieList">
+                    </select>
                     </br>
                     </br>
                     <div id="movieTitle"></div>
                 </td>
                 <td>
-                    <?php $list=CHtml::listData(RoomTime::model()->findAll(), 'id', 'time'); ?>
-                    <?php echo $form->DropdownList(RoomTime::model(),
+                    <?php /* $list=CHtml::listData(RoomTime::model()->findAll(), 'id', 'time'); */?>
+                    <?php /*echo $form->DropdownList(RoomTime::model(),
                             'id', 
                             $list,
                             array('id'=>'timeList','empty'=>'Seleccionar...')
-                            ); ?> 
+                            ); */?> 
+                    <select name="timeList" id="timeList">
+                    </select>
                     </br>
                     </br>
                     <div id="timeTitle"></div>
+                    <div id="time_loading_image" align="center"><img src="images/ajax-loader.gif" width="16" height="16" alt="ajax-loader"/>
+                    </div>
                 </td>
                 <td>
-                    <?php $list=CHtml::listData(Room::model()->findAll(), 'id', 'concatenedRoom'); ?>
-                    <?php echo $form->DropdownList(Room::model(),
+                    <?php /*$list=CHtml::listData(Room::model()->findAll(), 'id', 'concatenedRoom'); */?>
+                    <?php /*echo $form->DropdownList(Room::model(),
                             'id', 
                             $list,
                             array('id'=>'roomList','empty'=>'Seleccionar...')
-                            ); ?> 
-                    
+                            ); */?> 
+                    <select name="roomList" id="timeList">
+                    </select>
                     </br>
                     </br>
                     <div id="roomTitle"></div>
-                    
+                    <div id="room_loading_image" align="center"><img src="images/ajax-loader.gif" width="16" height="16" alt="ajax-loader"/>
                 </td>
                 <td>
                                            
@@ -210,16 +216,126 @@ should you have any questions.</p>
  
 
 <script>
+//hiding elements
+$("#time_loading_image").hide();
+$("#room_loading_image").hide();
+$('#timeList').hide();
 
+$.ajax({
+    type: 'GET',
+    //url: 'http://www.oncae.gob.hn/palcine/index.php/api/movies',
+    url: '<?php echo Yii::app()->createUrl("api/movies"); ?>',
+    dataType: "xml",
+    success: function(data) {
+        //alert(data);
+        var select = $('#movieList');
+        select.append("<option value=''>Seleccionar...</option>");
+        $(data).find('movie').each(function(){            
+            var id = $(this).find('id').text();
+            var value = $(this).find('name').text();
+            select.append("<option value='"+id+"'>"+value+"</option>");
+            //alert($(this).text());
+        });
+        //var success = $(data).find('name').text();
+        //alert(success);
+        
+                //NEED TO ITERATE data.msg AND FILL A DROP DOWN
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+        //alert(XMLHttpRequest.responseText);
+        //alert(textStatus);
+    }
+    
+});
+
+
+//Select Movie and Change MovieListTimes
 $('#movieList').change(function() {
+    $("#time_loading_image").show();
+    $('#timeList').hide();
+    $('#timeList').empty();
+    $('#timeTitle').hide();
+    $('#timeTitle').empty();
+    $('#roomList').hide();
+    $('#roomList').empty();
+    $('#roomTitle').hide();
+    $('#roomTitle').empty();
     //alert($(this).text());
      var movieTitleText = '<h1>'+$('#movieList option:selected' ).text()+'</h1>';
     $('#movieTitle').html(movieTitleText);
+    //alert($('#movieList option:selected' ).val());
+    
+    $.ajax({
+            type: 'GET',
+            //url: 'http://www.oncae.gob.hn/palcine/index.php/api/movies',
+            url: '<?php echo Yii::app()->createUrl("api/movieRoomTimes"); ?>',
+            dataType: "xml",
+            data: 'm_id='+$('#movieList option:selected' ).val(),
+            success: function(data) {
+                //alert(data);
+                var select = $('#timeList');
+                select.append("<option value=''>Seleccionar...</option>");
+                $(data).find('movieRoomTime').each(function(){            
+                    var id = $(this).find('id').text();
+                    var value = $(this).find('time').text();
+                    select.append("<option value='"+id+"'>"+value+"</option>");
+                    $('#timeList').show();
+                    $('#timeTitle').show();
+                    $("#time_loading_image").hide();
+                    //alert($(this).text());
+                });
+                //var success = $(data).find('name').text();
+                //alert(success);
+
+                        //NEED TO ITERATE data.msg AND FILL A DROP DOWN
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                //alert(XMLHttpRequest.responseText);
+                //alert(textStatus);
+            }
+
+        });
 });
 $('#timeList').change(function() {
+    $("#room_loading_image").show();
+    $('#roomList').hide();
+    $('#roomList').empty();
+    $('#roomTitle').hide();
+    $('#roomTitle').empty();
     //alert($(this).text());
      var timeTitleText = '<h1>'+$('#timeList option:selected' ).text()+'</h1>';
     $('#timeTitle').html(timeTitleText);
+    $.ajax({
+            type: 'GET',
+            //url: 'http://www.oncae.gob.hn/palcine/index.php/api/movies',
+            url: '<?php echo Yii::app()->createUrl("api/movieRoomTimes"); ?>',
+            dataType: "xml",
+            data: 'm_id='+$('#movieList option:selected' ).val(),
+            success: function(data) {
+                //alert(data);
+                var select = $('#timeList');
+                select.append("<option value=''>Seleccionar...</option>");
+                $(data).find('movieRoomTime').each(function(){            
+                    var id = $(this).find('id').text();
+                    var value = $(this).find('time').text();
+                    select.append("<option value='"+id+"'>"+value+"</option>");
+                    $('#timeList').show();
+                    $('#timeTitle').show();
+                    $("#time_loading_image").hide();
+                    //alert($(this).text());
+                });
+                //var success = $(data).find('name').text();
+                //alert(success);
+
+                        //NEED TO ITERATE data.msg AND FILL A DROP DOWN
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                //alert(XMLHttpRequest.responseText);
+                //alert(textStatus);
+            }
+
+        });
+    
 });
 $('#roomList').change(function() {
     //alert($(this).text());

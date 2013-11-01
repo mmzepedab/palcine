@@ -58,8 +58,10 @@ class Movie extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, name_english, description, length, genre_id, is_premiere, image, image_thumbnail, image_thumbnail2x, trailer_link, raiting, restriction', 'required'),
-			array('genre_id, is_premiere, create_user, update_user', 'numerical', 'integerOnly'=>true),
+			array('name, name_english, description, length, genre_id, is_premiere, trailer_link, raiting, restriction', 'required'),
+			array('image, image_thumbnail, image_thumbnail2x', 'required', 'on'=>'insert'),
+			
+                        array('genre_id, is_premiere, create_user, update_user', 'numerical', 'integerOnly'=>true),
 			array('raiting', 'numerical'),
 			array('name, name_english, length', 'length', 'max'=>100),
 			array('description, image, image_thumbnail, image_thumbnail2x, trailer_link', 'length', 'max'=>500),

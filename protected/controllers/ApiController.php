@@ -39,7 +39,7 @@ class ApiController extends Controller
     // {{{ actionList
     public function actionList()
     {
-        $this->_checkAuth();
+        //$this->_checkAuth();
         switch($_GET['model'])
         {
             case 'posts': // {{{ 
@@ -50,16 +50,32 @@ class ApiController extends Controller
                 break; // }}}
             case 'theaters': // {{{ 
                 $models = Theater::model()->findAll();
-                break; // }}}
-            case 'rooms': // {{{ 
-                $models = Room::model()->findAll();
-                break; // }}}
+                break; // }}}            
             case 'roomTimes': // {{{ 
             $models = RoomTime::model()->findAll();
             break; // }}}
+            
+            //For index 
             case 'movies': // {{{ 
-            $models = Movie::model()->findAll();
+            $models = Movie::model()->findAll(array('order'=>'name ASC'));
             break; // }}}
+            case 'movieRoomTimes': // {{{
+                $criteria = new CDbCriteria();
+                $criteria->addInCondition("movie_id", array($_GET["m_id"]));
+                $models = RoomTime::model()->findAll($criteria);
+                //$models = RoomTime::model()->findAll(array('order'=>'name ASC'));
+            break; // }}}
+            case 'rooms': // {{{
+                $timeCriteria = new CDbCriteria();
+                $criteria->select = 't.first_name, t.email';
+                $timeCriteria->addInCondition("time", array($_GET["time"]));
+                $rooms = RoomTime::model()->findAll($timeCriteria);
+                
+                $criteria = new CDbCriteria();
+                $criteria->addInCondition("id", array($_GET["m_id"]));
+                $models = Room::model()->findAll();
+            break; // }}}
+        
             
             default: // {{{ 
                 $this->_sendResponse(501, sprintf('Error: Mode <b>list</b> is not implemented for model <b>%s</b>',$_GET['model']) );
