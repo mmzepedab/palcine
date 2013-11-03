@@ -17,6 +17,7 @@ $this->pageTitle=Yii::app()->name;
 
 <div id="title_background">
     Voy palCine
+    
 </div>
 <div class="line-separator"></div>
 </br>
@@ -81,19 +82,17 @@ $this->pageTitle=Yii::app()->name;
                             $list,
                             array('id'=>'roomList','empty'=>'Seleccionar...')
                             ); */?> 
-                    <select name="roomList" id="timeList">
+                    <select name="roomList" id="roomList">
                     </select>
                     </br>
                     </br>
                     <div id="roomTitle"></div>
                     <div id="room_loading_image" align="center"><img src="images/ajax-loader.gif" width="16" height="16" alt="ajax-loader"/>
                 </td>
-                <td>
-                                           
-                                    <div align="center">
-                                        <a id="opener" href="#" class="yellow smallButton">Ver detalle</a>
-                                    </div>
-                    
+                <td>                                           
+                    <div align="center">
+                        <a id="opener" href="#" class="yellow smallButton">Ver detalle</a>
+                    </div>                    
                 </td>
             </tr>
         </tbody>
@@ -148,7 +147,7 @@ $this->pageTitle=Yii::app()->name;
                                         <a href="'.Yii::app()->createAbsoluteUrl('movie/index') .'" class="blue smallButton">Horarios</a>
                                     </div>
                                     </br>
-                                    <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-width="The pixel width of the plugin" data-height="The pixel height of the plugin" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="true"></div>
+                                    <div class="fb-like" data-href="'.$row['name'].'" href="'.Yii::app()->createAbsoluteUrl('movie/view',array('id'=>$row['id'])) .'" data-width="The pixel width of the plugin" data-height="The pixel height of the plugin" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="true"></div>
 				
                                 </li>'
                                     
@@ -184,69 +183,23 @@ $this->pageTitle=Yii::app()->name;
     </div>
 </div>
 
-<p>Congratulations! You have successfully created your Yii application.</p>
 
-<p>You may change the content of this page by modifying the following two files:</p>
-<ul>
-	<li>View file: <code><?php echo __FILE__; ?></code></li>
-	<li>Layout file: <code><?php echo $this->getLayoutFile('main'); ?></code></li>
-</ul>
-
-<p>For more details on how to further develop this application, please read
-the <a href="http://www.yiiframework.com/doc/">documentation</a>.
-Feel free to ask in the <a href="http://www.yiiframework.com/forum/">forum</a>,
-should you have any questions.</p>
 
 <div id="dialog" title="El planeta de los simios">
-  <a class="item-block" href="#">
-					    <h4>  </h4>
-                                            
-                                            <img id="myImage" src="images/170x230/2.jpg" width="170" height="230" />
-                                            <div id="stars">
-                                                <img class="my-item-block"src="images/stars4.png" width="170" height="30"/>
-                                            </div>
-					       
-                                            </a>
-                                    <div align="center">
-                                        <a href="<?php echo Yii::app()->createAbsoluteUrl('Issue/myAdmin'); ?>" class="blue smallButton">Horarios</a>
-                                    </div>
-                                    </br>
-                                    <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-width="The pixel width of the plugin" data-height="The pixel height of the plugin" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="true"></div>
-				</div>
+  </div>
  
 
 <script>
+
+
 //hiding elements
 $("#time_loading_image").hide();
 $("#room_loading_image").hide();
 $('#timeList').hide();
+$('#roomList').hide();
+$('#opener').hide();
 
-$.ajax({
-    type: 'GET',
-    //url: 'http://www.oncae.gob.hn/palcine/index.php/api/movies',
-    url: '<?php echo Yii::app()->createUrl("api/movies"); ?>',
-    dataType: "xml",
-    success: function(data) {
-        //alert(data);
-        var select = $('#movieList');
-        select.append("<option value=''>Seleccionar...</option>");
-        $(data).find('movie').each(function(){            
-            var id = $(this).find('id').text();
-            var value = $(this).find('name').text();
-            select.append("<option value='"+id+"'>"+value+"</option>");
-            //alert($(this).text());
-        });
-        //var success = $(data).find('name').text();
-        //alert(success);
-        
-                //NEED TO ITERATE data.msg AND FILL A DROP DOWN
-    },
-    error: function(XMLHttpRequest, textStatus, errorThrown) {
-        //alert(XMLHttpRequest.responseText);
-        //alert(textStatus);
-    }
-    
-});
+
 
 
 //Select Movie and Change MovieListTimes
@@ -260,6 +213,7 @@ $('#movieList').change(function() {
     $('#roomList').empty();
     $('#roomTitle').hide();
     $('#roomTitle').empty();
+    $('#opener').hide();
     //alert($(this).text());
      var movieTitleText = '<h1>'+$('#movieList option:selected' ).text()+'</h1>';
     $('#movieTitle').html(movieTitleText);
@@ -305,23 +259,69 @@ $('#timeList').change(function() {
     //alert($(this).text());
      var timeTitleText = '<h1>'+$('#timeList option:selected' ).text()+'</h1>';
     $('#timeTitle').html(timeTitleText);
+    
     $.ajax({
             type: 'GET',
             //url: 'http://www.oncae.gob.hn/palcine/index.php/api/movies',
-            url: '<?php echo Yii::app()->createUrl("api/movieRoomTimes"); ?>',
+            url: '<?php echo Yii::app()->createUrl("api/movieRooms"); ?>',
             dataType: "xml",
-            data: 'm_id='+$('#movieList option:selected' ).val(),
+            //data: 'time='+$('#timeList option:selected' ).val(),
+            
+            data: {time: $('#timeList option:selected' ).text(), m_id: $('#movieList option:selected' ).val()},
             success: function(data) {
                 //alert(data);
-                var select = $('#timeList');
+                var select = $('#roomList');
                 select.append("<option value=''>Seleccionar...</option>");
-                $(data).find('movieRoomTime').each(function(){            
+                $(data).find('movieRoom').each(function(){            
                     var id = $(this).find('id').text();
-                    var value = $(this).find('time').text();
+                    var value = $(this).find('name').text();
                     select.append("<option value='"+id+"'>"+value+"</option>");
-                    $('#timeList').show();
-                    $('#timeTitle').show();
-                    $("#time_loading_image").hide();
+                    $('#roomList').show();
+                    $('#roomTitle').show();
+                    $("#room_loading_image").hide();
+                    //alert($(this).text());
+                });
+                //var success = $(data).find('name').text();
+                //alert(success);
+
+                        //NEED TO ITERATE data.msg AND FILL A DROP DOWN
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert(XMLHttpRequest.responseText);
+                alert(textStatus);
+            }
+
+        });
+    
+});
+$('#roomList').change(function() {
+    //alert($(this).text());
+     var roomTitleText = '<h1>'+$('#roomList option:selected' ).text()+'</h1>';
+     $('#opener').show();
+    $('#roomTitle').html(roomTitleText);
+});
+
+
+$("#palcine_time").hide();
+function palCineAction(){
+    if ($("#palcine_time").is(":visible")){
+        $("#palcine_time").hide();
+    }else{
+        $("#palcine_time").show();
+        $.ajax({
+            type: 'GET',
+            //url: 'http://www.oncae.gob.hn/palcine/index.php/api/movies',
+            url: '<?php echo Yii::app()->createUrl("api/movies"); ?>',
+            dataType: "xml",
+            data: 'loc='+$('#city_location option:selected' ).val(),
+            success: function(data) {
+                //alert(data);
+                var select = $('#movieList');
+                select.append("<option value=''>Seleccionar...</option>");
+                $(data).find('movie').each(function(){            
+                    var id = $(this).find('id').text();
+                    var value = $(this).find('name').text();
+                    select.append("<option value='"+id+"'>"+value+"</option>");
                     //alert($(this).text());
                 });
                 //var success = $(data).find('name').text();
@@ -335,21 +335,6 @@ $('#timeList').change(function() {
             }
 
         });
-    
-});
-$('#roomList').change(function() {
-    //alert($(this).text());
-     var roomTitleText = '<h1>'+$('#roomList option:selected' ).text()+'</h1>';
-    $('#roomTitle').html(roomTitleText);
-});
-
-
-$("#palcine_time").hide();
-function palCineAction(){
-    if ($("#palcine_time").is(":visible")){
-        $("#palcine_time").hide();
-    }else{
-        $("#palcine_time").show();
     }
     
 }
@@ -357,7 +342,7 @@ function palCineAction(){
 $(function() {
     $( "#dialog" ).dialog({
       autoOpen: false,
-      width: 500,
+      /*width: 500,*/
       modal: true,
       show: {
       },
@@ -367,8 +352,50 @@ $(function() {
  
     $( "#opener" ).click(function() {
       $( "#dialog" ).dialog( "open" );
+      
+      //$('#movieList option:selected' ).val()
+      $.ajax({
+            type: 'GET',
+            //url: 'http://www.oncae.gob.hn/palcine/index.php/api/movies',
+            url: '<?php echo Yii::app()->createUrl("api/movies"); ?>/'+$('#movieList option:selected' ).val(),
+            dataType: "xml",
+            //data: 'time='+$('#timeList option:selected' ).val(),
+            
+            //data: {time: $('#timeList option:selected' ).text(), m_id: $('#movieList option:selected' ).val()},
+            success: function(data) {
+                
+                
+                var dialog_content = '<a class="item-block" href="#"> \
+                      <h4>  </h4> \
+                            <img id="myImage" src="images/movies/'+ $(data).find('image').text() +'" width="170" height="230" />\
+                            <div id="stars"> \
+                                <img class="my-item-block"src="images/stars'+parseInt($(data).find('raiting').text())+'.png" width="170" height="30"/> \
+                            </div> \
+                            </a> \
+                    <div align="center"> \
+                        <a href="<?php echo Yii::app()->createUrl("movie/view"); ?>/'+$('#movieList option:selected' ).val()+'" class="blue smallButton">Horarios</a> \
+                    </div> \
+                    </br> \
+                    <div class="fb-like" data-href="<?php echo Yii::app()->createUrl("movie/view"); ?>/'+$('#movieList option:selected' ).val()+'" data-width="The pixel width of the plugin" data-height="The pixel height of the plugin" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="true"></div>';
+                       
+                $('#dialog').dialog('option', 'title', $(data).find('name').text());            
+                $("#dialog").html(dialog_content);             
+                
+                
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert(XMLHttpRequest.responseText);
+                alert(textStatus);
+            }
+
+        });
+      
+      
+                       
+      
     });
-  });
+
+});
   
 $(function() {
     $("#carousel-image-and-text").touchCarousel({

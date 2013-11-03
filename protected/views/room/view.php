@@ -56,10 +56,10 @@ $this->menu=array(
                         (
                             'view' => array
                             (
-                                'label'=>'Ver Sala',  
+                                'label'=>'Ver Tanda',  
                                 'imageUrl'=>Yii::app()->request->baseUrl.'/images/view.png',
                                 //'url'=>'Yii::app()->createUrl("respuestas/view", array("id"=>$data->id))',
-                                'url'=>'Yii::app()->request->baseUrl.\'/index.php?r=/room/view&id=\'.$data->id',
+                                'url'=>'Yii::app()->request->baseUrl.\'/index.php/roomTime/view/\'.$data->id',
                             ),
                         ),
                     ),

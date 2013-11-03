@@ -3,16 +3,16 @@
 /* @var $model RoomTime */
 
 $this->breadcrumbs=array(
-	'Room Times'=>array('index'),
+	'Tandas'=>array('index'),
 	$model->id,
 );
 
 $this->menu=array(
-	array('label'=>'List RoomTime', 'url'=>array('index')),
-	array('label'=>'Create RoomTime', 'url'=>array('create')),
-	array('label'=>'Update RoomTime', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete RoomTime', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage RoomTime', 'url'=>array('admin')),
+	array('label'=>'Listar Tandas', 'url'=>array('index')),
+	array('label'=>'Crear Tanda', 'url'=>array('create')),
+	array('label'=>'Actualizar Tanda', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Eliminar Tanda', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Administrar Tanda', 'url'=>array('admin')),
 );
 ?>
 

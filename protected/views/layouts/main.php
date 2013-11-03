@@ -32,7 +32,10 @@
       <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>  
       <link rel="stylesheet" href="/resources/demos/style.css" />
       <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />      
-        
+      
+      <!-- GEO taging -->
+      <script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
+
         
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
@@ -42,7 +45,16 @@
 <div class="container" id="page">
 
 	<div id="header">
-            <a href="./"><div id="logo"></div></a>
+            <a href="<?php echo Yii::app()->getBaseUrl(true); ?>">
+                <span id="logo"></span>
+            </a>
+            <span id="location" align="center">
+                Donde estas?<br/> <select id="city_location">                    
+                    <option value="sps">San Pedro Sula</option>
+                    <option value="pro">El Progreso</option>
+                    <option value="tgu">Tegucigalpa</option>
+                </select>
+            </span>
 	</div><!-- header -->
 
 	<div id="mainmenu">
@@ -69,10 +81,27 @@
 	<div id="footer">
 		Copyright &copy; <?php echo date('Y'); ?> por palCine.<br/>
 		Todos los derechos reservados.<br/>
-		<?php echo Yii::powered(); ?>
+		palCine te lleva al cine.
 	</div><!-- footer -->
 
 </div><!-- page -->
 </div>
+    
+    
+<script>
+switch(geoplugin_city())
+{
+case 'Tegucigalpa':
+    $('#city_location option[value="tgu"]').prop('selected',true); 
+  break;
+case 'San Pedro Sula':
+    $('#city_location option[value="sps"]').prop('selected',true);
+  break;
+default:
+    $('#city_location option[value="pro"]').prop('selected',true);
+}    
+   
+   
+</script>    
 </body>
 </html>

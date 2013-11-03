@@ -3,8 +3,8 @@
 /* @var $model Room */
 
 $this->breadcrumbs=array(
-	'Rooms'=>array('index'),
-	'Create',
+	'Salas'=>array('index'),
+	'Crear',
 );
 /*
 $this->menu=array(
