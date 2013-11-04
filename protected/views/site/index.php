@@ -59,6 +59,8 @@ $this->pageTitle=Yii::app()->name;
                     </br>
                     </br>
                     <div id="movieTitle"></div>
+                    <div id="movie_loading_image" align="center"><img src="images/ajax-loader.gif" width="16" height="16" alt="ajax-loader"/>
+                    </div>
                 </td>
                 <td>
                     <?php /* $list=CHtml::listData(RoomTime::model()->findAll(), 'id', 'time'); */?>
@@ -193,6 +195,8 @@ $this->pageTitle=Yii::app()->name;
 
 
 //hiding elements
+$('#movieList').hide();
+$("#movie_loading_image").hide();
 $("#time_loading_image").hide();
 $("#room_loading_image").hide();
 $('#timeList').hide();
@@ -216,6 +220,7 @@ $('#movieList').change(function() {
     $('#opener').hide();
     //alert($(this).text());
      var movieTitleText = '<h1>'+$('#movieList option:selected' ).text()+'</h1>';
+     
     $('#movieTitle').html(movieTitleText);
     //alert($('#movieList option:selected' ).val());
     
@@ -304,6 +309,7 @@ $('#roomList').change(function() {
 
 $("#palcine_time").hide();
 function palCineAction(){
+        $("#movie_loading_image").show();
     if ($("#palcine_time").is(":visible")){
         $("#palcine_time").hide();
     }else{
@@ -316,6 +322,8 @@ function palCineAction(){
             data: 'loc='+$('#city_location option:selected' ).val(),
             success: function(data) {
                 //alert(data);
+                $("#movieList").show();
+                $("#movie_loading_image").hide();
                 var select = $('#movieList');
                 select.append("<option value=''>Seleccionar...</option>");
                 $(data).find('movie').each(function(){            

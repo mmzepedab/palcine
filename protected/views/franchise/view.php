@@ -30,7 +30,7 @@ $this->menu=array(
 	),
 )); ?>
 
-<h2>Salas</h2>
+<h2>Salas <?php //echo Yii::app()->createAbsoluteUrl("theater/view", array("id"=>$data->id));?></h2>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'theaters-grid',
 	'dataProvider'=> Theater::model()->view_franchise_theaters($model->id) ,
@@ -52,7 +52,8 @@ $this->menu=array(
                                 'label'=>'Ver Cine',  
                                 'imageUrl'=>Yii::app()->request->baseUrl.'/images/view.png',
                                 //'url'=>'Yii::app()->createUrl("respuestas/view", array("id"=>$data->id))',
-                                'url'=>'Yii::app()->request->baseUrl.\'/index.php/theater/view/\'.$data->id',
+                                //'url'=>'Yii::app()->request->baseUrl.\'/theater/view/\'.$data->id',
+                                'url'=>'Yii::app()->createAbsoluteUrl("theater/view", array("id"=>$data->id))',
                             ),
                         ),
                     ),
