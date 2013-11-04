@@ -177,9 +177,18 @@ $this->pageTitle=Yii::app()->name;
         <div class="line-separator"></div>
     </div>
     <div id="right_bottom_content">
-        <div id="title_background">
+        <div id="title_background" >
             Proximamente
-        </div>
+             </div>
+            <div class="slider1" style="margin: 0 auto; width: 100%;" align="center">
+              <div class="slide"><img src="images/movies/5.jpg"></div>
+              <div class="slide"><img src="images/movies/6.jpg"></div>
+              <div class="slide"><img src="images/movies/2.jpg"></div>
+              <div class="slide"><img src="images/movies/3.jpg"></div>
+              <div class="slide"><img src="images/movies/4.jpg"></div>
+            </div>
+            
+       
         <div class="line-separator"></div>
         
     </div>
@@ -192,7 +201,12 @@ $this->pageTitle=Yii::app()->name;
  
 
 <script>
-
+$('.slider1').bxSlider({
+    slideWidth: 200,
+    minSlides: 2,
+    maxSlides: 2,
+    slideMargin: 10
+  });
 
 //hiding elements
 $('#movieList').hide();
