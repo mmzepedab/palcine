@@ -48,6 +48,8 @@ return array(
 		
 		'urlManager'=>array(
 			'urlFormat'=>'path',
+                        'showScriptName'=>false,
+                        /*'caseSensitive'=>false,*/
 			'rules'=>array(
                                 'movie/<id:\d+>'=>'movie/view',
                                 'movies/<tag:.*?>'=>'movie/index',
