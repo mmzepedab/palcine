@@ -175,11 +175,27 @@ $this->pageTitle=Yii::app()->name;
             Comentarios
         </div>
         <div class="line-separator"></div>
+        <br/>
+        
+        <div class="slider8">
+          <div class="slide" style="height: 50px;" align="center">No me gusto mucho la pelicula</div>
+          <div class="slide" style="height: 50px;" align="center">Estuvo un poco aburrida pero la verdad tiene buenas escenas de accion</div>
+          <div class="slide" style="height: 50px;" align="center">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, </div>
+          <div class="slide" style="height: 50px;" align="center">Entretenida</div>
+          <div class="slide" style="height: 50px;" align="center">No me gusto la actuacion de George Clooney</div><div class="slide" style="height: 50px;" align="center">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, </div>
+          <div class="slide" style="height: 50px;" align="center">Entretenida</div>
+          
+       
+        </div>
+        
     </div>
     <div id="right_bottom_content">
         <div id="title_background" >
             Proximamente
+            
              </div>
+        <div class="line-separator"></div>
+            <br/>
             <div class="slider1" style="margin: 0 auto; width: 100%;" align="center">
               <div class="slide"><img src="images/movies/5.jpg"></div>
               <div class="slide"><img src="images/movies/6.jpg"></div>
@@ -189,7 +205,7 @@ $this->pageTitle=Yii::app()->name;
             </div>
             
        
-        <div class="line-separator"></div>
+        
         
     </div>
 </div>
@@ -205,6 +221,13 @@ $('.slider1').bxSlider({
     slideWidth: 200,
     minSlides: 2,
     maxSlides: 2,
+    slideMargin: 10
+  });
+
+$('.slider8').bxSlider({
+    mode: 'vertical',
+    slideWidth: 500,
+    minSlides: 5,
     slideMargin: 10
   });
 
@@ -326,8 +349,12 @@ function palCineAction(){
         $("#movie_loading_image").show();
     if ($("#palcine_time").is(":visible")){
         $("#palcine_time").hide();
+        $('#movieList').empty();
+        $('#movieTitle').empty();
     }else{
         $("#palcine_time").show();
+        $('#movieList').empty();
+        $('#movieTitle').empty();
         $.ajax({
             type: 'GET',
             //url: 'http://www.oncae.gob.hn/palcine/index.php/api/movies',
