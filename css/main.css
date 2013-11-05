@@ -62,11 +62,13 @@ body
 
 #content
 {
+    float: left;
     padding: 20px;
     border-style: solid;
     border-left-width: 1px;
     border-right-width: 1px;
     border-color: #e5e5e5;
+    width: 930px;
     /*background: white;8/
     /*box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.06);*/
     /*-moz-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.50);*/
@@ -91,6 +93,7 @@ body
         border-right-width: 1px;        
         border-color: #022e53;
         border-style: solid;
+        width: 950px;
 }
 
 #logo
@@ -338,8 +341,9 @@ background: #e5e5e5;
 
 #left_bottom_content{
     display: block;
-    width: 500px;
+    width: 550px;
     /*height: 200px;*/
+    margin-left: 10px;
     float: left;
 }
 
@@ -349,7 +353,7 @@ background: #e5e5e5;
     /*height: 200px;*/
     float: right;
     overflow: hidden;
-    margin-left: 20px;
+    margin-right: 10px;
     border-style: solid;
     border-left-width: 1px;
     border-color: #e5e5e5;
@@ -452,7 +456,7 @@ background: #e5e5e5;
         * Carousel with image and text, custom skinned scrollbar
         **/
         #carousel-image-and-text {
-                width: 100%;
+                width: 90%;
                 height: 380px;
                 margin: 0 auto;	
 
