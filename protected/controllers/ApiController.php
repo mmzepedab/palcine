@@ -131,7 +131,12 @@ class ApiController extends Controller
                 //$criteria->select = ('t.name, t.id, t.theater_id, t.is_3d, theater.name');
                 $models = Room::model()->findAll($criteria);
             break; // }}}
-        
+            
+            
+            //********* Busqueda por cine
+            case 'toMovies': // {{{
+                $models = Movie::model()->findAll();
+            break; // }}}    
             
             default: // {{{ 
                 $this->_sendResponse(501, sprintf('Error: Mode <b>list</b> is not implemented for model <b>%s</b>',$_GET['model']) );
