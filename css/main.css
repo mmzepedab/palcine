@@ -62,7 +62,7 @@ body
 
 #content
 {
-    /*float: left;*/
+    float: left;
     padding: 20px;
     border-style: solid;
     border-left-width: 1px;
@@ -77,7 +77,8 @@ body
 
 #sidebar
 {
-	padding: 20px 20px 20px 0;
+	/*padding: 20px 20px 20px 0;*/
+        float: right;
 }
 
 #footer
@@ -85,7 +86,7 @@ body
         background-color: #04467e;
         color: #fff;
         font-weight: bold;
-	padding: 10px;
+	padding: 20px;
 	font-size: 0.8em;
 	text-align: center;
 	border-top: 5px solid #004d9f;        
@@ -93,7 +94,7 @@ body
         border-right-width: 1px;        
         border-color: #022e53;
         border-style: solid;
-        width: 950px;
+        width: 100%;
 }
 
 #logo
