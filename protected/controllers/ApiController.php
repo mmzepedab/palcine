@@ -103,9 +103,35 @@ class ApiController extends Controller
             
             case 'movieRoomTimes': // {{{
                 $criteria = new CDbCriteria();
+                        $criteria->condition = "(city_id = :location ) ";
+                        $criteria->params = array(':location'=>$_GET['loc']);
+                        $theaters = Theater::model()->findAll($criteria); 
+                        $theater_ids = array();    
+                        foreach ($theaters as $theater) {
+                                $theater_ids[] = $theater['id'];
+
+                        }
+
+                        $criteria = new CDbCriteria();
+                        $criteria->addInCondition("theater_id", $theater_ids);
+                        $rooms = Room::model()->findAll($criteria); 
+                        $room_ids = array();    
+                        foreach ($rooms as $room) {
+                                $room_ids[] = $room['id'];
+
+                        }
+                        
+                        //print_r($room_ids);
+                
+                $criteria = new CDbCriteria();
                 $criteria->distinct = true;
                 $criteria->select = ('time');
                 $criteria->addInCondition("movie_id", array($_GET["m_id"]));
+                
+                        
+                        
+                
+                $criteria->addInCondition("room_id", $room_ids);
                 $models = RoomTime::model()->findAll($criteria);
                 //$models = RoomTime::model()->findAll(array('order'=>'name ASC'));
             break; // }}}

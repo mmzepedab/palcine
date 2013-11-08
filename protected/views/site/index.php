@@ -146,7 +146,7 @@ $this->pageTitle=Yii::app()->name;
 					       
                                             </a>
                                     <div align="center">
-                                        <a href="'.Yii::app()->createAbsoluteUrl('movie/index') .'" class="blue smallButton">Horarios</a>
+                                        <a id="timeOpener" href="javascript:;" class="blue smallButton">Horarios</a>
                                     </div>
                                     </br>
                                     <div class="fb-like" data-href="'.$row['name'].'" href="'.Yii::app()->createAbsoluteUrl('movie/view',array('id'=>$row['id'])) .'" data-width="The pixel width of the plugin" data-height="The pixel height of the plugin" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="true"></div>
@@ -266,7 +266,8 @@ $('#movieList').change(function() {
             //url: 'http://www.oncae.gob.hn/palcine/index.php/api/movies',
             url: '<?php echo Yii::app()->createUrl("api/movieRoomTimes"); ?>',
             dataType: "xml",
-            data: 'm_id='+$('#movieList option:selected' ).val(),
+            //data: 'm_id='+$('#movieList option:selected' ).val(),
+            data: {loc: $('#city_location option:selected' ).val(), m_id: $('#movieList option:selected' ).val()}, 
             success: function(data) {
                 //alert(data);
                 var select = $('#timeList');
@@ -388,6 +389,8 @@ function palCineAction(){
     
 }
 
+
+
 $(function() {
     $( "#dialog" ).dialog({
       autoOpen: false,
@@ -397,6 +400,10 @@ $(function() {
       },
       hide: {
       }
+    });
+ 
+    $( ".smallButton" ).click(function() {
+        alert(1);
     });
  
     $( "#opener" ).click(function() {
