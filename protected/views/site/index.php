@@ -394,7 +394,7 @@ function palCineAction(){
 $(function() {
     $( "#dialog" ).dialog({
       autoOpen: false,
-      /*width: 500,*/
+      width: 1000,
       modal: true,
       show: {
       },
