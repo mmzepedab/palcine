@@ -22,9 +22,24 @@ $this->pageTitle=Yii::app()->name;
 <div class="line-separator"></div>
 </br>
 <div align="center">
+    Donde estas?
+</div>
+
+<div class="styled-select">
+<span id="location" align="center">
+                <select id="city_location">                    
+                    <option value="sps">San Pedro Sula</option>
+                    <option value="pro">El Progreso</option>
+                    <option value="tgu">Tegucigalpa</option>
+                </select>
+            </span>
+    </div>
+</br>
+</br>
+<div align="center" style="margin-bottom: 3px;">
     Como queres buscar tu pelicula?
 </div>
-</br>
+
 <div align="center">
     <a href="#" class="blue button" onclick="palCineAction();">Por Hora</a>
     <a href="<?php echo Yii::app()->createAbsoluteUrl('Issue/myAdmin'); ?>" class="blue button">Por Cine</a>
@@ -217,6 +232,18 @@ $this->pageTitle=Yii::app()->name;
  
 
 <script>
+switch(geoplugin_city())
+{
+case 'Tegucigalpa':
+    $('#city_location option[value="tgu"]').prop('selected',true); 
+  break;
+case 'San Pedro Sula':
+    $('#city_location option[value="sps"]').prop('selected',true);
+  break;
+default:
+    $('#city_location option[value="pro"]').prop('selected',true);
+} 
+
 $('.slider1').bxSlider({
     slideWidth: 200,
     minSlides: 2,
@@ -241,7 +268,9 @@ $('#roomList').hide();
 $('#opener').hide();
 
 
-
+$('#city_location').change(function() {
+    palCineAction();
+});
 
 //Select Movie and Change MovieListTimes
 $('#movieList').change(function() {

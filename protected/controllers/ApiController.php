@@ -96,6 +96,7 @@ class ApiController extends Controller
                 }
             $criteria = new CDbCriteria();
             $criteria->addInCondition("id", $movie_ids);
+            $criteria->order= 'id DESC';
             //$models = Movie::model()->findAll(array('order'=>'name ASC'));
             $models = Movie::model()->findAll($criteria);
             break; // }}}

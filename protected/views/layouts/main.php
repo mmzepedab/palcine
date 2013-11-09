@@ -51,13 +51,7 @@
             <a href="<?php echo Yii::app()->getBaseUrl(true); ?>">
                 <span id="logo"></span>
             </a>
-            <span id="location" align="center">
-                Donde estas?<br/> <select id="city_location">                    
-                    <option value="sps">San Pedro Sula</option>
-                    <option value="pro">El Progreso</option>
-                    <option value="tgu">Tegucigalpa</option>
-                </select>
-            </span>
+            
 	</div><!-- header -->
 
 	<div id="mainmenu">
@@ -92,17 +86,7 @@
     
     
 <script>
-switch(geoplugin_city())
-{
-case 'Tegucigalpa':
-    $('#city_location option[value="tgu"]').prop('selected',true); 
-  break;
-case 'San Pedro Sula':
-    $('#city_location option[value="sps"]').prop('selected',true);
-  break;
-default:
-    $('#city_location option[value="pro"]').prop('selected',true);
-}    
+   
    
    
 </script>    

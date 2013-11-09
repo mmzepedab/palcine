@@ -55,8 +55,8 @@ body
     display:inline-block;
     vertical-align: top;
     margin: 0 auto;
-    width: 50%;
-    color: #FFF;
+    width: 100%;
+    color: #022e53;
     font-weight: bold;
 }
 
@@ -370,15 +370,9 @@ background: #e5e5e5;
   width: 160px;
   text-align: center;
   color: #fff;
-  font-weight: bold;
+  /*font-weight: bold;*/
   text-decoration: none;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
+  
   border-bottom: 1px solid rgba(0, 0, 0, 0.25);
   position: relative;
   cursor: pointer;
@@ -413,16 +407,9 @@ background: #e5e5e5;
   width: 80px;
   text-align: center;
   color: #fff;
-  font-weight: bold;
+  /*font-weight: bold;*/
   text-decoration: none;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  
   position: relative;
   cursor: pointer;
   font-family: helvetica, arial, sans-serif;
@@ -527,3 +514,26 @@ background: #e5e5e5;
                 background-color: #04467e !important;
                 bottom: 0;
         }
+
+        
+        .styled-select select {
+   background: transparent;
+   color: #fff;
+   width: 204px;
+   padding: 5px;
+   padding-left: 15px;
+   font-size: 16px;
+   border: 0;
+   border-radius: 0;
+   height: 32px;
+   -webkit-appearance: none;
+   }
+   
+   .styled-select {
+       margin: 0 auto;
+   width: 176px;
+   height: 32px;
+   overflow: hidden;
+   background: url(../images/down_arrow_select.jpg) no-repeat right #04467e;
+   border: 1px solid #ccc;
+   }
