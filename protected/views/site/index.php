@@ -269,7 +269,7 @@ $('#opener').hide();
 
 
 $('#city_location').change(function() {
-    palCineAction();
+    $("#palcine_time").hide();
 });
 
 //Select Movie and Change MovieListTimes

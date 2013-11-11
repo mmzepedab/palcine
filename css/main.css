@@ -518,11 +518,12 @@ background: #e5e5e5;
         
         .styled-select select {
    background: transparent;
-   color: #fff;
+   color: #04467e;
    width: 204px;
    padding: 5px;
    padding-left: 15px;
    font-size: 16px;
+   font-weight: bold;
    border: 0;
    border-radius: 0;
    height: 32px;
@@ -534,6 +535,6 @@ background: #e5e5e5;
    width: 176px;
    height: 32px;
    overflow: hidden;
-   background: url(../images/down_arrow_select.jpg) no-repeat right #04467e;
+   background: url(../images/down_arrow_select.jpg) no-repeat right #FFF;
    border: 1px solid #ccc;
    }

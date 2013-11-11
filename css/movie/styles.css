@@ -1,0 +1,12 @@
+#movie_container{
+    /*background-color: black;*/
+    
+}
+
+#movie_detail_container{
+    min-width:100px; width: auto !important; width: 100px;
+}
+
+#time_detail_container{
+    min-width:100px; width: auto !important; width: 100px;
+}
