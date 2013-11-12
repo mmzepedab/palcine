@@ -187,20 +187,24 @@ $this->pageTitle=Yii::app()->name;
 <div id="bottom_container">
     <div id="left_bottom_content">
         <div id="title_background">
-            Comentarios
+            Publicidad
         </div>
         <div class="line-separator"></div>
         <br/>
         
         <div class="slider8">
-          <div class="slide" style="height: 50px;" align="center">No me gusto mucho la pelicula</div>
-          <div class="slide" style="height: 50px;" align="center">Estuvo un poco aburrida pero la verdad tiene buenas escenas de accion</div>
-          <div class="slide" style="height: 50px;" align="center">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, </div>
-          <div class="slide" style="height: 50px;" align="center">Entretenida</div>
-          <div class="slide" style="height: 50px;" align="center">No me gusto la actuacion de George Clooney</div><div class="slide" style="height: 50px;" align="center">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, </div>
-          <div class="slide" style="height: 50px;" align="center">Entretenida</div>
-          
-       
+          <div class="slide" align="center">
+              <img src="<?php echo Yii::app()->baseUrl; ?>/images/batman_banner.jpg" />
+
+          </div>
+            <div class="slide" align="center">
+              <img src="<?php echo Yii::app()->baseUrl; ?>/images/batman_banner.jpg" />
+
+          </div>
+            <div class="slide" align="center">
+              <img src="<?php echo Yii::app()->baseUrl; ?>/images/batman_banner.jpg" />
+
+          </div>
         </div>
         
     </div>
@@ -252,9 +256,9 @@ $('.slider1').bxSlider({
   });
 
 $('.slider8').bxSlider({
-    mode: 'vertical',
     slideWidth: 500,
-    minSlides: 5,
+    minSlides: 2,
+    maxSlides: 1,
     slideMargin: 10
   });
 
