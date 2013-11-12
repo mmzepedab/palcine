@@ -192,20 +192,19 @@ $this->pageTitle=Yii::app()->name;
         <div class="line-separator"></div>
         <br/>
         
-        <div class="slider8">
-          <div class="slide" align="center">
-              <img src="<?php echo Yii::app()->baseUrl; ?>/images/batman_banner.jpg" />
-
-          </div>
-            <div class="slide" align="center">
-              <img src="<?php echo Yii::app()->baseUrl; ?>/images/batman_banner.jpg" />
-
-          </div>
-            <div class="slide" align="center">
-              <img src="<?php echo Yii::app()->baseUrl; ?>/images/batman_banner.jpg" />
-
-          </div>
-        </div>
+        
+            <ul class="slider8">
+                <li>
+                  <img src="<?php echo Yii::app()->baseUrl; ?>/images/batman_banner.jpg" />
+                </li>
+                <li>
+                  <img src="<?php echo Yii::app()->baseUrl; ?>/images/batman_banner.jpg" />
+                </li>
+                <li>
+                  <img src="<?php echo Yii::app()->baseUrl; ?>/images/batman_banner.jpg" />
+                </li>
+            </ul>
+        
         
     </div>
     <div id="right_bottom_content">
@@ -252,15 +251,26 @@ $('.slider1').bxSlider({
     slideWidth: 200,
     minSlides: 2,
     maxSlides: 2,
-    slideMargin: 10
+    slideMargin: 10,
+    auto: true,
+    autoControls: true,
+    pause: 2000
   });
 
 $('.slider8').bxSlider({
     slideWidth: 500,
     minSlides: 2,
     maxSlides: 1,
-    slideMargin: 10
+    slideMargin: 10,
+    autoControls: true,
+    auto: true,
+    speed: 1000
   });
+  
+  $('.bxslider').bxSlider({
+  auto: true,
+  autoControls: true
+});
 
 //hiding elements
 $('#movieList').hide();
