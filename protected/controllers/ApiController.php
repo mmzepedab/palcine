@@ -55,9 +55,48 @@ class ApiController extends Controller
             $models = RoomTime::model()->findAll();
             break; // }}}
             case 'rooms': // {{{ 
-            $models = Room::model()->findAll();
+                if(isset($_GET['loc'])){
+                    $criteria = new CDbCriteria();
+                    $criteria->condition = "(city_id = :location ) ";
+                    $criteria->params = array(':location'=>$_GET['loc']);
+                    $theaters = Theater::model()->findAll($criteria); 
+                    $theater_ids = array();    
+                    foreach ($theaters as $theater) {
+                            $theater_ids[] = $theater['id'];
+
+                    }
+                    
+                    $criteria = new CDbCriteria();
+                    $criteria->addInCondition("theater_id", $theater_ids);
+                    $models = Room::model()->findAll($criteria); 
+                    
+                    
+                }else{
+                    $models = Room::model()->findAll();
+                }
             break; // }}}
             
+            case 'movieTheaterRoomTimes': // {{{
+                $criteria = new CDbCriteria();
+                $criteria->addInCondition("theater_id", array($_GET["t_id"]));
+                $rooms = Room::model()->findAll($criteria); 
+                $room_ids = array();    
+                foreach ($rooms as $room) {
+                        $room_ids[] = $room['id'];
+
+                }
+
+                //print_r($room_ids);
+                
+                $criteria = new CDbCriteria();
+                //$criteria->distinct = true;
+                //$criteria->select = ('time');
+                $criteria->addInCondition("movie_id", array($_GET["m_id"]));
+                $criteria->addInCondition("room_id", $room_ids);
+                $models = RoomTime::model()->findAll($criteria);
+                
+            
+            break; // }}}
 
             //For index 
             case 'movies': // {{{
@@ -104,34 +143,30 @@ class ApiController extends Controller
             
             case 'movieRoomTimes': // {{{
                 $criteria = new CDbCriteria();
-                        $criteria->condition = "(city_id = :location ) ";
-                        $criteria->params = array(':location'=>$_GET['loc']);
-                        $theaters = Theater::model()->findAll($criteria); 
-                        $theater_ids = array();    
-                        foreach ($theaters as $theater) {
-                                $theater_ids[] = $theater['id'];
+                $criteria->condition = "(city_id = :location ) ";
+                $criteria->params = array(':location'=>$_GET['loc']);
+                $theaters = Theater::model()->findAll($criteria); 
+                $theater_ids = array();    
+                foreach ($theaters as $theater) {
+                        $theater_ids[] = $theater['id'];
 
-                        }
+                }
 
-                        $criteria = new CDbCriteria();
-                        $criteria->addInCondition("theater_id", $theater_ids);
-                        $rooms = Room::model()->findAll($criteria); 
-                        $room_ids = array();    
-                        foreach ($rooms as $room) {
-                                $room_ids[] = $room['id'];
+                $criteria = new CDbCriteria();
+                $criteria->addInCondition("theater_id", $theater_ids);
+                $rooms = Room::model()->findAll($criteria); 
+                $room_ids = array();    
+                foreach ($rooms as $room) {
+                        $room_ids[] = $room['id'];
 
-                        }
-                        
-                        //print_r($room_ids);
+                }
+
+                //print_r($room_ids);
                 
                 $criteria = new CDbCriteria();
                 $criteria->distinct = true;
                 $criteria->select = ('time');
                 $criteria->addInCondition("movie_id", array($_GET["m_id"]));
-                
-                        
-                        
-                
                 $criteria->addInCondition("room_id", $room_ids);
                 $models = RoomTime::model()->findAll($criteria);
                 //$models = RoomTime::model()->findAll(array('order'=>'name ASC'));

@@ -5,7 +5,7 @@
 
 
 $this->breadcrumbs=array(
-	'Peliculas'=>array('index'),
+	/*'Peliculas'=>array('index'),*/
 	$model->name,
 );
 
@@ -25,40 +25,94 @@ $this->menu=array(
   $cs->registerCssFile($baseUrl.'/css/movie/styles.css');
 ?>
 
-<div id="title_background">
-    <?php echo $model->name; ?>
-</div>
 
-<div class="line-separator"></div>
 
-<p></p>
 
-<table border="1">
+
+<table border="1" style="border-width: 0;">
     <tbody>
+        <tr>
+            <td colspan="2">
+                <div id="title_background">
+                    <?php echo $model->name; ?>
+                </div>
+            </td>
+        </tr>
         <tr>
             <td width="60%">
                 <div id="movie_detail_container">
                     <table border="0" cellspacing="0" cellpadding="0" >            
                         <tbody>
                             <tr>
+                                <td rowspan="3" >
+                                    <img src="<?php echo Yii::app()->baseUrl; ?>/images/movies/<?php echo $model->image; ?>" align="right"/>
+                                    <div id="stars">
+                                        <img class="my-item-block"src="<?php echo Yii::app()->baseUrl; ?>/images/stars<?php echo intval($model->raiting); ?>.png" width="170" height="30"/>
+                                    </div> 
+                                </td>
                                 <td width="200px">
-                                    <img src="<?php echo Yii::app()->baseUrl; ?>/images/movies/the_dark_knight.jpg" alt="the_dark_knight"/>
+                                    <b>Nombre en Ingles:</b>
+                                    <p>
+                                        <?php echo $model->name_english; ?>
+                                    </p>
+                                    <b>Fecha de lanzamiento:</b>
+                                    <p>
+                                        <?php echo $model->release_date; ?>
+                                    </p>
+                                    
                                 </td>
                                 <td>
+                                    <b>Duracion:</b>
                                     <p>
-                                        When Batman, Gordon and Harvey Dent launch an assault on the mob, they let the clown out of the box, the Joker, bent on turning Gotham on itself and bringing any heroes down to his level.	
+                                        <?php echo $model->length; ?>
+                                    </p>
+                                    <b>Genero:</b>
+                                    <p>
+                                        <?php echo $model->genre->name; ?>
+                                    </p>
+                                    
+                                </td>
+                                
+                            </tr>
+                            <tr >
+                                <td>
+                                    <b>Restricciones:</b>
+                                    <p>
+                                        <?php echo $model->restriction; ?> 
+                                    </p>
+                                    
+                                </td>
+                                <td>
+                                    
+                                    
+                                </td>
+                                
+                                <td>
+                                    
+                                </td>
+                                
+                                
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <b>Sinopsis:</b>
+                                    <p style="text-align: justify;">
+                                        <?php echo $model->description; ?>
                                     </p>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <div id="stars">
-                                        <img class="my-item-block"src="<?php echo Yii::app()->baseUrl; ?>/images/stars4.png" width="170" height="30"/>
-                                    </div>
+                                   
                                 </td>
-                                <td>
+                                <td colspan="2">
                                     <a id="timeOpener" href="javascript:;" class="blue smallButton">Ver Trailer</a>
-                                    <a id="timeOpener" href="javascript:;" class="blue smallButton">Comprar</a>
+                                    <a id="timeOpener" href="javascript:;" class="blue smallButton">Recomendar</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                   <p></p>
                                 </td>
                             </tr>
                         </tbody>
@@ -72,15 +126,56 @@ $this->menu=array(
                     <table border="0" cellspacing="0" cellpadding="0" >            
                         <tbody>
                             <tr>
-                                <td width="200px">
-                                    <img src="<?php echo Yii::app()->baseUrl; ?>/images/movies/the_dark_knight.jpg" alt="the_dark_knight"/>
+                                <td >
+                                    <div id="title_background">
+                                        Horarios
+                                    </div>
+
+                                    <div class="line-separator"></div>
+
+                                    <p>
+                                        
+                                    </p>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <div id="stars">
-                                        <img class="my-item-block"src="<?php echo Yii::app()->baseUrl; ?>/images/stars4.png" width="170" height="30"/>
+                                    <div class="styled-select-theater">
+                                        <span id="location" align="center">
+                                                        <select id="city_location">                    
+                                                            <option value="sps">San Pedro Sula</option>
+                                                            <option value="pro">El Progreso</option>
+                                                            <option value="tgu">Tegucigalpa</option>
+                                                        </select>
+                                                    </span>
                                     </div>
+                                    <p></p>
+                                    <div class="styled-select-theater" id="theaters_select_div">
+                                        <span id="location" align="center">
+                                                        <select id="theaters_select">                    
+                                                            <option value="sps">Cinepolis las Cascadas</option>
+                                                            <option value="pro">Metrocinemas Plaza America</option>
+                                                            <option value="tgu">Metrocinemas Metromall</option>
+                                                        </select>
+                                                    </span>
+                                    </div>
+                                    <p></p>
+                                    
+                                    <div align="center">
+                                        <a id="opener" href="#" class="yellow button">Comprar Boletos</a>
+                                    </div>
+                                    <p>
+                                        
+                                    </p>
+                                    <p>
+                                        <b>Sala 1</b> <br/>
+                                        2:00pm - 5:00pm - 6:00pm - 7:00pm - 8:00pm - 10:00pm - 11:00pm
+                                    </p>
+                                    <p>
+                                        <b>Sala 2 (3D)</b> <br/>
+                                        2:00pm - 5:00pm  - 6:00pm  - 7:00pm - 8:00pm - 10:00pm - 6:00pm - 7:00pm - 8:00pm  - 10:00pm - 11:00pm
+                                    </p>
+                                    
                                 </td>
                             </tr>
                         </tbody>
@@ -88,9 +183,6 @@ $this->menu=array(
 
 
                 </div>
-                
-                
-                
             </td>
         </tr>
     </tbody>
@@ -127,3 +219,12 @@ $this->menu=array(
 		'update_user',
 	),
 )); */?>
+
+
+
+<script>
+$('#city_location').change(function() {
+    $("#theaters_select_div").html('<img src="<?php echo Yii::app()->baseUrl; ?>/images/ajax-loader.gif" width="16" height="16"  alt="ajax-loader"/>');
+});
+
+</script>
