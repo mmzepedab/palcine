@@ -179,14 +179,19 @@ $this->menu=array(
                                     <p>
                                         
                                     </p>
-                                    <p>
-                                        <b>Sala 1</b> <br/>
-                                        2:00pm - 5:00pm - 6:00pm - 7:00pm - 8:00pm - 10:00pm - 11:00pm
-                                    </p>
-                                    <p>
-                                        <b>Sala 2 (3D)</b> <br/>
-                                        2:00pm - 5:00pm  - 6:00pm  - 7:00pm - 8:00pm - 10:00pm - 6:00pm - 7:00pm - 8:00pm  - 10:00pm - 11:00pm
-                                    </p>
+                                    
+                                    <div id="movieTheaterRoomTimes">
+                                        <p>
+                                            <b>Sala 1</b> <br/>
+                                            2:00pm - 5:00pm - 6:00pm - 7:00pm - 8:00pm - 10:00pm - 11:00pm
+                                        </p>
+                                        <p>
+                                            <b>Sala 2 (3D)</b> <br/>
+                                            2:00pm - 5:00pm  - 6:00pm  - 7:00pm - 8:00pm - 10:00pm - 6:00pm - 7:00pm - 8:00pm  - 10:00pm - 11:00pm
+                                        </p>    
+                                        
+                                    </div>
+                                    
                                     
                                 </td>
                             </tr>

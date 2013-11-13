@@ -79,6 +79,11 @@ class ApiController extends Controller
                     $models = Room::model()->findAll($criteria); 
                     
                     
+                }else if(isset($_GET['t_id'])){
+                    $criteria = new CDbCriteria();
+                    $criteria->condition = "(theater_id = :t_id ) ";
+                    $criteria->params = array(':t_id'=>$_GET['t_id']);
+                    $models = Room::model()->findAll($criteria);
                 }else{
                     $models = Room::model()->findAll();
                 }
