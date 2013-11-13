@@ -25,7 +25,14 @@ $this->menu=array(
   $cs->registerCssFile($baseUrl.'/css/movie/styles.css');
 ?>
 
-
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=164203760401068";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
 
 
@@ -44,10 +51,11 @@ $this->menu=array(
                     <table border="0" cellspacing="0" cellpadding="0" >            
                         <tbody>
                             <tr>
-                                <td rowspan="3" >
-                                    <img src="<?php echo Yii::app()->baseUrl; ?>/images/movies/<?php echo $model->image; ?>" align="right"/>
+                                <td rowspan="3" width="170" style="text-align:center;">
+                                    <img src="<?php echo Yii::app()->baseUrl; ?>/images/movies/<?php echo $model->image; ?>" />
                                     <div id="stars">
-                                        <img class="my-item-block"src="<?php echo Yii::app()->baseUrl; ?>/images/stars<?php echo intval($model->raiting); ?>.png" width="170" height="30"/>
+                                        <img class="my-item-block"src="<?php echo Yii::app()->baseUrl; ?>/images/stars<?php echo intval($model->raiting); ?>.png" width="170" height="30" align="center"/>
+                                        <div align="center" class="fb-like" data-href="http://www.oncae.gob.hn/palcine/movie/19" data-width="100" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
                                     </div> 
                                 </td>
                                 <td width="200px">
@@ -112,7 +120,7 @@ $this->menu=array(
                             </tr>
                             <tr>
                                 <td colspan="3">
-                                   <p></p>
+                                   <div class="fb-comments" data-href="http://www.oncae.gob.hn/palcine/movie/19" data-numposts="5" data-width="550"></div>
                                 </td>
                             </tr>
                         </tbody>
@@ -142,7 +150,8 @@ $this->menu=array(
                                 <td>
                                     <div class="styled-select-theater">
                                         <span id="location" align="center">
-                                                        <select id="city_location">                    
+                                                        <select id="city_location">
+                                                            <option value="">Seleccionar cine...</option>
                                                             <option value="sps">San Pedro Sula</option>
                                                             <option value="pro">El Progreso</option>
                                                             <option value="tgu">Tegucigalpa</option>
@@ -150,15 +159,18 @@ $this->menu=array(
                                                     </span>
                                     </div>
                                     <p></p>
-                                    <div class="styled-select-theater" id="theaters_select_div">
+                                    <div id="loading-container" align="center">
+                                        <img src="<?php echo Yii::app()->baseUrl; ?>/images/ajax-loader.gif" width="16" height="16"  alt="ajax-loader"/>
+                                    </div>
+                                    <div id="select-theater-container" align="center">
+                                        <div class="styled-select-theater" id="theaters_select_div">
                                         <span id="location" align="center">
-                                                        <select id="theaters_select">                    
-                                                            <option value="sps">Cinepolis las Cascadas</option>
-                                                            <option value="pro">Metrocinemas Plaza America</option>
-                                                            <option value="tgu">Metrocinemas Metromall</option>
+                                                        <select id="theaters_select">
                                                         </select>
                                                     </span>
+                                        </div>
                                     </div>
+                                    
                                     <p></p>
                                     
                                     <div align="center">
@@ -223,8 +235,45 @@ $this->menu=array(
 
 
 <script>
+$("#loading-container").hide();
+$("#select-theater-container").hide();
 $('#city_location').change(function() {
-    $("#theaters_select_div").html('<img src="<?php echo Yii::app()->baseUrl; ?>/images/ajax-loader.gif" width="16" height="16"  alt="ajax-loader"/>');
+    $("#loading-container").show();
+    $('#theaters_select').empty();
+    $.ajax({
+            type: 'GET',
+            //url: 'http://www.oncae.gob.hn/palcine/index.php/api/movies',
+            url: '<?php echo Yii::app()->createUrl("api/theaters"); ?>',
+            dataType: "xml",
+            //data: 'time='+$('#timeList option:selected' ).val(),
+            
+            data: {loc: $('#city_location option:selected' ).val()},
+            success: function(data) {
+                //alert(data);
+                var select = $('#theaters_select');
+                select.append("<option value=''>Seleccionar...</option>");
+                $(data).find('theater').each(function(){            
+                    var id = $(this).find('id').text();
+                    var value = $(this).find('name').text();
+                    select.append("<option value='"+id+"'>"+value+"</option>");
+                    //$('#roomList').show();
+                    $('#select-theater-container').show();
+                    $("#loading-container").hide();
+                    //alert($(this).text());
+                });
+                //alert(select);
+                //$("#select-theater-container").html('<p>Bien</p>');
+                //var success = $(data).find('name').text();
+                //alert(success);
+
+                        //NEED TO ITERATE data.msg AND FILL A DROP DOWN
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert(XMLHttpRequest.responseText);
+                alert(textStatus);
+            }
+
+        });
 });
 
 </script>

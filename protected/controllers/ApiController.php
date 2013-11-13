@@ -48,8 +48,16 @@ class ApiController extends Controller
             case 'franchises': // {{{ 
                 $models = Franchise::model()->findAll();
                 break; // }}}
-            case 'theaters': // {{{                
-                $models = Theater::model()->findAll();
+            case 'theaters': // {{{ 
+                if(isset($_GET['loc'])){
+                    $criteria = new CDbCriteria();
+                    $criteria->condition = "(city_id = :location ) ";
+                    $criteria->params = array(':location'=>$_GET['loc']);
+                    $models = Theater::model()->findAll($criteria);
+                }else{
+                    $models = Theater::model()->findAll();
+                }
+                
                 break; // }}}            
             case 'roomTimes': // {{{ 
             $models = RoomTime::model()->findAll();

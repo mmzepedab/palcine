@@ -214,13 +214,13 @@ $this->pageTitle=Yii::app()->name;
              </div>
         <div class="line-separator"></div>
             <br/>
-            <div class="slider1" style="margin: 0 auto; width: 100%;" align="center">
-              <div class="slide"><img src="images/movies/5.jpg"></div>
-              <div class="slide"><img src="images/movies/6.jpg"></div>
-              <div class="slide"><img src="images/movies/2.jpg"></div>
-              <div class="slide"><img src="images/movies/3.jpg"></div>
-              <div class="slide"><img src="images/movies/4.jpg"></div>
-            </div>
+            <ul class="slider1" >
+              <li><img src="images/movies/5.jpg"></li>
+              <li><img src="images/movies/6.jpg"></li>
+              <li><img src="images/movies/2.jpg"></li>
+              <li><img src="images/movies/3.jpg"></li>
+              <li><img src="images/movies/4.jpg"></li>
+            </ul>
             
        
         
@@ -247,30 +247,26 @@ default:
     $('#city_location option[value="pro"]').prop('selected',true);
 } 
 
+
 $('.slider1').bxSlider({
     slideWidth: 200,
     minSlides: 2,
     maxSlides: 2,
     slideMargin: 10,
-    auto: true,
-    autoControls: true,
-    pause: 2000
-  });
-
-$('.slider8').bxSlider({
-    slideWidth: 500,
-    minSlides: 2,
-    maxSlides: 1,
-    slideMargin: 10,
-    autoControls: true,
-    auto: true,
-    speed: 1000
+    auto: true
   });
   
-  $('.bxslider').bxSlider({
-  auto: true,
-  autoControls: true
-});
+$('.slider8').bxSlider({
+    slideWidth: 500,
+    minSlides: 1,
+    maxSlides: 1,
+    slideMargin: 10,
+    auto: true,
+    speed: 2000
+  });
+ 
+ 
+  
 
 //hiding elements
 $('#movieList').hide();

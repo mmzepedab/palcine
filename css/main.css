@@ -350,13 +350,13 @@ background: #e5e5e5;
 
 #right_bottom_content{
     display: block;
-    width: 300px;
+    width: 350px;
     /*height: 200px;*/
     float: right;
     overflow: hidden;
     margin-right: 10px;
     border-style: solid;
-    border-left-width: 1px;
+    /*border-left-width: 1px;*/
     border-color: #e5e5e5;
 }
 /*Buttons styles*/
