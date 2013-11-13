@@ -9,7 +9,7 @@ $this->pageTitle=Yii::app()->name;
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=164203760401068";
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=226266080832489";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
@@ -108,7 +108,7 @@ $this->pageTitle=Yii::app()->name;
                 </td>
                 <td>                                           
                     <div align="center">
-                        <a id="opener" href="#" class="yellow smallButton">Ver detalle</a>
+                        <a id="opener" href="javascript:;" class="yellow smallButton">Ver detalle</a>
                     </div>                    
                 </td>
             </tr>
@@ -442,7 +442,7 @@ $(function() {
     });
  
     $( ".smallButton" ).click(function() {
-        alert(1);
+        //alert(1);
     });
  
     $( "#opener" ).click(function() {

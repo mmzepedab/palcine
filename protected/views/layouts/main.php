@@ -26,15 +26,18 @@
         <link rel="stylesheet" type="text/css" href="touchcarousel/grey-blue-skin/grey-blue-skin.css" />
 
         <!-- JS files -->
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script> 
+        <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script> -->
+        <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/js/jquery.min.js"></script>
         <script type="text/javascript" src="touchcarousel/jquery.touchcarousel-1.2.min.js"></script> 
-	<script type="text/javascript" src="js/jquery.bxslider.js"></script>
+	<script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/js/jquery.bxslider.js"></script>
         
         
-          <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>  
+          <!-- <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> -->  
+          <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/js/jquery-ui.js"></script>
           <link rel="stylesheet" href="/resources/demos/style.css" />
           <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />      
-          <link rel="stylesheet" href="js/jquery.bxslider.css" /> 
+          <!-- <link rel="stylesheet" href="<?php echo Yii::app()->baseUrl; ?>/js/jquery-ui.css" /> --> 
+          <link rel="stylesheet" href="<?php echo Yii::app()->baseUrl; ?>/js/jquery.bxslider.css" /> 
           
       <!-- GEO taging -->
       <script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>

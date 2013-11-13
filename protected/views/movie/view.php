@@ -2,7 +2,7 @@
 /* @var $this MovieController */
 /* @var $model Movie */
 
-
+$this->setPageTitle('palCine - '.$model->name);
 
 $this->breadcrumbs=array(
 	/*'Peliculas'=>array('index'),*/
@@ -25,16 +25,9 @@ $this->menu=array(
   $cs->registerCssFile($baseUrl.'/css/movie/styles.css');
 ?>
 
+
+
 <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=164203760401068";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
-
 
 <table border="1" style="border-width: 0;">
     <tbody>
@@ -55,7 +48,7 @@ $this->menu=array(
                                     <img src="<?php echo Yii::app()->baseUrl; ?>/images/movies/<?php echo $model->image; ?>" />
                                     <div id="stars">
                                         <img class="my-item-block"src="<?php echo Yii::app()->baseUrl; ?>/images/stars<?php echo intval($model->raiting); ?>.png" width="170" height="30" align="center"/>
-                                        <div align="center" class="fb-like" data-href="http://www.oncae.gob.hn/palcine/movie/19" data-width="100" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+                                        <div align="center" class="fb-like" data-href="<?php echo Yii::app()->createAbsoluteUrl('movie/view',array('id'=>$model->id)); ?>" data-width="100" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
                                     </div> 
                                 </td>
                                 <td width="200px">
@@ -114,13 +107,13 @@ $this->menu=array(
                                    
                                 </td>
                                 <td colspan="2">
-                                    <a id="timeOpener" href="javascript:;" class="blue smallButton">Ver Trailer</a>
-                                    <a id="timeOpener" href="javascript:;" class="blue smallButton">Recomendar</a>
+                                    <a id="trailer_opener" href="javascript:;" class="blue smallButton">Ver Trailer</a>
+                                    <!-- <a id="timeOpener" href="javascript:;" class="blue smallButton">Recomendar</a> -->
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="3">
-                                   <div class="fb-comments" data-href="http://www.oncae.gob.hn/palcine/movie/19" data-numposts="5" data-width="550"></div>
+                                   <div class="fb-comments" data-href="<?php echo Yii::app()->createAbsoluteUrl('movie/view',array('id'=>$model->id)); ?>" data-numposts="5" data-width="550"></div>
                                 </td>
                             </tr>
                         </tbody>
@@ -159,6 +152,10 @@ $this->menu=array(
                                                     </span>
                                     </div>
                                     <p></p>
+                                    
+                                    <div id="thumbnail-container" align="center">
+                                        <img src="<?php echo Yii::app()->baseUrl; ?>/images/movies/thumbnails/2x/<?php echo $model->image_thumbnail2x; ?>" width="200" height="200"  alt="ajax-loader"/>
+                                    </div>
                                     <div id="loading-container" align="center">
                                         <img src="<?php echo Yii::app()->baseUrl; ?>/images/ajax-loader.gif" width="16" height="16"  alt="ajax-loader"/>
                                     </div>
@@ -237,9 +234,20 @@ $this->menu=array(
 	),
 )); */?>
 
-
+<div id="trailer_dialog" title="Trailer">
+    <iframe width="560" height="315" src="<?php echo $model->trailer_link; ?>" frameborder="0" allowfullscreen></iframe>
+  </div>
 
 <script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=226266080832489";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));    
+    
+$("#thumbnail-container").hide();    
 $("#loading-container").hide();
 $("#select-theater-container").hide();
 $('#city_location').change(function() {
@@ -281,4 +289,24 @@ $('#city_location').change(function() {
         });
 });
 
+
+$(function() {
+    $( "#trailer_dialog" ).dialog({
+      autoOpen: false,
+      width: 600,
+      modal: true,
+      show: {
+      },
+      hide: {
+      }
+    });
+$( "#trailer_opener" ).click(function() {
+      $( "#trailer_dialog" ).dialog( "open" );
+      //alert(1);
+
+});
+
+
+});
 </script>
+
