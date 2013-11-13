@@ -82,7 +82,7 @@ class MovieController extends Controller
                             $nameImage = dirname(Yii::app()->request->scriptFile).'/images/movies/'.$model->image;
                             $uploadedImage->saveAs($nameImage, true);
                             $nameImage = Yii::app()->image->load($nameImage);
-                            $nameImage->resize(170, 230);
+                            $nameImage->resize(255, 345);
                             $nameImage->save();
                             
                             $nameThumbnail = dirname(Yii::app()->request->scriptFile).'/images/movies/thumbnails/'.$model->image_thumbnail;

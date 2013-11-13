@@ -45,7 +45,7 @@ $this->menu=array(
                         <tbody>
                             <tr>
                                 <td rowspan="3" width="170" style="text-align:center;">
-                                    <img src="<?php echo Yii::app()->baseUrl; ?>/images/movies/<?php echo $model->image; ?>" />
+                                    <img src="<?php echo Yii::app()->baseUrl; ?>/images/movies/<?php echo $model->image; ?>" height="230" width="170"/>
                                     <div id="stars">
                                         <img class="my-item-block"src="<?php echo Yii::app()->baseUrl; ?>/images/stars<?php echo intval($model->raiting); ?>.png" width="170" height="30" align="center"/>
                                         <div align="center" class="fb-like" data-href="<?php echo Yii::app()->createAbsoluteUrl('movie/view',array('id'=>$model->id)); ?>" data-width="100" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
