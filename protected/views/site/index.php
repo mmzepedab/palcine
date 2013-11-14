@@ -499,7 +499,7 @@ $(function() {
 				pagingNav: true,
 				snapToItems: false,
 				itemsPerMove: 1,				
-				scrollToLast: true,
+				scrollToLast: false,
 				loopItems: true,
 				scrollbar: true,
                                 autoplay:true,               // Autoplay enabled.

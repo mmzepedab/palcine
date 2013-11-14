@@ -239,6 +239,16 @@ $this->menu=array(
   </div>
 
 <script>
+    <?php 
+        $roomTimes = RoomTime::model()->findAll();
+        $roomTimesArray = array(); 
+        foreach ($roomTimes as $roomTime) {
+            //$roomTimesArray[] = $roomTime['time'];
+            echo "alert('".$roomTime['time']."');";            
+        }
+    ?>
+//alert();    
+    
 (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
@@ -250,6 +260,8 @@ $this->menu=array(
 $("#thumbnail-container").hide();    
 $("#loading-container").hide();
 $("#select-theater-container").hide();
+
+
 $('#city_location').change(function() {
     $("#loading-container").show();
     $('#theaters_select').empty();
@@ -265,6 +277,7 @@ $('#city_location').change(function() {
                 //alert(data);
                 var select = $('#theaters_select');
                 select.append("<option value=''>Seleccionar...</option>");
+                
                 $(data).find('theater').each(function(){            
                     var id = $(this).find('id').text();
                     var value = $(this).find('name').text();
@@ -274,6 +287,8 @@ $('#city_location').change(function() {
                     $("#loading-container").hide();
                     //alert($(this).text());
                 });
+                
+                $("#movieTheaterRoomTimes").html();
                 //alert(select);
                 //$("#select-theater-container").html('<p>Bien</p>');
                 //var success = $(data).find('name').text();
@@ -288,6 +303,40 @@ $('#city_location').change(function() {
 
         });
 });
+
+
+
+$('#theaters_select').change(function() {
+    $('#movieTheaterRoomTimes').empty();
+    $.ajax({
+            type: 'GET',
+            url: '<?php echo Yii::app()->createUrl("api/rooms"); ?>',
+            dataType: "xml",            
+            data: {t_id: $('#theaters_select option:selected' ).val()},
+            success: function(data) {
+                var select = $('#theaters_select');
+                select.append("<option value=''>Seleccionar...</option>");
+                var rooms_content = "";
+                $(data).find('room').each(function(){            
+                    var id = $(this).find('id').text();
+                    var value = $(this).find('name').text();
+                    rooms_content += "<p><b>"+value+"</b></p>";
+                });
+                
+                $("#movieTheaterRoomTimes").html(rooms_content);
+                
+
+                        
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert(XMLHttpRequest.responseText);
+                alert(textStatus);
+            }
+
+        });
+});
+
+
 
 
 $(function() {
