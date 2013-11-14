@@ -239,16 +239,42 @@ $this->menu=array(
   </div>
 
 <script>
+    var roomTimesArray = new Array();
+    //var roomTimesArray = "";
     <?php 
         $roomTimes = RoomTime::model()->findAll();
-        $roomTimesArray = array(); 
-        foreach ($roomTimes as $roomTime) {
-            //$roomTimesArray[] = $roomTime['time'];
-            echo "alert('".$roomTime['time']."');";            
+        //$roomTimesArray = array();
+        foreach ($roomTimes as $roomTime) {            
+            echo "roomTimesArray[".$roomTime['room_id']."] = '';";
+                      
         }
+        foreach ($roomTimes as $roomTime) {            
+            echo "roomTimesArray[".$roomTime['room_id']."] += tConvert('".$roomTime['time']."') + ' - ';";
+                        
+        }
+        
+        
     ?>
-//alert();    
-    
+
+
+//alert(roomTimesArray[2]);    
+
+
+function tConvert (time) {
+  // Check correct time format and split into components
+  time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+  if (time.length > 1) { // If time format correct
+    time = time.slice (1);  // Remove full string match value
+    time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
+    time[0] = +time[0] % 12 || 12; // Adjust hours
+  }
+  return time.join (''); // return adjusted time or original string
+}
+
+
+
+
 (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
@@ -271,8 +297,8 @@ $('#city_location').change(function() {
             url: '<?php echo Yii::app()->createUrl("api/theaters"); ?>',
             dataType: "xml",
             //data: 'time='+$('#timeList option:selected' ).val(),
-            
-            data: {loc: $('#city_location option:selected' ).val()},
+            data: {loc: $('#city_location option:selected' ).val(), m_id: <?php echo $model->id; ?>},
+            //data: {loc: $('#city_location option:selected' ).val()},
             success: function(data) {
                 //alert(data);
                 var select = $('#theaters_select');
@@ -312,15 +338,15 @@ $('#theaters_select').change(function() {
             type: 'GET',
             url: '<?php echo Yii::app()->createUrl("api/rooms"); ?>',
             dataType: "xml",            
-            data: {t_id: $('#theaters_select option:selected' ).val()},
+            data: {t_id: $('#theaters_select option:selected' ).val(), m_id: <?php echo $model->id; ?>},
             success: function(data) {
                 var select = $('#theaters_select');
-                select.append("<option value=''>Seleccionar...</option>");
+                //select.append("<option value=''>Seleccionar...</option>");
                 var rooms_content = "";
                 $(data).find('room').each(function(){            
                     var id = $(this).find('id').text();
                     var value = $(this).find('name').text();
-                    rooms_content += "<p><b>"+value+"</b></p>";
+                    rooms_content += "<p><b>"+value+"</b><br/>"+roomTimesArray[id]+"</p>";
                 });
                 
                 $("#movieTheaterRoomTimes").html(rooms_content);
