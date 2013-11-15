@@ -102,8 +102,17 @@
 	</div>
 
 	<div class="row">
-                <?php if(!$model->isNewRecord ){echo $form->labelEx($model,'raiting');} ?>
-		<?php 
+                <?php /*if(!$model->isNewRecord ){*/echo $form->labelEx($model,'raiting');/*}*/ ?>
+		<?php echo $form->dropDownList($model,'raiting',
+                        array(
+                                '0'=>'0',
+                                '1'=>'1',
+                                '2'=>'2',
+                                '3'=>'3',
+                                '4'=>'4',
+                                '5'=>'5',
+                            )); ?>
+                    <?php /*
                 if(!$model->isNewRecord ){
                     echo $form->textField($model,'raiting'); 
                 }else{
@@ -112,7 +121,7 @@
                         'value' => 0
                         ));
                 }    
-                    ?>
+                    */ ?>
 		<?php echo $form->error($model,'raiting'); ?>
 	</div>
 
