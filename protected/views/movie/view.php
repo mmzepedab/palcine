@@ -178,14 +178,7 @@ $this->menu=array(
                                     </p>
                                     
                                     <div id="movieTheaterRoomTimes">
-                                        <p>
-                                            <b>Sala 1</b> <br/>
-                                            2:00pm - 5:00pm - 6:00pm - 7:00pm - 8:00pm - 10:00pm - 11:00pm
-                                        </p>
-                                        <p>
-                                            <b>Sala 2 (3D)</b> <br/>
-                                            2:00pm - 5:00pm  - 6:00pm  - 7:00pm - 8:00pm - 10:00pm - 6:00pm - 7:00pm - 8:00pm  - 10:00pm - 11:00pm
-                                        </p>    
+                                         
                                         
                                     </div>
                                     
@@ -241,8 +234,11 @@ $this->menu=array(
 <script>
     var roomTimesArray = new Array();
     //var roomTimesArray = "";
-    <?php 
-        $roomTimes = RoomTime::model()->findAll();
+    <?php
+        $criteria = new CDbCriteria();
+        $criteria->condition = "(movie_id = :m_id ) ";
+        $criteria->params = array(':m_id'=>$model->id);
+        $roomTimes = RoomTime::model()->findAll($criteria);
         //$roomTimesArray = array();
         foreach ($roomTimes as $roomTime) {            
             echo "roomTimesArray[".$roomTime['room_id']."] = '';";
@@ -346,7 +342,9 @@ $('#theaters_select').change(function() {
                 $(data).find('room').each(function(){            
                     var id = $(this).find('id').text();
                     var value = $(this).find('name').text();
-                    rooms_content += "<p><b>"+value+"</b><br/>"+roomTimesArray[id]+"</p>";
+                    roomTimes = roomTimesArray[id].substring(0, roomTimesArray[id].length - 2);
+                    rooms_content += "<p><b>"+value+"</b><br/>"+roomTimes+"</p>";
+                    
                 });
                 
                 $("#movieTheaterRoomTimes").html(rooms_content);

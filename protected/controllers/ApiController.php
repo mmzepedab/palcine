@@ -57,7 +57,7 @@ class ApiController extends Controller
                     $roomTimes = RoomTime::model()->findAll($criteria);                    
                     $room_ids = array();    
                     foreach ($roomTimes as $roomTime) {
-                            $room_ids[] = $room['room_id'];
+                            $room_ids[] = $roomTime['room_id'];
 
                     }
                     
@@ -74,8 +74,9 @@ class ApiController extends Controller
                     $criteria = new CDbCriteria();
                     $criteria->condition = "(city_id = :location ) ";
                     $criteria->params = array(':location'=>$_GET['loc']);
-                    $criteria->addInCondition("theater_id", $theater_ids);
+                    $criteria->addInCondition("id", $theater_ids);
                     $models = Theater::model()->findAll($criteria);
+                    
                 }else{
                     $models = Theater::model()->findAll();
                 }
@@ -111,7 +112,7 @@ class ApiController extends Controller
                     
                     $room_ids = array();    
                     foreach ($rooms as $room) {
-                            $room_ids[] = $room['id'];
+                            $room_ids[] = $room['room_id'];
 
                     }         
                     
@@ -119,7 +120,7 @@ class ApiController extends Controller
                     $criteria = new CDbCriteria();
                     $criteria->condition = "(theater_id = :t_id ) ";
                     $criteria->params = array(':t_id'=>$_GET['t_id']);
-                    //$criteria->addInCondition("id", $room_ids);
+                    $criteria->addInCondition("id", $room_ids);
                     $models = Room::model()->findAll($criteria);
                 }else{
                     $models = Room::model()->findAll();
