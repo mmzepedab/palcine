@@ -28,6 +28,7 @@
         <!-- JS files -->
         <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script> -->
         <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/js/jquery.min.js"></script>
+        <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/js/jquery.popupWindow.js"></script>
         <script type="text/javascript" src="touchcarousel/jquery.touchcarousel-1.2.min.js"></script> 
 	<script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/js/jquery.bxslider.js"></script>
         

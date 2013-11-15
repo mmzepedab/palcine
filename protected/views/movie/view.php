@@ -169,14 +169,13 @@ $this->menu=array(
                                     </div>
                                     
                                     <p></p>
-                                    
                                     <div align="center">
-                                        <a id="opener" href="#" class="yellow button">Comprar Boletos</a>
+                                        <a id="opener" href="https://ventas.cinemarkca.com/visInternetTicketing/visSelect.aspx?visSearchBy=cin&visCinID=774&visMovieName=" class="yellow button">Comprar Boletos</a>
                                     </div>
                                     <p>
                                         
                                     </p>
-                                    
+                                    <div id="movieUnavailable" style="color: tomato; font-size: 14; text-align: center;">Esta pelicula no esta disponible en ninguna sala en tu ciudad.</div>
                                     <div id="movieTheaterRoomTimes">
                                          
                                         
@@ -231,7 +230,21 @@ $this->menu=array(
     <iframe width="560" height="315" src="<?php echo $model->trailer_link; ?>" frameborder="0" allowfullscreen></iframe>
   </div>
 
+
+
+
+
+
 <script>
+$('#opener').popupWindow({ 
+height:500, 
+width:800, 
+top:200, 
+left:300 
+});    
+    
+    
+    
     var roomTimesArray = new Array();
     //var roomTimesArray = "";
     <?php
@@ -282,11 +295,14 @@ function tConvert (time) {
 $("#thumbnail-container").hide();    
 $("#loading-container").hide();
 $("#select-theater-container").hide();
-
+$("#movieUnavailable").hide();
 
 $('#city_location').change(function() {
     $("#loading-container").show();
     $('#theaters_select').empty();
+    $("#select-theater-container").hide();
+    $("#movieTheaterRoomTimes").empty();
+    $("#movieUnavailable").hide();
     $.ajax({
             type: 'GET',
             //url: 'http://www.oncae.gob.hn/palcine/index.php/api/movies',
@@ -297,9 +313,12 @@ $('#city_location').change(function() {
             //data: {loc: $('#city_location option:selected' ).val()},
             success: function(data) {
                 //alert(data);
+                
+                if($(data).find('theater').text() !== "" ) {
+                    
+                
                 var select = $('#theaters_select');
                 select.append("<option value=''>Seleccionar...</option>");
-                
                 $(data).find('theater').each(function(){            
                     var id = $(this).find('id').text();
                     var value = $(this).find('name').text();
@@ -311,6 +330,11 @@ $('#city_location').change(function() {
                 });
                 
                 $("#movieTheaterRoomTimes").html();
+                
+                }else{
+                    $("#movieUnavailable").show();
+                    $("#loading-container").hide();
+                }
                 //alert(select);
                 //$("#select-theater-container").html('<p>Bien</p>');
                 //var success = $(data).find('name').text();
