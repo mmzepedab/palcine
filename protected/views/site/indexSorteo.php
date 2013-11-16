@@ -13,9 +13,12 @@ $this->pageTitle=Yii::app()->name;
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-
-
-<div id="title_background">
+<table border="1" width="100%">
+    
+    <tbody>
+        <tr>
+            <td width="70%">
+               <div id="title_background">
     Voy palCine
     
 </div>
@@ -62,7 +65,7 @@ $this->pageTitle=Yii::app()->name;
         </thead>
         <tbody>            
             <tr>
-                <td valign="top">
+                <td valign="top" width="200px">
                     <?php /*$list=CHtml::listData(Movie::model()->findAll(), 'id', 'name'); */ ?>
                     <?php /*echo $form->DropdownList(Movie::model(),
                             'id', 
@@ -115,7 +118,30 @@ $this->pageTitle=Yii::app()->name;
         </tbody>
     </table>
 <?php $this->endWidget(); ?>
-</div>
+</div> 
+                
+                
+                
+            </td>
+            <td>
+                
+                <div id="title_background">
+                    Sorteo
+
+                </div>
+                <div class="line-separator"></div>
+                </br>
+                <p align="center">Sorteo de un iPhone cortesia de <b>Tigo</b></p>
+                <div align="center">
+                                        <a id="opener" href="#" class="yellow button">Participar</a>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+
 
 </br>
 </br>

@@ -216,9 +216,10 @@ class ApiController extends Controller
                 
                 $criteria = new CDbCriteria();
                 $criteria->distinct = true;
-                $criteria->select = ('time');
+                //$criteria->select = ('time');
                 $criteria->addInCondition("movie_id", array($_GET["m_id"]));
                 $criteria->addInCondition("room_id", $room_ids);
+                $criteria->order = ("time ASC");
                 $models = RoomTime::model()->findAll($criteria);
                 //$models = RoomTime::model()->findAll(array('order'=>'name ASC'));
             break; // }}}
