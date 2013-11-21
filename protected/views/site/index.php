@@ -235,7 +235,7 @@ $this->pageTitle=Yii::app()->name;
 					       
                                             </a>
                                     <div align="center">
-                                        <a id="timeOpener" href="javascript:;" class="blue smallButton">Horarios</a>
+                                        <a id="timeOpener" href="'.Yii::app()->createAbsoluteUrl('movie/viewTimes',array('id'=>$row['id'],'loc'=>'tgu')) .'" class="blue smallButton">Horarios</a>
                                     </div>
                                     </br>
                                     <div class="fb-like" data-href="'.$row['name'].'" href="'.Yii::app()->createAbsoluteUrl('movie/view',array('id'=>$row['id'])) .'" data-width="The pixel width of the plugin" data-height="The pixel height of the plugin" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="true"></div>
