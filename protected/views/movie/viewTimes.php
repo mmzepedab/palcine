@@ -74,12 +74,12 @@ echo $_GET['loc'];
                                         Horarios
                                     </div>
 
-                                    <div class="line-separator"></div>
+                                    <div class="line-separator" style="width: 30%;"></div>
                                     <p></p>
                                     
                                     <b style="font-size: large; color: #999;">Metrocinemas Metromall</b>
-                                    <a id="opener" href="https://ventas.cinemarkca.com/visInternetTicketing/visSelect.aspx?visSearchBy=cin&visCinID=774&visMovieName=" class="yellow button" style="float: right;">Comprar Boletos</a>
-                                    <br/>
+                                    
+                                    <div class="line-separator" ></div>
                                         
                                     <p>
                                         <b>Sala 3</b><br/>
@@ -93,7 +93,8 @@ echo $_GET['loc'];
                                     <p></p>
                                     <p></p>
                                     
-                                    <b style="font-size: large; color: #999;">Metrocinemas Plaza America</b><br/>
+                                    <b style="font-size: large; color: #999;">Metrocinemas Plaza America</b>
+                                    <div class="line-separator" ></div>
                                         
                                     <p>
                                         <b>Sala 3</b><br/>
@@ -104,7 +105,8 @@ echo $_GET['loc'];
                                     <p></p>
                                     <p></p>
                                     
-                                    <b style="font-size: large; color: #999;">Cinemark Mall Multiplaza</b><br/>
+                                    <b style="font-size: large; color: #999;">Cinemark Mall Multiplaza</b>
+                                    <div class="line-separator" ></div>
                                         
                                     <p>
                                         <b>Sala 3</b><br/>

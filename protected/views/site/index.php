@@ -129,8 +129,8 @@ $this->pageTitle=Yii::app()->name;
         <thead>
             <tr>
                 <th>Que queres ver?</th>
+                <th>En que cine?</th>
                 <th>A que hora?</th>
-                <th>Donde la queres ver?</th>
                 <th>palCine</th>
             </tr>
         </thead>
@@ -143,27 +143,12 @@ $this->pageTitle=Yii::app()->name;
                             $list,
                             array('id'=>'movieList','empty'=>'Seleccionar...')                            
                             ); */ ?>                    
-                    <select name="movieList" id="movieListTheater">
+                    <select name="movieListTheater" id="movieListTheater">
                     </select>
                     </br>
                     </br>
                     <div id="movieTitleTheater"></div>
                     <div id="movie_loading_image_theater" align="center"><img src="images/ajax-loader.gif" width="16" height="16" alt="ajax-loader"/>
-                    </div>
-                </td>
-                <td>
-                    <?php /* $list=CHtml::listData(RoomTime::model()->findAll(), 'id', 'time'); */?>
-                    <?php /*echo $form->DropdownList(RoomTime::model(),
-                            'id', 
-                            $list,
-                            array('id'=>'timeList','empty'=>'Seleccionar...')
-                            ); */?> 
-                    <select name="timeList" id="timeList">
-                    </select>
-                    </br>
-                    </br>
-                    <div id="timeTitle"></div>
-                    <div id="time_loading_image" align="center"><img src="images/ajax-loader.gif" width="16" height="16" alt="ajax-loader"/>
                     </div>
                 </td>
                 <td>
@@ -173,13 +158,29 @@ $this->pageTitle=Yii::app()->name;
                             $list,
                             array('id'=>'roomList','empty'=>'Seleccionar...')
                             ); */?> 
-                    <select name="roomList" id="roomList">
+                    <select name="theaterList" id="theaterList">
                     </select>
                     </br>
                     </br>
-                    <div id="roomTitle"></div>
-                    <div id="room_loading_image" align="center"><img src="images/ajax-loader.gif" width="16" height="16" alt="ajax-loader"/>
+                    <div id="theaterTitle"></div>
+                    <div id="theater_loading_image" align="center"><img src="images/ajax-loader.gif" width="16" height="16" alt="ajax-loader"/>
                 </td>
+                <td>
+                    <?php /* $list=CHtml::listData(RoomTime::model()->findAll(), 'id', 'time'); */?>
+                    <?php /*echo $form->DropdownList(RoomTime::model(),
+                            'id', 
+                            $list,
+                            array('id'=>'timeList','empty'=>'Seleccionar...')
+                            ); */?> 
+                    <select name="timeListTheater" id="timeListTheater">
+                    </select>
+                    </br>
+                    </br>
+                    <div id="timeTitleTheater"></div>
+                    <div id="time_loading_image_theater" align="center"><img src="images/ajax-loader.gif" width="16" height="16" alt="ajax-loader"/>
+                    </div>
+                </td>
+                
                 <td>                                           
                     <div align="center">
                         <a id="opener" href="javascript:;" class="yellow smallButton">Ver detalle</a>
