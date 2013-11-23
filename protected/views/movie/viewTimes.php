@@ -27,7 +27,7 @@ $this->menu=array(
 
 
 <?php 
-echo $_GET['loc'];
+//echo $_GET['loc'];
 ?>
 <div id="fb-root"></div>
 
@@ -37,7 +37,9 @@ echo $_GET['loc'];
             <td colspan="2">
                 <div id="title_background">
                     <?php echo $model->name; ?>
+                    
                 </div>
+                
             </td>
         </tr>
         <tr>
@@ -51,9 +53,11 @@ echo $_GET['loc'];
                                         
                                     <div id="stars" style="float: none;">
                                         <img class="my-item-block"src="<?php echo Yii::app()->baseUrl; ?>/images/stars<?php echo intval($model->raiting); ?>.png" width="170" height="30" align="center"/>
+                                        <div align="center"> <a id="trailer_opener" href="javascript:;" class="blue smallButton">Ver Trailer</a></div> 
+                                       
                                         <div align="center" class="fb-like" data-href="<?php echo Yii::app()->createAbsoluteUrl('movie/view',array('id'=>$model->id)); ?>" data-width="100" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
                                     </div> 
-                                </td>
+                                     </td>
                                 
                                 
                             </tr>
@@ -77,6 +81,91 @@ echo $_GET['loc'];
                                     <div class="line-separator" style="width: 30%;"></div>
                                     <p></p>
                                     
+                                    
+                                    <?php
+                                    
+                                    
+                                    $criteria = new CDbCriteria();
+                                    //$criteria->condition = "(movie_id = :m_id ) ";
+                                    //$criteria->params = array(':m_id'=>$_GET['m_id']);
+                                    $criteria->addInCondition("movie_id", array($_GET['m_id']));
+                                    $roomTimes = RoomTime::model()->findAll($criteria);
+                                    $room_ids = array();    
+                                    foreach ($roomTimes as $roomTime) {
+                                            $room_ids[] = $roomTime['room_id'];
+
+                                    }
+                                    
+                                    $criteriaRooms = new CDbCriteria();
+                                    $criteriaRooms->addInCondition("id", $room_ids);
+                                    $rooms = Room::model()->findAll($criteriaRooms);
+                                    $theater_ids = array(); 
+                                    foreach ($rooms as $room) {
+                                            $theater_ids[] = $room['theater_id'];
+                                    }
+                                    
+                                    $criteria = new CDbCriteria();
+                                    //$criteria->condition = "(city_id = :loc ) ";
+                                    //$criteria->params = array(':loc'=>$_GET['loc']);
+                                    $criteria->addInCondition("city_id", array($_GET['loc']));
+                                    $criteria->addInCondition("id", $theater_ids);
+                                    $criteria->order= 'name ASC';
+                                    $theaters = Theater::model()->findAll($criteria);
+                                    
+                                    foreach ($theaters as $theater) {
+                                        //$criteriaRooms = new CDbCriteria();
+                                        $criteriaRooms = new CDbCriteria();
+                                        $criteriaRooms->addInCondition("id", $room_ids);
+                                        $criteriaRooms->addInCondition("theater_id", array($theater['id']));
+                                        //$criteriaRooms->condition = "(theater_id = :t_id ) ";
+                                        //$criteriaRooms->params = array(':t_id'=>$theater['id']);
+                                        $criteriaRooms->order= 'name ASC';
+                                        $rooms = Room::model()->findAll($criteriaRooms);
+                                        
+                                        print_r('<b style="font-size: large; color: #999;">'.$theater["name"].'</b>');
+                                        print_r('<div class="line-separator" ></div>');
+                                        print_r('<p>');
+                                        foreach ($rooms as $room) {
+                                                print_r('<b>'.$room['name'].'</b><br/>');
+                                                
+                                                $criteriaTimes = new CDbCriteria();
+                                                $criteriaTimes->addInCondition("room_id", array($room['id']));
+                                                $criteriaTimes->addInCondition("movie_id", array($_GET['m_id']));
+                                                //$criteriaTimes->condition = "(room_id = :r_id AND movie_id = :m_id) ";
+                                                //$criteriaTimes->params = array(':r_id'=>$room['id'], ':m_id'=>$_GET['m_id']);
+                                                $roomTimes = RoomTime::model()->findAll($criteriaTimes);
+                                                
+                                                $i = 0;
+                                                $len = count($roomTimes);
+                                                foreach ($roomTimes as $roomTime) { 
+                                                    if ($i == $len - 1) {
+                                                        // last
+                                                        print_r(DATE("g:i a", STRTOTIME($roomTime['time'])));
+                                                    }else{
+                                                        print_r(DATE("g:i a", STRTOTIME($roomTime['time'])).' - ');
+                                                    }
+                                                    // …
+                                                    $i++;
+                                                    //print_r('1');
+                                                }
+                                                print_r('<br/>');
+                                                print_r('<br/>');
+                                            }
+                                        print_r('</p>');
+                                            /*
+                                            foreach ($roomTimes as $roomTime) {
+                                                print_r($roomTime['time']);
+                                                print_r('<p></p>');
+                                            }
+                                        print_r('<p></p>');
+                                        print_r('<p></p>');
+                                             * 
+                                             */
+                                    }
+                                    
+                                    ?>
+                                    
+                                    <!--
                                     <b style="font-size: large; color: #999;">Metrocinemas Metromall</b>
                                     
                                     <div class="line-separator" ></div>
@@ -118,52 +207,11 @@ echo $_GET['loc'];
                                     </p>
                                     
                                     <p></p>
+                                    -->
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                    <div class="styled-select-theater">
-                                        <span id="location" align="center">
-                                                        <select id="city_location">
-                                                            <option value="">Seleccionar cine...</option>
-                                                            <option value="sps">San Pedro Sula</option>
-                                                            <option value="pro">El Progreso</option>
-                                                            <option value="tgu">Tegucigalpa</option>
-                                                        </select>
-                                                    </span>
-                                    </div>
-                                    <p></p>
-                                    
-                                    <div id="thumbnail-container" align="center">
-                                        <img src="<?php echo Yii::app()->baseUrl; ?>/images/movies/thumbnails/2x/<?php echo $model->image_thumbnail2x; ?>" width="200" height="200"  alt="ajax-loader"/>
-                                    </div>
-                                    <div id="loading-container" align="center">
-                                        <img src="<?php echo Yii::app()->baseUrl; ?>/images/ajax-loader.gif" width="16" height="16"  alt="ajax-loader"/>
-                                    </div>
-                                    <div id="select-theater-container" align="center">
-                                        <div class="styled-select-theater" id="theaters_select_div">
-                                        <span id="location" align="center">
-                                                        <select id="theaters_select">
-                                                        </select>
-                                                    </span>
-                                        </div>
-                                    </div>
-                                    
-                                    <p></p>
-                                    <div align="center">
-                                        <a id="opener" href="https://ventas.cinemarkca.com/visInternetTicketing/visSelect.aspx?visSearchBy=cin&visCinID=774&visMovieName=" class="yellow button">Comprar Boletos</a>
-                                    </div>
-                                    <p>
-                                        
-                                    </p>
-                                    <div id="movieUnavailable" style="color: tomato; font-size: 14; text-align: center;">Esta pelicula no esta disponible en ninguna sala en tu ciudad.</div>
-                                    <div id="movieTheaterRoomTimes">
-                                         
-                                        
-                                    </div>
-                                    
-                                    
-                                </td>
+                                
                             </tr>
                         </tbody>
                     </table>

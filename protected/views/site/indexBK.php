@@ -183,7 +183,7 @@ $this->pageTitle=Yii::app()->name;
                 
                 <td>                                           
                     <div align="center">
-                        <a id="openerTheater" href="javascript:;" class="yellow smallButton">Ver detalle</a>
+                        <a id="opener" href="javascript:;" class="yellow smallButton">Ver detalle</a>
                     </div>                    
                 </td>
             </tr>
@@ -212,50 +212,7 @@ $this->pageTitle=Yii::app()->name;
 <div id="carousel-image-and-text" class="touchcarousel grey-blue">       
 			<ul class="touchcarousel-container">
                             <?php 
-                            if(isset($_GET['loc'])){
-                                $criteria = new CDbCriteria();
-                                $criteria->condition = "(city_id = :location ) ";
-                                $criteria->params = array(':location'=>$_GET['loc']);
-                                $theaters = Theater::model()->findAll($criteria); 
-                                $theater_ids = array();    
-                                foreach ($theaters as $theater) {
-                                        $theater_ids[] = $theater['id'];
-
-                                }
-
-                                $criteria = new CDbCriteria();
-                                $criteria->addInCondition("theater_id", $theater_ids);
-                                $rooms = Room::model()->findAll($criteria); 
-                                $room_ids = array();    
-                                foreach ($rooms as $room) {
-                                        $room_ids[] = $room['id'];
-
-                                }
-
-                                //print_r($theater_ids);
-
-                                $criteria = new CDbCriteria();
-                                $criteria->distinct = true;  
-                                $criteria->select = ('movie_id, room_id');
-                                $criteria->addInCondition("room_id", $room_ids);
-                                //$criteria->addInCondition("movie_id", array($_GET["m_id"]));
-                                $models = RoomTime::model()->findAll($criteria);
-
-                                $movie_ids = array();    
-                                    foreach ($models as $model) {
-                                            $movie_ids[] = $model['movie_id'];
-
-                                    }
-                                $criteria = new CDbCriteria();
-                                $criteria->addInCondition("id", $movie_ids);
-                                $criteria->order= 'id DESC';
-                                //$models = Movie::model()->findAll(array('order'=>'name ASC'));
-                                $models = Movie::model()->findAll($criteria);
-                            }else{
-                                $criteria = new CDbCriteria();
-                                $criteria->order = ("id DESC");
-                                $models = Movie::model()->findAll($criteria);
-                            }
+                            $models = Movie::model()->findAll(array('order'=>'id DESC'));
 
                             $rows = array();
                             foreach($models as $model)
@@ -268,10 +225,6 @@ $this->pageTitle=Yii::app()->name;
                                 $movieName = substr($movieName, 0, 21);
                                 $movieName.=  "...";
                             }
-                            $loc = '';
-                            if(isset($_GET['loc'])){
-                                $loc = $_GET['loc'];
-                            }
                             print_r('<li class="touchcarousel-item">
 					<a class="item-block" title="'.$row['name'].'" href="'.Yii::app()->createAbsoluteUrl('movie/view',array('id'=>$row['id'])) .'">
 					    <h4>'.$movieName.'</h4>
@@ -283,7 +236,7 @@ $this->pageTitle=Yii::app()->name;
 					       
                                             </a>
                                     <div align="center">
-                                        <a id="timeOpener" href="'.Yii::app()->createAbsoluteUrl('movie/viewTimes',array('m_id'=>$row['id'],'loc'=>$loc)) .'" class="blue smallButton">Horarios</a>
+                                        <a id="timeOpener" href="'.Yii::app()->createAbsoluteUrl('movie/viewTimes',array('id'=>$row['id'],'loc'=>'tgu')) .'" class="blue smallButton">Horarios</a>
                                     </div>
                                     </br>
                                     <div class="fb-like" data-href="'.$row['name'].'" href="'.Yii::app()->createAbsoluteUrl('movie/view',array('id'=>$row['id'])) .'" data-width="The pixel width of the plugin" data-height="The pixel height of the plugin" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="true"></div>
@@ -357,21 +310,17 @@ $this->pageTitle=Yii::app()->name;
  
 
 <script>
-    var loc = getUrlVars()["loc"];
-    if(typeof loc == 'undefined'){
-            window.location.replace("./?loc=tgu");
-    }else{
-        $('#city_location option[value="'+loc+'"]').prop('selected',true);
-    }
-    
-    function getUrlVars() {
-        var vars = {};
-        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-            vars[key] = value;
-        });
-        return vars;
-    }
-
+switch(geoplugin_city())
+{
+case 'Tegucigalpa':
+    $('#city_location option[value="tgu"]').prop('selected',true); 
+  break;
+case 'San Pedro Sula':
+    $('#city_location option[value="sps"]').prop('selected',true);
+  break;
+default:
+    $('#city_location option[value="pro"]').prop('selected',true);
+} 
 
 
 $('.slider1').bxSlider({
@@ -403,19 +352,9 @@ $('#timeList').hide();
 $('#roomList').hide();
 $('#opener').hide();
 
-//hide palCine by theater
-$('#movieListTheater').hide();
-$('#theaterList').hide();
-$("#theater_loading_image").hide();
-$('#timeListTheater').hide();
-$("#time_loading_image_theater").hide();
-$('#openerTheater').hide();
 
 $('#city_location').change(function() {
-    //$("#palcine_time").hide();
-    //$("#palcine_theater").hide();
-    
-    window.location.replace("./?loc="+$('#city_location option:selected' ).val());
+    $("#palcine_time").hide();
 });
 
 //Select Movie and Change MovieListTimes
@@ -607,108 +546,6 @@ function palCineActionTheater(){
     }
     
 }
-
-//Select Movie and Change MovieListTimes
-$('#movieListTheater').change(function() {
-    $("#theater_loading_image").show();
-    $('#theaterList').hide();
-    $('#theaterList').empty();
-    $('#theaterTitle').hide();
-    $('#theaterTitle').empty();
-    $('#roomList').hide();
-    $('#roomList').empty();
-    $('#roomTitle').hide();
-    $('#roomTitle').empty();
-    $('#opener').hide();
-    //alert($(this).text());
-     var movieTitleText = '<h1>'+$('#movieListTheater option:selected' ).text()+'</h1>';
-     
-    $('#movieTitleTheater').html(movieTitleText);
-    //alert($('#movieList option:selected' ).val());
-    
-    $.ajax({
-            type: 'GET',
-            //url: 'http://www.oncae.gob.hn/palcine/index.php/api/movies',
-            url: '<?php echo Yii::app()->createUrl("api/theaters"); ?>',
-            dataType: "xml",
-            //data: 'm_id='+$('#movieList option:selected' ).val(),
-            data: {loc: $('#city_location option:selected' ).val(), m_id: $('#movieListTheater option:selected' ).val()}, 
-            success: function(data) {
-                //alert(data);
-                var select = $('#theaterList');
-                select.append("<option value=''>Seleccionar...</option>");
-                $(data).find('theater').each(function(){            
-                    var id = $(this).find('id').text();
-                    var value = $(this).find('name').text();
-                    select.append("<option value='"+id+"'>"+value+"</option>");
-                    $('#theaterList').show();
-                    $('#theaterTitle').show();
-                    $("#theater_loading_image").hide();
-                    //alert($(this).text());
-                });
-                //var success = $(data).find('name').text();
-                //alert(success);
-
-                        //NEED TO ITERATE data.msg AND FILL A DROP DOWN
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                //alert(XMLHttpRequest.responseText);
-                //alert(textStatus);
-            }
-
-        });
-});
-
-$('#theaterList').change(function() {
-    $("#time_loading_image_theater").show();
-    $('#timeListTheater').hide();
-    $('#timeListTheater').empty();
-    $('#timeTitleTheater').hide();
-    $('#timeTitleTheater').empty();
-    //alert($(this).text());
-     var timeTitleText = '<h1>'+$('#theaterList option:selected' ).text()+'</h1>';
-    $('#theaterTitle').html(timeTitleText);
-    
-    $.ajax({
-            type: 'GET',
-            //url: 'http://www.oncae.gob.hn/palcine/index.php/api/movies',
-            url: '<?php echo Yii::app()->createUrl("api/movieRoomTimes"); ?>',
-            dataType: "xml",
-            //data: 'm_id='+$('#movieList option:selected' ).val(),
-            data: {loc: $('#city_location option:selected' ).val(), m_id: $('#movieListTheater option:selected' ).val(), t_id: $('#theaterList option:selected' ).val()}, 
-            success: function(data) {
-                //alert(data);
-                var select = $('#timeListTheater');
-                select.append("<option value=''>Seleccionar...</option>");
-                $(data).find('movieRoomTime').each(function(){            
-                    var id = $(this).find('id').text();
-                    var value = $(this).find('time').text();
-                    select.append("<option value='"+id+"'>"+value+"</option>");
-                    $('#timeListTheater').show();
-                    $('#timeTitleTheater').show();
-                    $("#time_loading_image_theater").hide();
-                    //alert($(this).text());
-                });
-                //var success = $(data).find('name').text();
-                //alert(success);
-
-                        //NEED TO ITERATE data.msg AND FILL A DROP DOWN
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                //alert(XMLHttpRequest.responseText);
-                //alert(textStatus);
-            }
-
-        });
-    
-});
-
-$('#timeListTheater').change(function() {
-    //alert($(this).text());
-     var roomTitleText = '<h1>'+$('#timeListTheater option:selected' ).text()+'</h1>';
-     $('#openerTheater').show();
-    $('#timeTitleTheater').html(roomTitleText);
-});
 
 $(function() {
     $( "#dialog" ).dialog({

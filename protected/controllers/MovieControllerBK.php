@@ -61,10 +61,10 @@ class MovieController extends Controller
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionViewTimes($m_id,$loc)
+	public function actionViewTimes($id,$loc)
 	{
 		$this->render('viewTimes',array(
-			'model'=>$this->loadModel($m_id),
+			'model'=>$this->loadModel($id),
                         'loc'=>$loc
 		));
 	}

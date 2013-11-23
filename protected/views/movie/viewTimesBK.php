@@ -26,7 +26,9 @@ $this->menu=array(
 ?>
 
 
-
+<?php 
+echo $_GET['loc'];
+?>
 <div id="fb-root"></div>
 
 <table border="1" style="border-width: 0;">
@@ -39,91 +41,30 @@ $this->menu=array(
             </td>
         </tr>
         <tr>
-            <td width="60%">
+            <td width="170px">
                 <div id="movie_detail_container">
                     <table border="0" cellspacing="0" cellpadding="0" >            
                         <tbody>
                             <tr>
-                                <td rowspan="3" width="170" style="text-align:center;">
+                                <td width="170px" >
                                     <img src="<?php echo Yii::app()->baseUrl; ?>/images/movies/<?php echo $model->image; ?>" height="230" width="170"/>
-                                    <div id="stars">
+                                        
+                                    <div id="stars" style="float: none;">
                                         <img class="my-item-block"src="<?php echo Yii::app()->baseUrl; ?>/images/stars<?php echo intval($model->raiting); ?>.png" width="170" height="30" align="center"/>
                                         <div align="center" class="fb-like" data-href="<?php echo Yii::app()->createAbsoluteUrl('movie/view',array('id'=>$model->id)); ?>" data-width="100" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
                                     </div> 
                                 </td>
-                                <td width="200px">
-                                    <b>Nombre en Ingles:</b>
-                                    <p>
-                                        <?php echo $model->name_english; ?>
-                                    </p>
-                                    <b>Fecha de lanzamiento:</b>
-                                    <p>
-                                        <?php echo $model->release_date; ?>
-                                    </p>
-                                    
-                                </td>
-                                <td>
-                                    <b>Duracion:</b>
-                                    <p>
-                                        <?php echo $model->length; ?>
-                                    </p>
-                                    <b>Genero:</b>
-                                    <p>
-                                        <?php echo $model->genre->name; ?>
-                                    </p>
-                                    
-                                </td>
-                                
-                            </tr>
-                            <tr >
-                                <td>
-                                    <b>Restricciones:</b>
-                                    <p>
-                                        <?php echo $model->restriction; ?> 
-                                    </p>
-                                    
-                                </td>
-                                <td>
-                                    
-                                    
-                                </td>
-                                
-                                <td>
-                                    
-                                </td>
                                 
                                 
                             </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <b>Sinopsis:</b>
-                                    <p style="text-align: justify;">
-                                        <?php echo $model->description; ?>
-                                    </p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                   
-                                </td>
-                                <td colspan="2">
-                                    <a id="trailer_opener" href="javascript:;" class="blue smallButton">Ver Trailer</a>
-                                    <a id="trailer_opener" href="javascript:;" class="blue smallButton">Ver Trailer</a>
-                                    <!-- <a id="timeOpener" href="javascript:;" class="blue smallButton">Recomendar</a> -->
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="3">
-                                   <div class="fb-comments" data-href="<?php echo Yii::app()->createAbsoluteUrl('movie/view',array('id'=>$model->id)); ?>" data-numposts="5" data-width="550"></div>
-                                </td>
-                            </tr>
+                            
                         </tbody>
                     </table>
 
 
                 </div>
             </td>
-            <td width="40%">
+            <td>
                 <div id="time_detail_container" >
                     <table border="0" cellspacing="0" cellpadding="0" >            
                         <tbody>
@@ -133,11 +74,50 @@ $this->menu=array(
                                         Horarios
                                     </div>
 
-                                    <div class="line-separator"></div>
-
+                                    <div class="line-separator" style="width: 30%;"></div>
+                                    <p></p>
+                                    
+                                    <b style="font-size: large; color: #999;">Metrocinemas Metromall</b>
+                                    
+                                    <div class="line-separator" ></div>
+                                        
                                     <p>
+                                        <b>Sala 3</b><br/>
+                                        10:00PM - 5:00PM(3D) - 7:00PM - 5:00PM(3D) - 7:00PM - 5:00PM(3D) - 7:00PM
+                                        <br/>
+                                        <b>Sala 5</b><br/>
+                                        10:00PM - 5:00PM(3D) - 7:00PM - 5:00PM(3D) - 7:00PM - 5:00PM(3D) - 7:00PM - 5:00PM(3D) - 7:00PM - 5:00PM(3D) - 7:00PM - 5:00PM(3D)
                                         
                                     </p>
+                                    
+                                    <p></p>
+                                    <p></p>
+                                    
+                                    <b style="font-size: large; color: #999;">Metrocinemas Plaza America</b>
+                                    <div class="line-separator" ></div>
+                                        
+                                    <p>
+                                        <b>Sala 3</b><br/>
+                                        10:00PM - 5:00PM(3D) - 7:00PM - 5:00PM(3D) - 7:00PM - 5:00PM(3D) - 7:00PM
+                                        <br/>
+                                    </p>
+                                    
+                                    <p></p>
+                                    <p></p>
+                                    
+                                    <b style="font-size: large; color: #999;">Cinemark Mall Multiplaza</b>
+                                    <div class="line-separator" ></div>
+                                        
+                                    <p>
+                                        <b>Sala 3</b><br/>
+                                        10:00PM - 5:00PM(3D) - 7:00PM - 5:00PM(3D) - 7:00PM - 5:00PM(3D) - 7:00PM
+                                        <br/>
+                                        <b>Sala 5</b><br/>
+                                        10:00PM - 5:00PM(3D) - 7:00PM - 5:00PM(3D) - 7:00PM - 5:00PM(3D) - 7:00PM - 5:00PM(3D) - 7:00PM - 5:00PM(3D) - 7:00PM - 5:00PM(3D)
+                                        
+                                    </p>
+                                    
+                                    <p></p>
                                 </td>
                             </tr>
                             <tr>
