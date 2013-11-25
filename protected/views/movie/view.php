@@ -108,7 +108,10 @@ $this->menu=array(
                                 </td>
                                 <td colspan="2">
                                     <a id="trailer_opener" href="javascript:;" class="blue smallButton">Ver Trailer</a>
-                                    <a id="trailer_opener" href="javascript:;" class="blue smallButton">Ver Trailer</a>
+                                    <?php 
+                                    echo '<a id="timeOpener" href="'.Yii::app()->createAbsoluteUrl('movie/viewTimes',array('m_id'=>$model->id,'loc'=>$_GET['loc'])) .'" class="blue smallButton">Horarios</a>';
+                                    
+                                    ?>
                                     <!-- <a id="timeOpener" href="javascript:;" class="blue smallButton">Recomendar</a> -->
                                 </td>
                             </tr>

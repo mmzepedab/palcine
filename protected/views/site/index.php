@@ -264,17 +264,17 @@ $this->pageTitle=Yii::app()->name;
                             foreach($rows as $row){
                             
                             $movieName = $row['name'];
-                            if(strlen($movieName)>24){
+                            /*if(strlen($movieName)>18){
                                 $movieName = substr($movieName, 0, 21);
                                 $movieName.=  "...";
-                            }
+                            }*/
                             $loc = '';
                             if(isset($_GET['loc'])){
                                 $loc = $_GET['loc'];
                             }
                             print_r('<li class="touchcarousel-item">
-					<a class="item-block" title="'.$row['name'].'" href="'.Yii::app()->createAbsoluteUrl('movie/view',array('id'=>$row['id'])) .'">
-					    <h4>'.$movieName.'</h4>
+					<a class="item-block" title="'.$row['name'].'" href="'.Yii::app()->createAbsoluteUrl('movie/view',array('id'=>$row['id'],'loc'=>$loc)) .'">
+					    <div style="width:160px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap; "><h4>'.$movieName.'</h4></div>
                                             
                                             <img id="myImage" src="images/movies/'.$row['image'].'" width="170" height="230" />
                                             <div id="stars">
