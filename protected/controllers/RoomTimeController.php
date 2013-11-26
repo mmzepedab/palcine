@@ -72,7 +72,9 @@ class RoomTimeController extends Controller
 			$model->attributes=$_POST['RoomTime'];
 			if($model->save())
 				//$this->redirect(array('view','id'=>$model->id));
-                                $this->redirect(array('room/view','id'=>$model->room_id));
+                                Yii::app()->user->setFlash('success', "Tanda Agregada");
+                                $this->redirect(array('create','r_id'=>$_GET['r_id'],'m_id'=>$model->movie_id));
+                                //$this->redirect(array('room/view','id'=>$model->room_id));
 		}
 
 		$this->render('create',array(
@@ -117,6 +119,8 @@ class RoomTimeController extends Controller
 		if(!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
+        
+        
 
 	/**
 	 * Lists all models.

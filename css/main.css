@@ -85,15 +85,16 @@ body
 {
         background-color: #04467e;
         color: #fff;
-        font-weight: bold;
+        /*font-weight: bold;*/
 	padding: 20px;
 	font-size: 0.8em;
 	text-align: center;
+        /*
 	border-top: 5px solid #004d9f;        
         border-left-width: 1px;
         border-right-width: 1px;        
         border-color: #022e53;
-        border-style: solid;
+        border-style: solid;*/
         width: 100%;
 }
 

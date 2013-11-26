@@ -9,7 +9,7 @@ $this->pageTitle=Yii::app()->name;
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=226266080832489";
+  js.src = "//connect.facebook.net/es_ES/all.js#xfbml=1&appId=226266080832489";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
@@ -46,6 +46,11 @@ $this->pageTitle=Yii::app()->name;
 </div>
 
 <div id="palcine_time">
+    </br>
+    <div id="title_background">
+    Busca tu pelicula por hora
+    </div>
+    <div class="line-separator"></div>
     </br>
     <?php $form=$this->beginWidget('CActiveForm', array(
             'id'=>'issue-form',
@@ -120,6 +125,11 @@ $this->pageTitle=Yii::app()->name;
                     
                     
 <div id="palcine_theater">
+    </br>
+    <div id="title_background">
+    Busca tu pelicula por cine
+    </div>
+    <div class="line-separator"></div>
     </br>
     <?php $form=$this->beginWidget('CActiveForm', array(
             'id'=>'issue-form',
@@ -274,8 +284,11 @@ $this->pageTitle=Yii::app()->name;
                             }
                             print_r('<li class="touchcarousel-item">
 					<a class="item-block" title="'.$row['name'].'" href="'.Yii::app()->createAbsoluteUrl('movie/view',array('id'=>$row['id'],'loc'=>$loc)) .'">
+                                            
 					    <div style="width:160px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap; "><h4>'.$movieName.'</h4></div>
                                             
+                                            <div class="fb-like" data-href="'.$row['name'].'" href="'.Yii::app()->createAbsoluteUrl('movie/view',array('id'=>$row['id'])) .'" data-width="The pixel width of the plugin" data-height="The pixel height of the plugin" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="true"></div>
+                                                </br></br>
                                             <img id="myImage" src="images/movies/'.$row['image'].'" width="170" height="230" />
                                             <div id="stars">
                                                 <img class="my-item-block"src="images/stars'.intval($row['raiting']).'.png" width="170" height="30"/>
@@ -285,9 +298,8 @@ $this->pageTitle=Yii::app()->name;
                                     <div align="center">
                                         <a id="timeOpener" href="'.Yii::app()->createAbsoluteUrl('movie/viewTimes',array('m_id'=>$row['id'],'loc'=>$loc)) .'" class="blue smallButton">Horarios</a>
                                     </div>
-                                    </br>
-                                    <div class="fb-like" data-href="'.$row['name'].'" href="'.Yii::app()->createAbsoluteUrl('movie/view',array('id'=>$row['id'])) .'" data-width="The pixel width of the plugin" data-height="The pixel height of the plugin" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="true"></div>
-				
+                                    
+                                    
                                 </li>'
                                     
                                     );
@@ -309,7 +321,7 @@ $this->pageTitle=Yii::app()->name;
 <div id="bottom_container">
     <div id="left_bottom_content">
         <div id="title_background">
-            Publicidad
+            Destacado
         </div>
         <div class="line-separator"></div>
         <br/>
@@ -317,13 +329,13 @@ $this->pageTitle=Yii::app()->name;
         
             <ul class="slider8">
                 <li>
-                  <img src="<?php echo Yii::app()->baseUrl; ?>/images/batman_banner.jpg" />
+                  <img src="<?php echo Yii::app()->baseUrl; ?>/images/banner1.jpg" />
                 </li>
                 <li>
-                  <img src="<?php echo Yii::app()->baseUrl; ?>/images/batman_banner.jpg" />
+                  <img src="<?php echo Yii::app()->baseUrl; ?>/images/palCine_App_Banner.jpg" />
                 </li>
                 <li>
-                  <img src="<?php echo Yii::app()->baseUrl; ?>/images/batman_banner.jpg" />
+                  <img src="<?php echo Yii::app()->baseUrl; ?>/images/banner3.jpg" />
                 </li>
             </ul>
         
@@ -337,11 +349,8 @@ $this->pageTitle=Yii::app()->name;
         <div class="line-separator"></div>
             <br/>
             <ul class="slider1" >
-              <li><img src="images/movies/5.jpg"></li>
-              <li><img src="images/movies/6.jpg"></li>
-              <li><img src="images/movies/2.jpg"></li>
-              <li><img src="images/movies/3.jpg"></li>
-              <li><img src="images/movies/4.jpg"></li>
+              <li><img src="images/movies/coming_soon1.jpg"></li>
+              <li><img src="images/movies/coming_soon2.jpg"></li>
             </ul>
             
        
@@ -352,7 +361,7 @@ $this->pageTitle=Yii::app()->name;
 
 
 
-<div id="dialog" title="El planeta de los simios">
+<div id="dialog" title="">
   </div>
  
 
@@ -449,8 +458,8 @@ $('#movieList').change(function() {
                 select.append("<option value=''>Seleccionar...</option>");
                 $(data).find('movieRoomTime').each(function(){            
                     var id = $(this).find('id').text();
-                    var value = $(this).find('time').text();
-                    select.append("<option value='"+id+"'>"+value+"</option>");
+                    var value = tConvert($(this).find('time').text());
+                    select.append("<option value='"+$(this).find('time').text()+"'>"+value+"</option>");
                     $('#timeList').show();
                     $('#timeTitle').show();
                     $("#time_loading_image").hide();
@@ -485,7 +494,7 @@ $('#timeList').change(function() {
             dataType: "xml",
             //data: 'time='+$('#timeList option:selected' ).val(),
             
-            data: {time: $('#timeList option:selected' ).text(), m_id: $('#movieList option:selected' ).val()},
+            data: {time: $('#timeList option:selected' ).val(), m_id: $('#movieList option:selected' ).val()},
             success: function(data) {
                 //alert(data);
                 var select = $('#roomList');
@@ -529,6 +538,7 @@ function palCineAction(){
         $('#movieList').empty();
         $('#movieTitle').empty();
     }else{
+        $("#palcine_theater").hide();
         $("#palcine_time").show();
         $('#movieList').empty();
         $('#movieTitle').empty();
@@ -572,6 +582,7 @@ function palCineActionTheater(){
         $('#movieListTheater').empty();
         $('#movieTitleTheater').empty();
     }else{
+        $("#palcine_time").hide();
         $("#palcine_theater").show();
         $('#movieListTheater').empty();
         $('#movieTitleTheater').empty();
@@ -682,7 +693,7 @@ $('#theaterList').change(function() {
                 select.append("<option value=''>Seleccionar...</option>");
                 $(data).find('movieRoomTime').each(function(){            
                     var id = $(this).find('id').text();
-                    var value = $(this).find('time').text();
+                    var value = tConvert($(this).find('time').text());
                     select.append("<option value='"+id+"'>"+value+"</option>");
                     $('#timeListTheater').show();
                     $('#timeTitleTheater').show();
@@ -726,6 +737,8 @@ $(function() {
     });
  
     $( "#opener" ).click(function() {
+        window.location.replace("<?php echo Yii::app()->createUrl("movie/view"); ?>/"+$('#movieList option:selected' ).val()+"?loc="+$('#city_location option:selected' ).val());
+      /*
       $( "#dialog" ).dialog( "open" );
       
       //$('#movieList option:selected' ).val()
@@ -765,6 +778,13 @@ $(function() {
 
         });
       
+      */
+                       
+      
+    });
+    
+    $( "#openerTheater" ).click(function() {
+        window.location.replace("<?php echo Yii::app()->createUrl("movie/view"); ?>/"+$('#movieListTheater option:selected' ).val()+"?loc="+$('#city_location option:selected' ).val());
       
                        
       
@@ -790,4 +810,17 @@ $(function() {
     
    
 });
+
+
+function tConvert (time) {
+  // Check correct time format and split into components
+  time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+  if (time.length > 1) { // If time format correct
+    time = time.slice (1);  // Remove full string match value
+    time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
+    time[0] = +time[0] % 12 || 12; // Adjust hours
+  }
+  return time.join (''); // return adjusted time or original string
+}
 </script>

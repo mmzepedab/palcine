@@ -36,7 +36,7 @@ class RoomController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete','deleteRoomTimes'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -115,6 +115,18 @@ class RoomController extends Controller
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+	}
+        
+        /**
+	 * Deletes a particular model.
+	 * If deletion is successful, the browser will be redirected to the 'admin' page.
+	 * @param integer $id the ID of the model to be deleted
+	 */
+	public function actionDeleteRoomTimes($id)
+	{
+		//$this->loadModel($id)->delete();
+                Yii::app()->db->createCommand('DELETE FROM {{room_time}} WHERE room_id = '.$id.';')->query();
+                $this->redirect(array('view','id'=>$id));
 	}
 
 	/**

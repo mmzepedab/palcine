@@ -15,7 +15,8 @@ $this->menu=array(
         array('label'=>'Crear Tanda', 'url'=>array('roomTime/create', 'r_id'=>$model->id)),
 	array('label'=>'Actualizar Sala', 'url'=>array('update', 'id'=>$model->id,'t_id'=>$model->theater_id)),
 	array('label'=>'Eliminar Sala', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Administrar Salas', 'url'=>array('admin')),
+	array('label'=>'Eliminar Tandas', 'url'=>'#', 'linkOptions'=>array('submit'=>array('deleteRoomTimes','id'=>$model->id),'confirm'=>'Esta seguro que desea eliminar todas las tandas de esta sala?')),	
+        array('label'=>'Administrar Salas', 'url'=>array('admin')),
 );
 ?>
 

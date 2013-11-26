@@ -41,7 +41,7 @@
           <link rel="stylesheet" href="<?php echo Yii::app()->baseUrl; ?>/js/jquery.bxslider.css" /> 
           
       <!-- GEO taging -->
-      <script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
+      <!--<script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script> -->
 
         
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
@@ -89,11 +89,6 @@
 </div><!-- page -->
 </div>
     
-    
-<script>
-   
-   
-   
-</script>    
+  
 </body>
 </html>
