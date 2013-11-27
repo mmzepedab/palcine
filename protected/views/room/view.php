@@ -41,14 +41,47 @@ $this->menu=array(
     <h2>Tandas</h2>
     <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'theaters-grid',
-	'dataProvider'=> RoomTime::model()->view_room_times($model->id) ,
+	'dataProvider'=> RoomTime::model()->view_room_times($model->id),
+        'ajaxUpdate'=>false, 
 //	'filter'=>Respuestas::model(),
 	'columns'=>array(
 		'time',
 		'movie.name',
+                array(
+			'class'=>'CButtonColumn',
+                        'template'=>'{view}{edit}{delete}',
+                        'buttons'=>array
+                        (
+                            'view' => array
+                            (
+                                'label'=>'Ver Tanda',  
+                                'imageUrl'=>Yii::app()->request->baseUrl.'/images/view.png',
+                                //'url'=>'Yii::app()->createUrl("respuestas/view", array("id"=>$data->id))',
+                                //'url'=>'Yii::app()->request->baseUrl.\'/index.php/roomTime/view/\'.$data->id',
+                                'url'=>'Yii::app()->createAbsoluteUrl("roomTime/view", array("id"=>$data->id))',
+                            ),
+                            'edit' => array
+                            (
+                                'label'=>'Editar Tanda',  
+                                'imageUrl'=>Yii::app()->request->baseUrl.'/images/update.png',
+                                //'url'=>'Yii::app()->createUrl("respuestas/view", array("id"=>$data->id))',
+                                //'url'=>'Yii::app()->request->baseUrl.\'/index.php/roomTime/view/\'.$data->id',
+                                'url'=>'Yii::app()->createAbsoluteUrl("roomTime/update", array("id"=>$data->id,"r_id"=>'.$model->id.'))',
+                            ),
+                            'delete' => array
+                            (
+                                'label'=>'Eliminar tanda',  
+                                'imageUrl'=>Yii::app()->request->baseUrl.'/images/delete.png',
+                                //'url'=>'Yii::app()->createUrl("respuestas/view", array("id"=>$data->id))',
+                                //'url'=>'Yii::app()->request->baseUrl.\'/index.php/roomTime/view/\'.$data->id',
+                                'url'=>'Yii::app()->createAbsoluteUrl("roomTime/delete", array("id"=>$data->id,"r_id"=>'.$model->id.'))',
+                            ),
+                        ),
+		),
 		/*
 		'adjuntos',
 		*/
+                /*
 		array
                     (
                         'class'=>'CButtonColumn',
@@ -64,6 +97,6 @@ $this->menu=array(
                                 'url'=>'Yii::app()->createAbsoluteUrl("roomTime/view", array("id"=>$data->id))',
                             ),
                         ),
-                    ),
+                    ),*/
 	),
 )); ?>

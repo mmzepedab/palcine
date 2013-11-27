@@ -109,7 +109,7 @@ $this->menu=array(
                                 <td colspan="2">
                                     <a id="trailer_opener" href="javascript:;" class="blue smallButton">Ver Trailer</a>
                                     <?php 
-                                    echo '<a id="timeOpener" href="'.Yii::app()->createAbsoluteUrl('movie/viewTimes',array('m_id'=>$model->id,'loc'=>$_GET['loc'])) .'" class="blue smallButton">Horarios</a>';
+                                    /*echo '<a id="timeOpener" href="'.Yii::app()->createAbsoluteUrl('movie/viewTimes',array('m_id'=>$model->id,'loc'=>$_GET['loc'])) .'" class="blue smallButton">Horarios</a>';*/
                                     
                                     ?>
                                     <!-- <a id="timeOpener" href="javascript:;" class="blue smallButton">Recomendar</a> -->
@@ -161,7 +161,7 @@ $this->menu=array(
                                         <img src="<?php echo Yii::app()->baseUrl; ?>/images/movies/thumbnails/2x/<?php echo $model->image_thumbnail2x; ?>" width="200" height="200"  alt="ajax-loader"/>
                                     </div>
                                     <div id="loading-container" align="center">
-                                        <img src="<?php echo Yii::app()->baseUrl; ?>/images/ajax-loader.gif" width="16" height="16"  alt="ajax-loader"/>
+                                        <!-- <img src="<?php echo Yii::app()->baseUrl; ?>/images/ajax-loader.gif" width="16" height="16"  alt="ajax-loader"/> -->
                                     </div>
                                     <div id="select-theater-container" align="center">
                                         <div class="styled-select-theater" id="theaters_select_div">

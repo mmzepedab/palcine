@@ -281,9 +281,11 @@ $this->pageTitle=Yii::app()->name;
                             $loc = '';
                             if(isset($_GET['loc'])){
                                 $loc = $_GET['loc'];
+                                //unset(Yii::app()->request->cookies['loc']);
+                                //Yii::app()->request->cookies['loc'] = new CHttpCookie('loc', 'tgu');
                             }
                             print_r('<li class="touchcarousel-item">
-					<a class="item-block" title="'.$row['name'].'" href="'.Yii::app()->createAbsoluteUrl('movie/view',array('id'=>$row['id'],'loc'=>$loc)) .'">
+					<a class="item-block" title="'.$row['name'].'" href="'.Yii::app()->createAbsoluteUrl('movie/viewTimes',array('id'=>$row['id'],'loc'=>$loc,'m_id'=>$row['id'])) .'">
                                             
 					    <div style="width:160px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap; "><h4>'.$movieName.'</h4></div>
                                             
@@ -366,6 +368,17 @@ $this->pageTitle=Yii::app()->name;
  
 
 <script>
+
+var myWidth = 170 * $( ".touchcarousel-item" ).size();
+    if(myWidth  < 900){
+        myWidth = 170 * $( ".touchcarousel-item" ).size();        
+    }else{
+        myWidth = 855;
+    }
+     $("#carousel-image-and-text").css({
+        "width": myWidth+"px"   
+    });
+
     var loc = getUrlVars()["loc"];
     if(typeof loc == 'undefined'){
             window.location.replace("./?loc=tgu");
