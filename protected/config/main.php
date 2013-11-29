@@ -36,6 +36,8 @@ return array(
 
 	// application components
 	'components'=>array(
+                
+            
                 'image'=>array(     
                     'class'=>'application.extensions.image.CImageComponent',            
                     'driver'=>'GD', 

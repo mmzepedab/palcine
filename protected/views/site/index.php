@@ -2,6 +2,14 @@
 /* @var $this SiteController */
 
 $this->pageTitle=Yii::app()->name;
+
+Yii::app()->clientScript->registerMetaTag(Yii::app()->getBaseUrl(true).'/images/logo.png', '', null, array('id'=>'meta_og_image', 'property' => 'og:image'), 'meta_og_image');
+Yii::app()->clientScript->registerMetaTag($this->pageTitle=Yii::app()->name, '', null, array('id'=>'meta_og_title', 'property' => 'og:title'), 'meta_og_title');
+Yii::app()->clientScript->registerMetaTag('website', '', null, array('id'=>'meta_og_type', 'property' => 'og:type'), 'meta_og_type');
+Yii::app()->clientScript->registerMetaTag(Yii::app()->getBaseUrl(true), '', null, array('id'=>'meta_og_url', 'property' => 'og:url'), 'meta_og_url');
+Yii::app()->clientScript->registerMetaTag('226266080832489', '', null, array('id'=>'meta_fb_app_id', 'property' => 'fb:app_id'), 'meta_fb_app_id');
+
+
 ?>
 
 <div id="fb-root"></div>
@@ -13,7 +21,10 @@ $this->pageTitle=Yii::app()->name;
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-
+<div id="facebook_like" style=" width: 100%; display: block; height: 50px;">           
+    <div style="float: right; color: grey;" class="fb-like" data-href="http://palcine.me" data-width="100" data-layout="standard" data-action="like" data-show-faces="true" data-share="false" data-colorscheme="light"></div> 
+            
+</div>
 
 <div id="title_background">
     Voy palCine
@@ -289,7 +300,7 @@ $this->pageTitle=Yii::app()->name;
                                             
 					    <div style="width:160px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap; "><h4>'.$movieName.'</h4></div>
                                             
-                                            <div class="fb-like" data-href="'.$row['name'].'" href="'.Yii::app()->createAbsoluteUrl('movie/view',array('id'=>$row['id'])) .'" data-width="The pixel width of the plugin" data-height="The pixel height of the plugin" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="true"></div>
+                                            <div class="fb-like" data-href="'.$row['name'].'" href="'.Yii::app()->createAbsoluteUrl('movie/view',array('id'=>$row['id'])) .'" data-width="The pixel width of the plugin" data-height="The pixel height of the plugin" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
                                                 </br></br>
                                             <img id="myImage" src="images/movies/'.$row['image'].'" width="170" height="230" />
                                             <div id="stars">
@@ -365,7 +376,9 @@ $this->pageTitle=Yii::app()->name;
 
 <div id="dialog" title="">
   </div>
- 
+
+
+
 
 <script>
 
@@ -396,22 +409,7 @@ var myWidth = 170 * $( ".touchcarousel-item" ).size();
 
 
 
-$('.slider1').bxSlider({
-    slideWidth: 200,
-    minSlides: 2,
-    maxSlides: 2,
-    slideMargin: 10,
-    auto: true
-  });
-  
-$('.slider8').bxSlider({
-    slideWidth: 500,
-    minSlides: 1,
-    maxSlides: 1,
-    slideMargin: 10,
-    auto: true,
-    speed: 2000
-  });
+
  
  
   
@@ -821,6 +819,22 @@ $(function() {
 
     });
     
+    $('.slider1').bxSlider({
+    slideWidth: 200,
+    minSlides: 2,
+    maxSlides: 2,
+    slideMargin: 10,
+    auto: true
+  });
+  
+$('.slider8').bxSlider({
+    slideWidth: 500,
+    minSlides: 1,
+    maxSlides: 1,
+    slideMargin: 10,
+    auto: true,
+    speed: 2000
+  });
    
 });
 

@@ -42,9 +42,22 @@
           
       <!-- GEO taging -->
       <!--<script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script> -->
+          <link rel="shortcut icon" href="<?php echo Yii::app()->request->baseUrl; ?>/images/favicon.ico?v=2" type="image/x-icon" />
 
         
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
+        
+        
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-32596666-1', 'palcine.me');
+  ga('send', 'pageview');
+
+</script>
 </head>
 
 <body>
@@ -56,18 +69,21 @@
                 <span id="logo"></span>
             </a>
             
+            
 	</div><!-- header -->
 
 	<div id="mainmenu">
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
-				array('label'=>'Inicio', 'url'=>array('/')),
+				array('label'=>'Inicio', 'url'=>Yii::app()->getBaseUrl(true)),
+                                /*
                                 array('label'=>'Cartelera Rapida', 'url'=>array('/')),
-				/*array('label'=>'Cartelera Rapida', 'url'=>array('/site/index', 'view'=>'about')),*/
+				array('label'=>'Cartelera Rapida', 'url'=>array('/site/index', 'view'=>'about')),
 				array('label'=>'Ubicaciones', 'url'=>array('/')),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Cerrar Sesion ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
-			),
+                                */
+                            ),
 		)); ?>
 	</div><!-- mainmenu -->
 	<?php if(isset($this->breadcrumbs)):?>
