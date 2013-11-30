@@ -58,14 +58,17 @@ $this->menu=array(
                                     </p>
                                     <b>Fecha de lanzamiento:</b>
                                     <p>
-                                        <?php echo $model->release_date; ?>
+                                        <?php 
+                                        $date = date_create($model->release_date);                                        
+                                        echo date_format($date, 'd M Y'); 
+                                        ?>
                                     </p>
                                     
                                 </td>
                                 <td>
                                     <b>Duracion:</b>
                                     <p>
-                                        <?php echo $model->length; ?>
+                                        <?php echo $model->length.' min'; ?>
                                     </p>
                                     <b>Genero:</b>
                                     <p>
@@ -109,7 +112,7 @@ $this->menu=array(
                                 <td colspan="2">
                                     <a id="trailer_opener" href="javascript:;" class="blue smallButton">Ver Trailer</a>
                                     <?php 
-                                    echo '<a id="timeOpener" href="'.Yii::app()->createAbsoluteUrl('movie/viewTimes',array('m_id'=>$model->id,'loc'=>$_GET['loc'])) .'" class="blue smallButton">Horarios</a>';
+                                    //echo '<a id="timeOpener" href="'.Yii::app()->createAbsoluteUrl('movie/viewTimes',array('m_id'=>$model->id,'loc'=>$_GET['loc'])) .'" class="blue smallButton">Horarios</a>';
                                     
                                     ?>
                                     <!-- <a id="timeOpener" href="javascript:;" class="blue smallButton">Recomendar</a> -->
@@ -192,6 +195,7 @@ $this->menu=array(
                                                 $criteriaTimes = new CDbCriteria();
                                                 $criteriaTimes->addInCondition("room_id", array($room['id']));
                                                 $criteriaTimes->addInCondition("movie_id", array($_GET['m_id']));
+                                                $criteriaTimes->order= 'time ASC';
                                                 //$criteriaTimes->condition = "(room_id = :r_id AND movie_id = :m_id) ";
                                                 //$criteriaTimes->params = array(':r_id'=>$room['id'], ':m_id'=>$_GET['m_id']);
                                                 $roomTimes = RoomTime::model()->findAll($criteriaTimes);

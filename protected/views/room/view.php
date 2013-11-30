@@ -39,9 +39,15 @@ $this->menu=array(
 </br>
 </br>
     <h2>Tandas</h2>
+    
+    <?php 
+        $myDataProvider = RoomTime::model()->view_room_times($model->id);
+        $myDataProvider->sort->defaultOrder='time ASC';
+    ?>
+    
     <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'theaters-grid',
-	'dataProvider'=> RoomTime::model()->view_room_times($model->id),
+	'dataProvider'=> $myDataProvider,
         'ajaxUpdate'=>false, 
 //	'filter'=>Respuestas::model(),
 	'columns'=>array(

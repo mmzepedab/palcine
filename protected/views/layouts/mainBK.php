@@ -31,7 +31,6 @@
         <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/js/jquery.popupWindow.js"></script>
         <script type="text/javascript" src="touchcarousel/jquery.touchcarousel-1.2.min.js"></script> 
 	<script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/js/jquery.bxslider.js"></script>
-        <script src="<?php echo Yii::app()->baseUrl; ?>/js/jquery.cookie.js"></script>
         
         
           <!-- <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> -->  
@@ -45,9 +44,6 @@
       <!--<script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script> -->
           <link rel="shortcut icon" href="<?php echo Yii::app()->request->baseUrl; ?>/images/favicon.ico?v=2" type="image/x-icon" />
 
-            <!-- Joyride -->  
-            <link rel=" stylesheet" type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/js/joyride-2.1.css">
-            <script src="<?php echo Yii::app()->baseUrl; ?>/js/jquery.joyride-2.1.js"></script>
         
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
         
@@ -109,8 +105,6 @@
 </div><!-- page -->
 </div>
     
-
-   
-    
+  
 </body>
 </html>

@@ -26,19 +26,13 @@ Yii::app()->clientScript->registerMetaTag('226266080832489', '', null, array('id
             
 </div>
 
-
-<table border="0" width="100%" style="margin: 0; border: 0;">
-    
-    <tbody>
-        <tr>
-            <td width="70%">
 <div id="title_background">
     Voy palCine
     
 </div>
 <div class="line-separator"></div>
 </br>
-<div align="center" style="font-weight: bold; ">
+<div align="center">
     Donde estas?
 </div>
 
@@ -50,13 +44,10 @@ Yii::app()->clientScript->registerMetaTag('226266080832489', '', null, array('id
                     <option value="tgu">Tegucigalpa</option>
                 </select>
             </span>
-    
-    
-</div>
-<div align='center' style="font-size: smaller; ">Recordar mi selección<input type="checkbox" checked='checked' id='remember_location'></input></div>
+    </div>
 </br>
 </br>
-<div align="center" style="font-weight: bold; margin-bottom: 3px;">
+<div align="center" style="margin-bottom: 3px;">
     Como queres buscar tu pelicula?
 </div>
 
@@ -142,7 +133,9 @@ Yii::app()->clientScript->registerMetaTag('226266080832489', '', null, array('id
 <?php $this->endWidget(); ?>
 </div>
                     
-                    <div id="palcine_theater">
+                    
+                    
+<div id="palcine_theater">
     </br>
     <div id="title_background">
     Busca tu pelicula por cine
@@ -218,41 +211,10 @@ Yii::app()->clientScript->registerMetaTag('226266080832489', '', null, array('id
         </tbody>
     </table>
 <?php $this->endWidget(); ?>
-</div>         
-                    
-                    </td>
-            <td>
-               <div id="publicidad" >
-            
-            </div> 
-                <div id="title_background_dark" >
-            
-            Publicidad
-             </div>
-        <div class="line-separator"></div>
-            <br/>
-            <ul class="publicidad" >
-             
-              <li>
-                  <img src="<?php echo Yii::app()->baseUrl; ?>/images/banner1.jpg" />
-                </li>
-                <li>
-                  <img src="<?php echo Yii::app()->baseUrl; ?>/images/palCine_App_Banner.jpg" />
-                </li>
-                <li>
-                  <img src="<?php echo Yii::app()->baseUrl; ?>/images/banner3.jpg" />
-                </li>
-            </ul>
-            
-            
-            </td>
-        </tr>
-    </tbody>
-</table>
-                    
-                    
-                    
-           
+</div>                    
+
+</br>
+</br>
 
 
 
@@ -412,39 +374,13 @@ Yii::app()->clientScript->registerMetaTag('226266080832489', '', null, array('id
 
 
 
-<div id="dialog" title="Selecciona tu ubicación">
-  </br>
-<div align="center">
-    Donde estas?
-</div>
+<div id="dialog" title="">
+  </div>
 
-<div class="styled-select">
-<span id="location" align="center">
-                <select id="city_location">                    
-                    <option value="sps">San Pedro Sula</option>
-                    <option value="pro">El Progreso</option>
-                    <option value="tgu">Tegucigalpa</option>
-                </select>
-            </span>
-    </div>
-</br>
-</br>
-
-</div>
-
-<ol id="chooseID" style="display: none" data-joyride>
-  
-    <li data-id="publicidad" data-options="tipLocation:top;tipAnimation:fade" data-button="Entiendo"><p>Si viste este espacio, es porque funciona. Anunciate con nosotros.</p></li>
-
-  
-</ol> 
 
 
 
 <script>
-
-
-
 
 var myWidth = 170 * $( ".touchcarousel-item" ).size();
     if(myWidth  < 900){
@@ -456,7 +392,12 @@ var myWidth = 170 * $( ".touchcarousel-item" ).size();
         "width": myWidth+"px"   
     });
 
-    
+    var loc = getUrlVars()["loc"];
+    if(typeof loc == 'undefined'){
+            window.location.replace("./?loc=tgu");
+    }else{
+        $('#city_location option[value="'+loc+'"]').prop('selected',true);
+    }
     
     function getUrlVars() {
         var vars = {};
@@ -490,34 +431,11 @@ $('#timeListTheater').hide();
 $("#time_loading_image_theater").hide();
 $('#openerTheater').hide();
 
-
-
-var loc = getUrlVars()["loc"];
-    //$.cookie('loc', null);
-    
-    if($.cookie('loc') != 'null' && typeof $.cookie('loc') != 'undefined'){
-    
-    $('#city_location option[value="'+$.cookie('loc')+'"]').prop('selected',true);    
-        if(typeof loc == 'undefined'){  
-            window.location.replace("./?loc="+$.cookie('loc'));
-        }
-    }else{
-        $.cookie('loc', 'tgu');
-        //location.reload();
-        window.location.replace("./?loc="+$.cookie('loc'));
-        //window.location.replace("./?loc=tgu");
-        //$('#city_location option[value="'+loc+'"]').prop('selected',true);
-    }
 $('#city_location').change(function() {
     //$("#palcine_time").hide();
     //$("#palcine_theater").hide();
-    if($('#remember_location').is(":checked")){        
-        $.cookie('loc', null);
-        $.cookie('loc', $('#city_location option:selected' ).val());
-        window.location.replace("./?loc="+$('#city_location option:selected' ).val());
-    }else{        
-        window.location.replace("./?loc="+$('#city_location option:selected' ).val());
-    }
+    
+    window.location.replace("./?loc="+$('#city_location option:selected' ).val());
 });
 
 //Select Movie and Change MovieListTimes
@@ -815,28 +733,9 @@ $('#timeListTheater').change(function() {
 });
 
 $(function() {
-  if($('#remember_location').is(":checked")){
-      //alert('si');
-  }else{
-      //alert('no');
-  }
-  
-  $('#remember_location').change(function() {
-        if($(this).is(":checked")) {
-            //var returnVal = confirm("Are you sure?");
-            //$(this).attr("checked", returnVal);
-        }
-        //$('#textbox1').val($(this).is(':checked'));        
-    });
-    
-  /*
-  $("#chooseID").joyride({
-  });
-  */
- 
     $( "#dialog" ).dialog({
       autoOpen: false,
-      width: 500,
+      width: 1000,
       modal: true,
       show: {
       },
@@ -849,7 +748,7 @@ $(function() {
     });
  
     $( "#opener" ).click(function() {
-        window.location.replace("<?php echo Yii::app()->createUrl("movie/viewTimes"); ?>/"+$('#movieList option:selected' ).val()+"?loc="+$('#city_location option:selected' ).val()+"&m_id="+$('#movieList option:selected' ).val());
+        window.location.replace("<?php echo Yii::app()->createUrl("movie/view"); ?>/"+$('#movieList option:selected' ).val()+"?loc="+$('#city_location option:selected' ).val());
       /*
       $( "#dialog" ).dialog( "open" );
       
@@ -896,7 +795,7 @@ $(function() {
     });
     
     $( "#openerTheater" ).click(function() {
-        window.location.replace("<?php echo Yii::app()->createUrl("movie/viewTimes"); ?>/"+$('#movieListTheater option:selected' ).val()+"?loc="+$('#city_location option:selected' ).val()+"&m_id="+$('#movieListTheater option:selected' ).val());
+        window.location.replace("<?php echo Yii::app()->createUrl("movie/view"); ?>/"+$('#movieListTheater option:selected' ).val()+"?loc="+$('#city_location option:selected' ).val());
       
                        
       
@@ -905,7 +804,6 @@ $(function() {
 });
   
 $(function() {
-
     $("#carousel-image-and-text").touchCarousel({
         /* carousel options go here see Javascript Options section for more info */
         				
@@ -920,14 +818,6 @@ $(function() {
                                 autoplayStopAtAction:true,
 
     });
-    
-    $('.publicidad').bxSlider({
-    slideWidth: 300,
-    minSlides: 1,
-    maxSlides: 1,
-    controls: false,
-    auto: true
-  });
     
     $('.slider1').bxSlider({
     slideWidth: 200,
@@ -945,8 +835,6 @@ $('.slider8').bxSlider({
     auto: true,
     speed: 2000
   });
-  
-  
    
 });
 
@@ -962,6 +850,4 @@ function tConvert (time) {
   }
   return time.join (''); // return adjusted time or original string
 }
-
-
 </script>
