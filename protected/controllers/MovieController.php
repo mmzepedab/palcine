@@ -134,7 +134,14 @@ class MovieController extends Controller
 
 		if(isset($_POST['Movie']))
 		{
+                        $myImage = $model->image;
+                        $myImageThumbnail = $model->image_thumbnail;
+                        $myImageThumbnail2x = $model->image_thumbnail2x;
 			$model->attributes=$_POST['Movie'];
+                        $model->image = $myImage;
+                        $model->image_thumbnail = $myImageThumbnail;
+                        $model->image_thumbnail2x = $myImageThumbnail2x;
+                                
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}

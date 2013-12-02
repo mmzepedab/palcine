@@ -65,9 +65,9 @@ class Movie extends CActiveRecord
 			array('raiting', 'numerical'),
 			array('name, name_english, length', 'length', 'max'=>100),
 			array('description, image, image_thumbnail, image_thumbnail2x, trailer_link', 'length', 'max'=>500),
-			array('image', 'file', 'types'=>'jpg, gif, png'),
+			/*array('image', 'file', 'types'=>'jpg, gif, png'),*/
                         array('restriction', 'length', 'max'=>50),
-			array('release_date, create_time, update_time, image', 'safe'),
+			array('release_date, create_time, update_time, image, raiting', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, name, name_english, description, release_date, length, genre_id, is_premiere, image, image_thumbnail, image_thumbnail2x, trailer_link, raiting, restriction, create_time, create_user, update_time, update_user', 'safe', 'on'=>'search'),

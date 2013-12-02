@@ -21,11 +21,13 @@ Yii::app()->clientScript->registerMetaTag('226266080832489', '', null, array('id
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
+<div id='contact_us' style=" width: 560px; display: block; height: 78px; float: left; margin-left: 60px; background-image: url(images/contact_us.png)">
+    
+</div>
 <div id="facebook_like" style=" width: 100%; display: block; height: 50px;">           
     <div style="float: right; color: grey;" class="fb-like" data-href="http://palcine.me" data-width="100" data-layout="standard" data-action="like" data-show-faces="true" data-share="false" data-colorscheme="light"></div> 
             
 </div>
-
 
 <table border="0" width="100%" style="margin: 0; border: 0;">
     
@@ -258,7 +260,13 @@ Yii::app()->clientScript->registerMetaTag('226266080832489', '', null, array('id
 
 
 <div id="title_background">
-    En cartelera
+    Cartelera para hoy: <span style='font-style: italic ; color: #777;'> 
+        <?php
+setlocale(LC_ALL,"es_ES");
+echo strftime("%A %d de %B del %Y");
+ 
+//Salida: viernes 24 de febrero del 2012
+?></span>
 </div>
 
 <div class="line-separator"></div>
@@ -587,7 +595,7 @@ $('#timeList').change(function() {
             dataType: "xml",
             //data: 'time='+$('#timeList option:selected' ).val(),
             
-            data: {time: $('#timeList option:selected' ).val(), m_id: $('#movieList option:selected' ).val()},
+            data: {time: $('#timeList option:selected' ).val(), m_id: $('#movieList option:selected' ).val(),loc: $('#city_location option:selected' ).val()},
             success: function(data) {
                 //alert(data);
                 var select = $('#roomList');
@@ -630,6 +638,11 @@ function palCineAction(){
         $("#palcine_time").hide();
         $('#movieList').empty();
         $('#movieTitle').empty();
+        $('#timeList').hide();
+        $('#timeTitle').hide();
+        $('#roomList').hide();
+        $('#roomTitle').hide();
+        $('#opener').hide();
     }else{
         $("#palcine_theater").hide();
         $("#palcine_time").show();
@@ -912,7 +925,8 @@ $(function() {
 				pagingNav: true,
 				snapToItems: false,
 				itemsPerMove: 1,				
-				scrollToLast: false,
+				scrollToLast: true,
+                                keyboardNav: true, 
 				loopItems: true,
 				scrollbar: true,
                                 autoplay:true,               // Autoplay enabled.

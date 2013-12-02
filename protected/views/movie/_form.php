@@ -74,6 +74,7 @@
 	</div>
 
 	<div class="row">
+                <?php if($model->isNewRecord ){?>
 		<?php echo $form->labelEx($model,'image'); ?>
 		<?php echo $form->fileField($model,'image'); ?>
                 <?php /*echo $form->textField($model,'image',array('size'=>60,'maxlength'=>500)); */?>
@@ -93,6 +94,7 @@
                 <?php echo $form->fileField($model,'image_thumbnail2x'); ?>
 		<?php /*echo $form->textField($model,'image_thumbnail2x',array('size'=>60,'maxlength'=>500)); */?>
 		<?php echo $form->error($model,'image_thumbnail2x'); ?>
+                <?php } ?>
 	</div>
 
 	<div class="row">
@@ -102,6 +104,7 @@
 	</div>
 
 	<div class="row">
+                
                 <?php /*if(!$model->isNewRecord ){*/echo $form->labelEx($model,'raiting');/*}*/ ?>
 		<?php echo $form->dropDownList($model,'raiting',
                         array(
@@ -111,7 +114,10 @@
                                 '3'=>'3',
                                 '4'=>'4',
                                 '5'=>'5',
-                            )); ?>
+                            ),
+                        array('options' => array(intval($model->raiting)=>array('selected'=>true)))
+                        
+                        ); ?>
                     <?php /*
                 if(!$model->isNewRecord ){
                     echo $form->textField($model,'raiting'); 

@@ -210,7 +210,12 @@ class ApiController extends Controller
                 }
 
                 $criteria = new CDbCriteria();
-                $criteria->addInCondition("theater_id", $theater_ids);
+                if(isset($_GET["t_id"])){
+                    $criteria->addInCondition("theater_id", array($_GET["t_id"]));
+                }else{
+                    $criteria->addInCondition("theater_id", $theater_ids);
+                }
+                
                 $rooms = Room::model()->findAll($criteria); 
                 $room_ids = array();    
                 foreach ($rooms as $room) {
@@ -222,7 +227,7 @@ class ApiController extends Controller
                 
                 $criteria = new CDbCriteria();
                 $criteria->distinct = true;
-                //$criteria->select = ('time');
+                $criteria->select = ('time');
                 $criteria->addInCondition("movie_id", array($_GET["m_id"]));
                 $criteria->addInCondition("room_id", $room_ids);
                 $criteria->order = ("time ASC");

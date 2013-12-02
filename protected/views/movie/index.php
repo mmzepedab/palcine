@@ -14,7 +14,10 @@ $this->menu=array(
 
 <h1>Peliculas</h1>
 
-<?php $this->widget('zii.widgets.CListView', array(
+
+<?php 
+$dataProvider->sort->defaultOrder='ID DESC';
+$this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
 )); ?>

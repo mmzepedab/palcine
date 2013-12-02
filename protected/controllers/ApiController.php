@@ -237,6 +237,16 @@ class ApiController extends Controller
             
             
             case 'movieRooms': // {{{
+                $criteria = new CDbCriteria();
+                $criteria->condition = "(city_id = :location ) ";
+                $criteria->params = array(':location'=>$_GET['loc']);
+                $theaters = Theater::model()->findAll($criteria); 
+                $theater_ids = array();    
+                foreach ($theaters as $theater) {
+                        $theater_ids[] = $theater['id'];
+
+                }
+                
                  $rooms_ids = Yii::app()->db->createCommand()
                     ->select('room_id')
                     ->from('{{room_time}}')
@@ -253,6 +263,7 @@ class ApiController extends Controller
                //print_r($ids); 
                 $criteria = new CDbCriteria();
                 $criteria->addInCondition("id", $ids);
+                $criteria->addInCondition("theater_id", $theater_ids);
                 //$criteria->select = ('t.name, t.id, t.theater_id, t.is_3d, theater.name');
                 $models = Room::model()->findAll($criteria);
             break; // }}}

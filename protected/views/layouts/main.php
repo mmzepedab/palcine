@@ -80,6 +80,7 @@
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
 				array('label'=>'Inicio', 'url'=>Yii::app()->getBaseUrl(true)),
+                                array('label'=>'Contactanos', 'url'=>array('/site/contact')),
                                 /*
                                 array('label'=>'Cartelera Rapida', 'url'=>array('/')),
 				array('label'=>'Cartelera Rapida', 'url'=>array('/site/index', 'view'=>'about')),
