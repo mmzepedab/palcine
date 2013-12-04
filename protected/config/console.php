@@ -49,7 +49,7 @@ return array(
               'migrationPath'=>'application.migrations',
               'migrationTable'=>'pal_migration',
               'connectionID'=>'db',
-              'templateFile'=>'application.migrations.template',
+              //'templateFile'=>'application.migrations.template',
             ),
           ),
 );

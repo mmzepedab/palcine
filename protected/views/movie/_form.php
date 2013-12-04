@@ -66,12 +66,78 @@
 		<?php echo $form->error($model,'genre_id'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'is_premiere'); ?>
-                <?php echo $form->dropDownList($model,'is_premiere',array(1=>'Si',0=>'No')); ?>
-		<?php /*echo $form->textField($model,'is_premiere'); */?>
-		<?php echo $form->error($model,'is_premiere'); ?>
-	</div>
+        <table border="0" style="width:50%;">            
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="row">
+                            <?php echo $form->labelEx($model,'is_premiere'); ?>
+                            <?php /*echo $form->dropDownList($model,'is_premiere',array(1=>'Si',0=>'No')); */?>
+                            <?php
+                                 echo $form->radioButtonList($model, 'is_premiere',
+                                                    array(  
+                                                        1 => 'Si',
+                                                        0 => 'No'                                                 
+                                                        ),
+                                                   array(
+                                    'labelOptions'=>array('style'=>'display:inline'), // add this code
+                                    'separator'=>'  ',
+                                ) );
+                            ?>
+                            <?php /*echo $form->textField($model,'is_premiere'); */?>
+                            <?php echo $form->error($model,'is_premiere'); ?>
+                    </div>
+                    </td>
+                    <td>
+                        <div class="row">
+                            <?php echo $form->labelEx($model,'is_in_theaters'); ?>
+                            <?php /*echo $form->dropDownList($model,'is_in_theaters',array(1=>'Si',0=>'No')); */?>
+                            <?php
+                                 echo $form->radioButtonList($model, 'is_in_theaters',
+                                                    array(  
+                                                        1 => 'Si',
+                                                        0 => 'No'                                                 
+                                                        ),
+                                                   array(
+                                    'labelOptions'=>array('style'=>'display:inline'), // add this code
+                                    'separator'=>'  ',
+                                ) );
+                            ?>
+                            <?php /*echo $form->textField($model,'is_premiere'); */?>
+                            <?php echo $form->error($model,'is_in_theaters'); ?>
+                    </div>
+                        
+                    </td>
+                    <td>
+                        <div class="row">
+                            <?php echo $form->labelEx($model,'is_coming_soon'); ?>
+                            <?php /*echo $form->dropDownList($model,'is_coming_soon',array(1=>'Si',0=>'No')); */?>
+                            <?php
+                                 echo $form->radioButtonList($model, 'is_coming_soon',
+                                                    array(  
+                                                        1 => 'Si',
+                                                        0 => 'No'                                                 
+                                                        ),
+                                                   array(
+                                    'labelOptions'=>array('style'=>'display:inline'), // add this code
+                                    'separator'=>'  ',
+                                ) );
+                            ?>
+                            <?php /*echo $form->textField($model,'is_premiere'); */?>
+                            <?php echo $form->error($model,'is_coming_soon'); ?>
+                    </div>
+                        
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        
+	
+        
+        
+        
+        
 
 	<div class="row">
                 <?php if($model->isNewRecord ){?>

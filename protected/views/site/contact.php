@@ -9,12 +9,12 @@ $this->breadcrumbs=array(
 );
 ?>
 
-<h1>Contactanos</h1>
+<h1>Contáctanos</h1>
 
 
 
 <p>
-Si queres anunciarte con podes contactarnos a
+Si quieres anunciarte con nosotros contáctanos 
 </p>
 
 

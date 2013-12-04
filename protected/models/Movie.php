@@ -22,6 +22,8 @@
  * @property integer $create_user
  * @property string $update_time
  * @property integer $update_user
+ * @property integer $is_in_theaters
+ * @property integer $is_coming_soon
  *
  * The followings are the available model relations:
  * @property Genre $genre
@@ -58,7 +60,7 @@ class Movie extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, name_english, description, length, genre_id, is_premiere, trailer_link, raiting, restriction', 'required'),
+			array('name, name_english, description, length, genre_id, is_premiere, trailer_link, raiting, restriction, is_in_theaters, is_coming_soon', 'required'),
 			array('image, image_thumbnail, image_thumbnail2x', 'required', 'on'=>'insert'),
 			
                         array('genre_id, is_premiere, create_user, update_user', 'numerical', 'integerOnly'=>true),
@@ -102,7 +104,7 @@ class Movie extends CActiveRecord
 			'release_date' => 'Fecha de lanzamiento',
 			'length' => 'Duracion(Min)',
 			'genre_id' => 'Genero',
-			'is_premiere' => 'Es premier',
+			'is_premiere' => 'Es estreno',
 			'image' => 'Imagen',
 			'image_thumbnail' => 'Imagen minuatura',
 			'image_thumbnail2x' => 'Imagen miniatura2x',
@@ -113,6 +115,8 @@ class Movie extends CActiveRecord
 			'create_user' => 'Creado por',
 			'update_time' => 'Fecha Actualizado',
 			'update_user' => 'Actualizado por',
+                        'is_in_theaters' => 'En cartelera',
+                        'is_coming_soon' => 'Proximamente',
 		);
 	}
 

@@ -521,7 +521,8 @@ $('#city_location').change(function() {
     //$("#palcine_theater").hide();
     if($('#remember_location').is(":checked")){        
         $.cookie('loc', null);
-        $.cookie('loc', $('#city_location option:selected' ).val());
+        //$.cookie('loc', $('#city_location option:selected' ).val());        
+        $.cookie('loc', $('#city_location option:selected' ).val(),{path: '/', expires:365});
         window.location.replace("./?loc="+$('#city_location option:selected' ).val());
     }else{        
         window.location.replace("./?loc="+$('#city_location option:selected' ).val());
