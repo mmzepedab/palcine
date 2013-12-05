@@ -33,8 +33,13 @@
                     }
                 ?>
 		<?php echo $form->labelEx($model,'movie_id'); ?>
+                <?php 
+                    $criteria = new CDbCriteria();
+                    $criteria->condition = "(is_in_theaters = :is_in_theaters ) ";
+                    $criteria->params = array(':is_in_theaters'=>1); 
+                ?>
                 <?php echo $form->dropDownList($model,'movie_id', 
-                        CHtml::listData(Movie::model()->findAll(), 'id', 'name'),
+                        CHtml::listData(Movie::model()->findAll($criteria), 'id', 'name'),
                         array('options' => 
                             array($myMovie=>
                                 array('selected'=>true)

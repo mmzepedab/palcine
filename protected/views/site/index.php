@@ -408,8 +408,17 @@ echo strftime("%A %d de %B del %Y");
         <div class="line-separator"></div>
             <br/>
             <ul class="slider1" >
-              <li><img src="images/movies/coming_soon1.jpg"></li>
-              <li><img src="images/movies/coming_soon2.jpg"></li>
+              <?php $criteria = new CDbCriteria();
+                    $criteria->condition = "(is_coming_soon = :is_coming_soon ) ";
+                    $criteria->params = array(':is_coming_soon'=>1);
+                    $movies = Movie::model()->findAll($criteria); 
+                    //$theater_ids = array();    
+                    foreach ($movies as $movie) {
+                         print_r('<li><a href="'.$movie['trailer_link'].'"><img width="170px" height="230px" src="images/movies/'.$movie['image'].'"></a></li>');
+
+                    }  
+               ?> 
+              
             </ul>
             
        
