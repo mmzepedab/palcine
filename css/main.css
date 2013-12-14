@@ -592,3 +592,17 @@ background: #e5e5e5;
    background: url(../images/down_arrow_select.jpg) no-repeat right #FFF;
    border: 1px solid #ccc;
    }
+   
+   
+   /*Time counter style*/
+   .cd-time{
+       color: #555;
+       font-size: large;
+       
+   }
+   
+   .cd-time-number{
+       color: #04467e;
+       font-size: 50pt;
+       
+   }
