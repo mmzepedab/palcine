@@ -21,14 +21,26 @@ Yii::app()->clientScript->registerMetaTag('226266080832489', '', null, array('id
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-<div id='contact_us' style=" width: 560px; display: block; height: 78px; float: left; margin-left: 60px; background-image: url(images/contact_us.png)">
+<div id='contact_us' style=" width: 422px; display: block; height: 89px; float: left; margin-left: 60px; background-image: url(images/iPhoneBanner.png)">
+    
+</div>
+<div style="float: left; margin-top: 25px; margin-left: 30px;">
+    <a id="shareOpener" href="<?php echo Yii::app()->createAbsoluteUrl('site/sorteo'); ?>" class="yellow button">Participar</a><p></p>    
+                                
     
 </div>
 <div id="facebook_like" style=" width: 100%; display: block; height: 50px;">           
     <div style="float: right; color: grey;" class="fb-like" data-href="http://palcine.me" data-width="100" data-layout="standard" data-action="like" data-show-faces="true" data-share="false" data-colorscheme="light"></div> 
             
 </div>
+</br>
+</br>
+</br>
+</br>
 
+<div class="line-separator"></div>
+</br>
+</br>
 <table border="0" width="100%" style="margin: 0; border: 0;">
     
     <tbody>

@@ -91,11 +91,11 @@ Yii::app()->clientScript->registerScriptFile(
                 alert('Debes completar todos los datos para participar');
                 $("#time_loading_image").hide(); 
              }else{	
-                 //alert('Si');
+                 //alert('talvez');
                  var singleValues = 
                  $.ajax({
                     type: "POST",
-                     url: "http://www.palcine.me/insert.php",
+                     url: "/insert.php",
                      data: {    first_name: me.first_name, 
                                 last_name: me.last_name,
                                 email: me.email,
@@ -108,7 +108,11 @@ Yii::app()->clientScript->registerScriptFile(
                                   window.location.href += "#participantes";
                                   location.reload();
                                   
-                              }
+                              },
+                     error: function(xhr, status, error) {
+                          var err = eval("(" + xhr.responseText + ")");
+                          alert(err.Message);
+}
                      }/*
                  }).done(function (msg) {				 
                     alert(msg);	
@@ -233,9 +237,10 @@ Yii::app()->clientScript->registerScriptFile(
                             <td>
                                 <div align="center" style="color: #04467e; font-size: 12pt; font-weight: bold;">
                                 <br/>
-                                    <a id="shareOpener" href="https://www.facebook.com/photo.php?fbid=486446331473324&set=a.222655054519121.47830.222201907897769&type=1&relevant_count=1&ref=nf" target="_blank" class="yellow smallButton">Compartir</a><p></p>    
-                                
-                                
+                                    <!-- <a id="shareOpener" href="https://www.facebook.com/photo.php?fbid=486446331473324&set=a.222655054519121.47830.222201907897769&type=1&relevant_count=1&ref=nf" target="_blank" class="yellow smallButton">Compartir</a><p></p> -->    
+                                <div class="fb-share-button" data-href="https://www.facebook.com/photo.php?fbid=486446331473324&amp;set=a.222655054519121.47830.222201907897769&amp;type=1&amp;theater" data-type="button_count"></div>
+                                <br/>
+                                <br/>
                                 </div>
                             </td>
                         </tr>
@@ -284,7 +289,7 @@ Yii::app()->clientScript->registerScriptFile(
                         <div id="time_loading_image" align="center"><img src="<?php echo Yii::app()->baseUrl; ?>/images/ajax-loader.gif" width="16" height="16" alt="ajax-loader"/>
                         </div>
                         <p></p>
-                        <p style="color: #999;">Para participar debes aceptar los <a>terminos del concurso</a></p>
+                        <p style="color: #999;">Para participar debes aceptar los <a id="terms">terminos del concurso</a></p>
 
                         <!-- <input id="postButton" type="button" value="PARTICIPAR" /></form></div> -->
                 </div>
@@ -315,8 +320,8 @@ Yii::app()->clientScript->registerScriptFile(
                 
                 <tbody>
                     <?php
-                    $mysqli = new mysqli("palcineweb.db.9416022.hostedresource.com", "palcineweb", "Q1w2e3r4t5", "palcineweb");
-                    //$mysqli = new mysqli("localhost", "root", "root", "palcineweb");
+                    //$mysqli = new mysqli("palcineweb.db.9416022.hostedresource.com", "palcineweb", "Q1w2e3r4t5", "palcineweb");
+                    $mysqli = new mysqli("localhost", "root", "root", "palcineweb");
                     /* check connection */
                     if (mysqli_connect_errno()) {
                         printf("Connect failed: %s\n", mysqli_connect_error());
@@ -377,7 +382,7 @@ $("#time_loading_image").hide();
     
 function timer() {
 			$("#time").countdown({
-		date: "january 30, 2014 23:59:59", //Counting TO a date
+		date: "february 20, 2014 23:59:59", //Counting TO a date
 		//htmlTemplate: "%{h} <span class=\"cd-time\">hours</span> %{m} <span class=\"cd-time\">mins</span> %{s} <span class=\"cd-time\">sec</span>",
 		//date: "july 1, 2011 19:24", //Counting TO a date
 		onChange: function( event, timer ){

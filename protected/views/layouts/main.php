@@ -143,6 +143,7 @@
 			'items'=>array(
 				array('label'=>'Inicio', 'url'=>Yii::app()->getBaseUrl(true)),
                                 array('label'=>'Contactanos', 'url'=>array('/site/contact')),
+                                array('label'=>'Sorteo iPhone 5C', 'url'=>array('/site/sorteo')),
                                 /*
                                 array('label'=>'Cartelera Rapida', 'url'=>array('/')),
 				array('label'=>'Cartelera Rapida', 'url'=>array('/site/index', 'view'=>'about')),
