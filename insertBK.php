@@ -15,14 +15,14 @@ $identity = $_POST["identity"];
 $facebook_id = $_POST["facebook_id"];
 
 
-$sql_validation = "SELECT * FROM pal_sorteo WHERE  (facebook_id = '$facebook_id' OR identity = '$identity') AND DATE(`create_time`) = DATE('".date("Y-m-d H:i:s", strtotime('+1 hour'))."')";
+$sql_validation = "SELECT * FROM pal_sorteo WHERE  (facebook_id = '$facebook_id' OR identity = '$identity') AND DATE(`create_time`) = DATE(NOW())";
 $results = mysql_query($sql_validation,$con);
 $row = mysql_num_rows($results);
 if ($row > 0){
     print_r( "Tu ya participaste hoy, puedes regresar mañana a participar de nuevo. MUCHA SUERTE SORTEO 21 DE FEBRERO.");
 }else{      
     $sql="INSERT INTO `pal_sorteo` (`first_name`, `last_name`, `email`, `phone_number`, `identity`, `facebook_id`, `create_time`) 
-                                VALUES ('$first_name', '$last_name', '$email', '$phone', '$identity', '$facebook_id', '".date("Y-m-d H:i:s", strtotime('+1 hour'))."')";
+                                VALUES ('$first_name', '$last_name', '$email', '$phone', '$identity', '$facebook_id', NOW())";
     if (!mysql_query($sql,$con)){
         //die('Could not connect: ' . mysql_error());
         //die('Solo podes participar una vez. Suerte para el sorteo.' );

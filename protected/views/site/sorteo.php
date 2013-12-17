@@ -3,9 +3,9 @@
 /* @var $model ContactForm */
 /* @var $form CActiveForm */
 
-$this->pageTitle=Yii::app()->name . ' - Sorteo';
+$this->pageTitle=Yii::app()->name . ' - Sorteo iPhone 5C';
 $this->breadcrumbs=array(
-	'Sorteo',
+	'Sorteo iPhone 5C',
 );
 
 Yii::app()->clientScript->registerScriptFile(
@@ -66,7 +66,7 @@ Yii::app()->clientScript->registerScriptFile(
 		// respond to clicks on the participate button
         document.getElementById('postButton').addEventListener('click', function(){
             if(!$('#myCheck').is(':checked')){
-                alert('Debes aceptar los terminos y condiciones del concurso para participar.');
+                alert('Debes aceptar los términos y condiciones del concurso para participar.');
                 return false;
             }
             //return false;
@@ -191,8 +191,8 @@ Yii::app()->clientScript->registerScriptFile(
         <tr>
             <td width="30%" >
                 <div align="center" style="color: #04467e; font-size: 50pt; font-weight: bold;">1</div> 
-                <h3 style="color: #04467e; text-align: center;">Darle like a nuestras paginas</h3>
-                </br>
+                <h3 style="color: #04467e; text-align: center;">Darle like a nuestras paginas (1 sola vez)</h3>
+                
                 <table border="1" style="background-color: white;">
                     <tbody>
                         <tr>
@@ -230,7 +230,7 @@ Yii::app()->clientScript->registerScriptFile(
             <td width="30%">
                 <div align="center" style="color: #04467e; font-size: 50pt; font-weight: bold;">2</div> 
                 
-                <h3 style="color: #04467e; text-align: center;">Compartir y darle like a esta imagen </h3>
+                <h3 style="color: #04467e; text-align: center;">Compartir esta imagen </br>(por cada participación)</h3>
                 <table border="1" style="background-color: white;">
                     <tbody>
                         <tr>
@@ -238,7 +238,7 @@ Yii::app()->clientScript->registerScriptFile(
                                 <div align="center" style="color: #04467e; font-size: 12pt; font-weight: bold;">
                                 <br/>
                                     <!-- <a id="shareOpener" href="https://www.facebook.com/photo.php?fbid=486446331473324&set=a.222655054519121.47830.222201907897769&type=1&relevant_count=1&ref=nf" target="_blank" class="yellow smallButton">Compartir</a><p></p> -->    
-                                <div class="fb-share-button" data-href="https://www.facebook.com/photo.php?fbid=486446331473324&amp;set=a.222655054519121.47830.222201907897769&amp;type=1&amp;theater" data-type="button_count"></div>
+                                <div class="fb-share-button" data-href="https://www.facebook.com/photo.php?fbid=1395683184012481&set=a.1387771961470270.1073741828.1384849471762519&type=1&theater" data-type="button_count"></div>
                                 <br/>
                                 <br/>
                                 </div>
@@ -247,8 +247,8 @@ Yii::app()->clientScript->registerScriptFile(
                     </tbody>
                 </table>
                 <br/>
-                <div align="center" >                
-                <img src="https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-frc3/q71/1469817_486446331473324_823678471_n.jpg" width="148" height="197"/>
+                <div align="center" style="border:1px solid #e5e5e5;">                
+                <img src="<?php echo Yii::app()->baseUrl; ?>/images/sorteo.png" width="300" height="219" />
                 </div>
                 <br/>
             </td>
@@ -282,14 +282,14 @@ Yii::app()->clientScript->registerScriptFile(
                 </tr>
                 </tbody>
                 </table>
-                        <input type="checkbox" id="myCheck"> Acepto los terminos y condiciones del concurso<p></p>
+                        <input type="checkbox" id="myCheck"> Soy mayor de 18 años y acepto los términos y condiciones del concurso<p></p>
                         <a id="postButton" href="javascript:;" class="yellow smallButton">Participar</a><p></p>
                         
                         
                         <div id="time_loading_image" align="center"><img src="<?php echo Yii::app()->baseUrl; ?>/images/ajax-loader.gif" width="16" height="16" alt="ajax-loader"/>
                         </div>
                         <p></p>
-                        <p style="color: #999;">Para participar debes aceptar los <a id="terms">terminos del concurso</a></p>
+                        <p style="color: #999;">Para participar debes ser mayor de 18 años y aceptar los <a id="terms">términos y condiciones del concurso</a></p>
 
                         <!-- <input id="postButton" type="button" value="PARTICIPAR" /></form></div> -->
                 </div>
@@ -320,8 +320,8 @@ Yii::app()->clientScript->registerScriptFile(
                 
                 <tbody>
                     <?php
-                    //$mysqli = new mysqli("palcineweb.db.9416022.hostedresource.com", "palcineweb", "Q1w2e3r4t5", "palcineweb");
-                    $mysqli = new mysqli("localhost", "root", "root", "palcineweb");
+                    $mysqli = new mysqli("palcineweb.db.9416022.hostedresource.com", "palcineweb", "Q1w2e3r4t5", "palcineweb");
+                    //$mysqli = new mysqli("localhost", "root", "root", "palcineweb");
                     /* check connection */
                     if (mysqli_connect_errno()) {
                         printf("Connect failed: %s\n", mysqli_connect_error());
@@ -375,8 +375,105 @@ Yii::app()->clientScript->registerScriptFile(
     </tbody>
 </table>
 
+<div id="dialog" title="Términos y Condicones del concurso" style="height: 500px; overflow: scroll; color: #555;">
+  </br>
+<div align="center">
+    <h2>Términos y Condiciones del concurso</h2>
+    
+    <p style="text-align: justify;">
+    1. La participación en el concurso es gratuita y esta abierta unicamente a personas mayores de 18 años.</br></br>
+
+2. Fecha del sorteo 21 de Febrero 2014, la inscripción tiene fecha limite 
+
+el 20 de Febrero de 2014 a las 11:59:00 pm.</br></br>
+
+3. El premio será un iPhone 5c nuevo.</br></br>
+
+4. palCine no se hace responsable por el estado del aparato y no 
+
+promueve ninguna garantía del mismo luego de ser entregado.</br></br>
+
+5. Para que la participación sea aceptada el concursante debe cumplir 
+
+con todos los paso que palCine requiera al momento de la inscripción en 
+
+el concurso.</br></br></br>
+
+<b>Entrega del premio</b></br></br>
+
+6. El celular será entregado por personal de palCine únicamente en la 
+
+ciudad de Tegucigalpa o San Pedro Sula.</br></br>
+
+7. La persona ganadora deberá presentar su identidad al momento de 
+
+entregarse el premio, esta identidad debe ser la misma con la que se 
+
+registro en el concurso.</br></br>
+
+8. El premio debe ser reclamado al correo administracion@palcine.me 
+
+enviando una copia de la identidad con que se registro.</br></br>
+
+9. Si el ganador no reclama el premio a mas tardar el día 28 de Febrero de 
+
+2014 este será sujeto a una nueva rifa sin ninguna responsabilidad por 
+
+parte de palCine.</br></br>
+
+10. palCine tiene todo el derecho de cancelar cualquier participación en 
+
+el momento que se detecte que es fraudulenta.</br></br>
+
+11. Si la persona ganadora no siguió los pasos tal y como se especifican 
+
+en el sorteo palCine realizara una nueva rifa del celular.</br></br>
+
+12. El limite de participaciones es 1 vez por día, lo cual limita el numero 
+
+máximo de participaciones desde la fecha que se inicio el sorteo hasta la 
+
+fecha de cierre.</br></br>
+
+13. palCine tiene la potestad de dar de baja la inscripción en el sorteo
+
+en cualquier momento, ya sea por mantenimiento, administración o 
+
+cualquier otra razón que palCine considere sea necesaria.</br></br>
+
+14. La fecha del sorteo puede variar en cualquier momento y esta sujeta 
+
+a cambios; mismos que se publicaran en la página oficial de Facebook 
+
+PALCINE TE LLEVA EL CINE.</br></br>
+
+15. Cualquier participacion de un menor de edad sera anulada y en caso de resultar ganador el iPhone sera sorteado nuevamente sin ninguna responsabilidad por parte de palCine.</br></br>
+
+16. palCine no se hace responsable por información comprometida de cualquier participación.    
+    </p>
+</div>
+
+</br>
+</br>
+
+</div>
+
 
 <script>
+    $( "#terms" ).click(function() {
+        $('#dialog').dialog('open');         
+    });   
+$( "#dialog" ).dialog({
+      autoOpen: false,
+      width: 800,
+      height: 500,
+      modal: true,
+      show: {
+      },
+      hide: {
+      }
+    });    
+    
 timer();    
 $("#time_loading_image").hide();    
     
