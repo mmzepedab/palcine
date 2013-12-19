@@ -348,7 +348,20 @@ Yii::app()->clientScript->registerScriptFile(
                         if($count > 4){
                             echo "<tr>";
                         }
-                        echo "<td style='border: 1px solid #e5e5e5;'><b>".$participantes[$i]["id"].".</b> ".$participantes[$i]["first_name"]." ".$participantes[$i]["last_name"]."</td>";
+                        
+                        if(Yii::app()->user->getId() !== null){
+                        echo "<td style='border: 1px solid #e5e5e5;'><b>".
+                                $participantes[$i]["id"].".</b> ".
+                                "<a href='http://www.facebook.com/profile.php?id=".$participantes[$i]["facebook_id"]."' target='_blank'>".
+                                $participantes[$i]["first_name"]." ".$participantes[$i]["last_name"].
+                                "</a>".
+                                "</td>";
+                        }else{
+                        echo "<td style='border: 1px solid #e5e5e5;'><b>".
+                                $participantes[$i]["id"].".</b> ".
+                                $participantes[$i]["first_name"]." ".$participantes[$i]["last_name"].
+                                "</td>";    
+                        }
                         
                          
                         if($count > 3){
@@ -374,6 +387,17 @@ Yii::app()->clientScript->registerScriptFile(
         </tr>
     </tbody>
 </table>
+
+<div id="estreno" title="Estreno de la semana" style="height: 700px; overflow: scroll; color: #555;">
+  </br>
+  <div align="center">
+      <h3 style="color: #04467e; font-size: 20pt;"><b>El hobbit: la desolación de Smaug</b></h3>
+      <div style="color: grey;" class="fb-like" data-href="http://www.palcine.me/movie/19" data-width="100" data-layout="box_count" data-action="like" data-show-faces="true" data-share="false" data-colorscheme="light"></div> 
+                                </br></br>
+      <img src="<?php echo Yii::app()->baseUrl; ?>/images/estreno.jpg" />
+  </div>
+  </div>
+
 
 <div id="dialog" title="Términos y Condicones del concurso" style="height: 500px; overflow: scroll; color: #555;">
   </br>
@@ -472,7 +496,18 @@ $( "#dialog" ).dialog({
       },
       hide: {
       }
-    });    
+    });
+    
+    $( "#estreno" ).dialog({
+      autoOpen: true,
+      width: 900,
+      height: 700,
+      modal: true,
+      show: {
+      },
+      hide: {
+      }
+    }); 
     
 timer();    
 $("#time_loading_image").hide();    
