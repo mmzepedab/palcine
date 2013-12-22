@@ -327,12 +327,16 @@ echo strftime("%A %d de %B del %Y");
                                     }
                                 $criteria = new CDbCriteria();
                                 $criteria->addInCondition("id", $movie_ids);
-                                $criteria->order= 'id DESC';
+                                //$criteria->order= 'id DESC';
+                                $criteria->order = ("create_time DESC");
+                                $criteria->addInCondition("is_in_theaters", array(1));
                                 //$models = Movie::model()->findAll(array('order'=>'name ASC'));
                                 $models = Movie::model()->findAll($criteria);
                             }else{
                                 $criteria = new CDbCriteria();
-                                $criteria->order = ("id DESC");
+                                //$criteria->order = ("id DESC");
+                                $criteria->order = ("create_time DESC");
+                                $criteria->addInCondition("is_in_theaters", array(1));
                                 $models = Movie::model()->findAll($criteria);
                             }
 
@@ -438,6 +442,8 @@ echo strftime("%A %d de %B del %Y");
         
     </div>
 </div>
+
+
 
 
 
@@ -878,6 +884,9 @@ $(function() {
       hide: {
       }
     });
+    
+    
+    
  
     $( ".smallButton" ).click(function() {
         //alert(1);
@@ -952,7 +961,7 @@ $(function() {
 				loopItems: true,
 				scrollbar: true,
                                 autoplay:true,               // Autoplay enabled.
-                                autoplayDelay:2000,	          // Delay between transitions.
+                                autoplayDelay:8000,	          // Delay between transitions.
                                 autoplayStopAtAction:true,
 
     });
