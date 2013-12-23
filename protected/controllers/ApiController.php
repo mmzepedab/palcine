@@ -191,11 +191,19 @@ class ApiController extends Controller
                     $criteria->order= 'create_time DESC';
                     //$models = Movie::model()->findAll(array('order'=>'name ASC'));
                     $models = Movie::model()->findAll($criteria);
+                    foreach ($models as $model) {
+                        $genre = Genre::model()->findByPK($model->genre_id);
+                        $model->genre_id = $genre->name;
+                    }
                 }else{
                     $criteria = new CDbCriteria();
                     //$criteria->order = ("id DESC");
                     $criteria->order= 'create_time DESC';
                     $models = Movie::model()->findAll($criteria);
+                    foreach ($models as $model) {
+                        $genre = Genre::model()->findByPK($model->genre_id);
+                        $model->genre_id = $genre->name;
+                    }
                 }
             break; // }}}
             
