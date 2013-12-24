@@ -194,15 +194,18 @@ class ApiController extends Controller
                     foreach ($models as $model) {
                         $genre = Genre::model()->findByPK($model->genre_id);
                         $model->genre_id = $genre->name;
+                        $model->release_date = date_format(date_create($model->release_date), 'd M Y');
                     }
                 }else{
                     $criteria = new CDbCriteria();
                     //$criteria->order = ("id DESC");
                     $criteria->order= 'create_time DESC';
                     $models = Movie::model()->findAll($criteria);
+                    
                     foreach ($models as $model) {
                         $genre = Genre::model()->findByPK($model->genre_id);
                         $model->genre_id = $genre->name;
+                        $model->release_date = date_format(date_create($model->release_date), 'd M Y');
                     }
                 }
             break; // }}}
@@ -695,7 +698,7 @@ class ApiController extends Controller
             foreach($arrays as $array){
                 $result .= "\n<".substr($model, 0, -1).">\n";
                 foreach($array as $key=>$value)
-                    $result .= "    <$key>".utf8_encode($value)."</$key>\n";
+                    $result .= "    <$key>"./*utf8_encode(*/$value/*)*/."</$key>\n";
                 
                 $result .= "</".substr($model, 0, -1).">";
             }
