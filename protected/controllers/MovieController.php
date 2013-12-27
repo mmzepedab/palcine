@@ -29,7 +29,7 @@ class MovieController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','viewTimes'),
+				'actions'=>array('index','view','viewTimes','times'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -64,6 +64,18 @@ class MovieController extends Controller
 	public function actionViewTimes($m_id,$loc)
 	{
 		$this->render('viewTimes',array(
+			'model'=>$this->loadModel($m_id),
+                        'loc'=>$loc
+		));
+	}
+        
+        /**
+	 * Displays a particular model.
+	 * @param integer $id the ID of the model to be displayed
+	 */
+	public function actionTimes($m_id,$loc)
+	{
+		$this->renderPartial('times',array(
 			'model'=>$this->loadModel($m_id),
                         'loc'=>$loc
 		));
