@@ -587,7 +587,8 @@ $('#movieList').change(function() {
                 select.append("<option value=''>Seleccionar...</option>");
                 $(data).find('movieRoomTime').each(function(){            
                     var id = $(this).find('id').text();
-                    var value = tConvert($(this).find('time').text());
+                    //var value = tConvert($(this).find('time').text());
+                    var value = $(this).find('time').text();
                     select.append("<option value='"+$(this).find('time').text()+"'>"+value+"</option>");
                     $('#timeList').show();
                     $('#timeTitle').show();
@@ -827,7 +828,8 @@ $('#theaterList').change(function() {
                 select.append("<option value=''>Seleccionar...</option>");
                 $(data).find('movieRoomTime').each(function(){            
                     var id = $(this).find('id').text();
-                    var value = tConvert($(this).find('time').text());
+                    //var value = tConvert($(this).find('time').text());
+                    var value = $(this).find('time').text();
                     select.append("<option value='"+id+"'>"+value+"</option>");
                     $('#timeListTheater').show();
                     $('#timeTitleTheater').show();

@@ -247,7 +247,8 @@ class ApiController extends Controller
                 $models = RoomTime::model()->findAll($criteria);
                 foreach ($models as $model) {
                         $room = Room::model()->findByPK($model->room_id);
-                        $model->room_id = $room->name;
+                        $model->room_id = $room->name;                        
+                        $model->time = DATE("g:i a", STRTOTIME($model->time));
                     }
                 //$models = RoomTime::model()->findAll(array('order'=>'name ASC'));
             break; // }}}
@@ -268,7 +269,7 @@ class ApiController extends Controller
                     ->select('room_id')
                     ->from('{{room_time}}')
                     ->where('time=:time AND movie_id=:movie_id', 
-                            array(':time'=>$_GET["time"],
+                            array(':time'=>DATE("H:i", STRTOTIME($_GET["time"])),
                                     ':movie_id'=>$_GET["m_id"]
                                 ))
                     ->queryAll();

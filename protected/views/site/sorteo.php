@@ -356,17 +356,24 @@ Yii::app()->clientScript->registerScriptFile(
                         }
                         
                         if(Yii::app()->user->getId() !== null){
-                        echo "<td style='border: 1px solid #e5e5e5;'><b>".
+                        echo "<td style='border: 1px solid #e5e5e5;' bgcolor='#B3D9FF'><b>".
                                 $participantes[$i]["id"].".</b> ".
                                 "<a href='http://www.facebook.com/profile.php?id=".$participantes[$i]["facebook_id"]."' target='_blank'>".
                                 $participantes[$i]["first_name"]." ".$participantes[$i]["last_name"].
                                 "</a>".
                                 "</td>";
                         }else{
-                        echo "<td style='border: 1px solid #e5e5e5;'><b>".
+                            if(intval($participantes[$i]["id"]) > 499 && intval($participantes[$i]["id"]) < 551){
+                                echo "<td style='border: 1px solid #e5e5e5;' bgcolor='#B3D9FF'><b>".
                                 $participantes[$i]["id"].".</b> ".
                                 $participantes[$i]["first_name"]." ".$participantes[$i]["last_name"].
-                                "</td>";    
+                                "</td>";
+                            }else{
+                                echo "<td style='border: 1px solid #e5e5e5;' <b>".
+                                $participantes[$i]["id"].".</b> ".
+                                $participantes[$i]["first_name"]." ".$participantes[$i]["last_name"].
+                                "</td>";
+                            }
                         }
                         
                          
