@@ -151,63 +151,77 @@ class ApiController extends Controller
 
             //For index 
             case 'movies': // {{{
-                if(isset($_GET['loc'])){
+                if(isset($_GET['is_coming_soon'])){
                     $criteria = new CDbCriteria();
-                    $criteria->condition = "(city_id = :location ) ";
-                    $criteria->params = array(':location'=>$_GET['loc']);
-                    $theaters = Theater::model()->findAll($criteria); 
-                    $theater_ids = array();    
-                    foreach ($theaters as $theater) {
-                            $theater_ids[] = $theater['id'];
-
-                    }
-
-                    $criteria = new CDbCriteria();
-                    $criteria->addInCondition("theater_id", $theater_ids);
-                    $rooms = Room::model()->findAll($criteria); 
-                    $room_ids = array();    
-                    foreach ($rooms as $room) {
-                            $room_ids[] = $room['id'];
-
-                    }
-
-                    //print_r($theater_ids);
-
-                    $criteria = new CDbCriteria();
-                    $criteria->distinct = true;  
-                    $criteria->select = ('movie_id, room_id');
-                    $criteria->addInCondition("room_id", $room_ids);
-                    //$criteria->addInCondition("movie_id", array($_GET["m_id"]));
-                    $models = RoomTime::model()->findAll($criteria);
-
-                    $movie_ids = array();    
-                        foreach ($models as $model) {
-                                $movie_ids[] = $model['movie_id'];
-
-                        }
-                    $criteria = new CDbCriteria();
-                    $criteria->addInCondition("id", $movie_ids);
+                    $criteria->condition = "(is_coming_soon = :is_coming_soon ) ";
+                    $criteria->params = array(':is_coming_soon'=>'1');
                     //$criteria->order= 'id DESC';
-                    $criteria->order= 'create_time DESC';
+                    $criteria->order= 'release_date ASC';
                     //$models = Movie::model()->findAll(array('order'=>'name ASC'));
                     $models = Movie::model()->findAll($criteria);
-                    foreach ($models as $model) {
-                        $genre = Genre::model()->findByPK($model->genre_id);
-                        $model->genre_id = $genre->name;
-                        $model->release_date = date_format(date_create($model->release_date), 'd M Y');
-                    }
+                    foreach ($models as $model) {                            
+                            $model->release_date = date_format(date_create($model->release_date), 'd M Y');
+                        }
                 }else{
-                    $criteria = new CDbCriteria();
-                    //$criteria->order = ("id DESC");
-                    $criteria->order= 'create_time DESC';
-                    $models = Movie::model()->findAll($criteria);
-                    
-                    foreach ($models as $model) {
-                        $genre = Genre::model()->findByPK($model->genre_id);
-                        $model->genre_id = $genre->name;
-                        $model->release_date = date_format(date_create($model->release_date), 'd M Y');
+                
+                    if(isset($_GET['loc'])){
+                        $criteria = new CDbCriteria();
+                        $criteria->condition = "(city_id = :location ) ";
+                        $criteria->params = array(':location'=>$_GET['loc']);
+                        $theaters = Theater::model()->findAll($criteria); 
+                        $theater_ids = array();    
+                        foreach ($theaters as $theater) {
+                                $theater_ids[] = $theater['id'];
+
+                        }
+
+                        $criteria = new CDbCriteria();
+                        $criteria->addInCondition("theater_id", $theater_ids);
+                        $rooms = Room::model()->findAll($criteria); 
+                        $room_ids = array();    
+                        foreach ($rooms as $room) {
+                                $room_ids[] = $room['id'];
+
+                        }
+
+                        //print_r($theater_ids);
+
+                        $criteria = new CDbCriteria();
+                        $criteria->distinct = true;  
+                        $criteria->select = ('movie_id, room_id');
+                        $criteria->addInCondition("room_id", $room_ids);
+                        //$criteria->addInCondition("movie_id", array($_GET["m_id"]));
+                        $models = RoomTime::model()->findAll($criteria);
+
+                        $movie_ids = array();    
+                            foreach ($models as $model) {
+                                    $movie_ids[] = $model['movie_id'];
+
+                            }
+                        $criteria = new CDbCriteria();
+                        $criteria->addInCondition("id", $movie_ids);
+                        //$criteria->order= 'id DESC';
+                        $criteria->order= 'create_time DESC';
+                        //$models = Movie::model()->findAll(array('order'=>'name ASC'));
+                        $models = Movie::model()->findAll($criteria);
+                        foreach ($models as $model) {
+                            $genre = Genre::model()->findByPK($model->genre_id);
+                            $model->genre_id = $genre->name;
+                            $model->release_date = date_format(date_create($model->release_date), 'd M Y');
+                        }
+                    }else{
+                        $criteria = new CDbCriteria();
+                        //$criteria->order = ("id DESC");
+                        $criteria->order= 'create_time DESC';
+                        $models = Movie::model()->findAll($criteria);
+
+                        foreach ($models as $model) {
+                            $genre = Genre::model()->findByPK($model->genre_id);
+                            $model->genre_id = $genre->name;
+                            $model->release_date = date_format(date_create($model->release_date), 'd M Y');
+                        }
                     }
-                }
+              }  
             break; // }}}
             
             
