@@ -356,7 +356,7 @@ Yii::app()->clientScript->registerScriptFile(
                         }
                         
                         if(Yii::app()->user->getId() !== null){
-                        echo "<td style='border: 1px solid #e5e5e5;' bgcolor='#B3D9FF'><b>".
+                        echo "<td style='border: 1px solid #e5e5e5;'><b>".
                                 $participantes[$i]["id"].".</b> ".
                                 "<a href='http://www.facebook.com/profile.php?id=".$participantes[$i]["facebook_id"]."' target='_blank'>".
                                 $participantes[$i]["first_name"]." ".$participantes[$i]["last_name"].
@@ -364,10 +364,17 @@ Yii::app()->clientScript->registerScriptFile(
                                 "</td>";
                         }else{
                             if(intval($participantes[$i]["id"]) > 499 && intval($participantes[$i]["id"]) < 551){
-                                echo "<td style='border: 1px solid #e5e5e5;' bgcolor='#B3D9FF'><b>".
-                                $participantes[$i]["id"].".</b> ".
-                                $participantes[$i]["first_name"]." ".$participantes[$i]["last_name"].
-                                "</td>";
+                                if(intval($participantes[$i]["id"]) == 522){
+                                    echo "<td style='border: 1px solid #e5e5e5;' bgcolor='#fdca4b'><b>".
+                                    $participantes[$i]["id"].".</b> ".
+                                    $participantes[$i]["first_name"]." ".$participantes[$i]["last_name"].
+                                    "</td>";
+                                }else{                                
+                                    echo "<td style='border: 1px solid #e5e5e5;' bgcolor='#B3D9FF'><b>".
+                                    $participantes[$i]["id"].".</b> ".
+                                    $participantes[$i]["first_name"]." ".$participantes[$i]["last_name"].
+                                    "</td>";
+                                }
                             }else{
                                 echo "<td style='border: 1px solid #e5e5e5;' <b>".
                                 $participantes[$i]["id"].".</b> ".
@@ -401,7 +408,7 @@ Yii::app()->clientScript->registerScriptFile(
     </tbody>
 </table>
 
-<div id="estreno" title="Estreno de la semana" style="height: 700px; overflow: scroll; color: #555;">
+<div id="estreno" title="Ganador" style="height: 700px; overflow: scroll; color: #555;">
   </br>
   <div align="center">
       
@@ -409,8 +416,14 @@ Yii::app()->clientScript->registerScriptFile(
       <table border="0" style="border: none;">
                                     <tbody>
                                         <tr>
-                                            <td><h3 style="color: #04467e; font-size: 20pt;"><b>El hobbit: la desolación de Smaug</b></h3></td>
-                                            <td><div style="color: grey;" class="fb-like" data-href="http://www.palcine.me/movie/19" data-width="100" data-layout="standard" data-action="like" data-show-faces="true" data-share="true" data-colorscheme="light"></div> 
+                                            <td><h3 style="color: #04467e; font-size: 15pt;"><b>Numero Ganador de la Recarga Tigo de L.100.00</b></h3>
+                                            <!-- 
+                                                <div align="center">
+                                                <a id="opener" href="http://www.youtube.com/embed/utClMjdBixo" class="yellow button" style="color: #FFF;">Ver Trailer</a>
+                                            </div>
+                                            -->
+                                            </td>
+                                            <td><div style="color: grey;" class="fb-like" data-href="http://www.palcine.me/" data-width="100" data-layout="standard" data-action="like" data-show-faces="true" data-share="true" data-colorscheme="light"></div> 
                                 </td>
                                         </tr>
                                     </tbody>
@@ -418,8 +431,9 @@ Yii::app()->clientScript->registerScriptFile(
                                 <table border="0">
                                     <tbody>
                                         <tr>
-                                            <td><img width="448" height="286" src="<?php echo Yii::app()->baseUrl; ?>/images/estreno.jpg" /></td>
-                                            <td><div class="fb-comments" data-href="http://www.palcine.me/movie/19" data-numposts="5" data-width="380"></div>
+                                            <!-- <td><img width="448" height="286" src="<?php echo Yii::app()->baseUrl; ?>/images/estreno.jpg" /></td> -->
+                                            <td><iframe width="448" height="286" src="//www.youtube.com/embed/g5LS-3gBZdg" frameborder="0" allowfullscreen></iframe></td>
+                                            <td><div class="fb-comments" data-href="http://www.palcine.me/" data-numposts="5" data-width="380"></div>
                                 </td>
                                         </tr>
                                     </tbody>
