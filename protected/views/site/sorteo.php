@@ -363,7 +363,7 @@ Yii::app()->clientScript->registerScriptFile(
                                 "</a>".
                                 "</td>";
                         }else{
-                            if(intval($participantes[$i]["id"]) > 499 && intval($participantes[$i]["id"]) < 551){
+                            if(intval($participantes[$i]["id"]) > 877 && intval($participantes[$i]["id"]) < 951){
                                 if(intval($participantes[$i]["id"]) == 522){
                                     echo "<td style='border: 1px solid #e5e5e5;' bgcolor='#fdca4b'><b>".
                                     $participantes[$i]["id"].".</b> ".
