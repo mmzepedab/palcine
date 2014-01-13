@@ -83,11 +83,11 @@ Yii::app()->clientScript->registerScriptFile(
     var uid = response.authResponse.userID;
     var accessToken = response.authResponse.accessToken;
 	 FB.api('/me', function(me){
-             if(me.email==undefined){                
+             /*if(me.email==undefined){                
                 FB.logout();
                 alert('Debes autorizar a palCine en Facebook para poder participar.');
                 $("#time_loading_image").hide(); 
-             }else if($('#identity').val()=="" || $('#phone').val() == ""){
+             }else */ if($('#identity').val()=="" || $('#phone').val() == ""){
                 alert('Debes completar todos los datos para participar');
                 $("#time_loading_image").hide(); 
              }else{	
@@ -408,7 +408,7 @@ Yii::app()->clientScript->registerScriptFile(
     </tbody>
 </table>
 
-<div id="estreno" title="Ganador" style="height: 700px; overflow: scroll; color: #555;">
+<div id="estreno" title="palCine App" style="height: 700px; overflow: scroll; color: #555;">
   </br>
   <div align="center">
       
@@ -416,14 +416,14 @@ Yii::app()->clientScript->registerScriptFile(
       <table border="0" style="border: none;">
                                     <tbody>
                                         <tr>
-                                            <td><h3 style="color: #04467e; font-size: 15pt;"><b>Numero Ganador de la Recarga Tigo de L.100.00</b></h3>
-                                            <!-- 
+                                            <td><h3 style="color: #04467e; font-size: 15pt;"><b>Horarios del cine en Honduras en tus manos</b></h3>
+                                             
                                                 <div align="center">
-                                                <a id="opener" href="http://www.youtube.com/embed/utClMjdBixo" class="yellow button" style="color: #FFF;">Ver Trailer</a>
+                                                <a id="opener" href="https://itunes.apple.com/us/app/palcine/id791104005?ls=1&mt=8" class="yellow button" style="color: #FFF;">Descargar</a>
                                             </div>
-                                            -->
+                                            
                                             </td>
-                                            <td><div style="color: grey;" class="fb-like" data-href="http://www.palcine.me/" data-width="100" data-layout="standard" data-action="like" data-show-faces="true" data-share="true" data-colorscheme="light"></div> 
+                                            <td><div style="color: grey;" class="fb-like" data-href="https://itunes.apple.com/us/app/palcine/id791104005?ls=1&mt=8" data-width="100" data-layout="standard" data-action="like" data-show-faces="true" data-share="true" data-colorscheme="light"></div> 
                                 </td>
                                         </tr>
                                     </tbody>
@@ -431,9 +431,9 @@ Yii::app()->clientScript->registerScriptFile(
                                 <table border="0">
                                     <tbody>
                                         <tr>
-                                            <!-- <td><img width="448" height="286" src="<?php echo Yii::app()->baseUrl; ?>/images/estreno.jpg" /></td> -->
-                                            <td><iframe width="448" height="286" src="//www.youtube.com/embed/g5LS-3gBZdg" frameborder="0" allowfullscreen></iframe></td>
-                                            <td><div class="fb-comments" data-href="http://www.palcine.me/" data-numposts="5" data-width="380"></div>
+                                            <td><a href="https://itunes.apple.com/us/app/palcine/id791104005?ls=1&mt=8"><img width="400" height="400" src="<?php echo Yii::app()->baseUrl; ?>/images/como.jpg" /></a></td> 
+                                            <!-- <td><iframe width="448" height="286" src="//www.youtube.com/embed/g5LS-3gBZdg" frameborder="0" allowfullscreen></iframe></td> -->
+                                            <td><div class="fb-comments" data-href="https://itunes.apple.com/us/app/palcine/id791104005?ls=1&mt=8" data-numposts="5" data-width="380"></div>
                                 </td>
                                         </tr>
                                     </tbody>

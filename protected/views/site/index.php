@@ -248,13 +248,7 @@ Yii::app()->clientScript->registerMetaTag('226266080832489', '', null, array('id
             <ul class="publicidad" >
              
               <li>
-                  <img src="<?php echo Yii::app()->baseUrl; ?>/images/banner1.jpg" />
-                </li>
-                <li>
-                  <img src="<?php echo Yii::app()->baseUrl; ?>/images/palCine_App_Banner.jpg" />
-                </li>
-                <li>
-                  <img src="<?php echo Yii::app()->baseUrl; ?>/images/banner3.jpg" />
+                  <a href="https://itunes.apple.com/us/app/palcine/id791104005?ls=1&mt=8"><img src="<?php echo Yii::app()->baseUrl; ?>/images/smallBanner1.jpg" /></a>
                 </li>
             </ul>
             
@@ -973,7 +967,7 @@ $(function() {
     minSlides: 1,
     maxSlides: 1,
     controls: false,
-    auto: true
+    auto: false
   });
     
     $('.slider1').bxSlider({

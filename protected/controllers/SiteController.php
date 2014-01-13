@@ -75,6 +75,15 @@ class SiteController extends Controller
         /**
 	 * Displays the contact page
 	 */
+	public function actionPrivacy()
+	{
+		
+		$this->render('privacy');
+	}
+        
+        /**
+	 * Displays the contact page
+	 */
 	public function actionSorteo()
 	{
 		
