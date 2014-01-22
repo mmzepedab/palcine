@@ -545,6 +545,81 @@ background: #e5e5e5;
                 background-color: #04467e !important;
                 bottom: 0;
         }
+        
+        /**
+        * Carousel with image and text, custom skinned scrollbar
+        **/
+        #carousel-image-and-text2 {
+                width: 90%;
+                height: 380px;
+                margin: 0 auto;	
+
+        }	
+        #carousel-image-and-text2 .arrow-holder {
+                height: 250px;
+        }		
+        #carousel-image-and-text2 .touchcarousel-item {
+                margin-right: 1px;	
+                width: 170px;
+                height: 277px;		
+        }
+        #carousel-image-and-text2 .item-block {
+                width: 170px;
+                height: 277px;
+                display: block;
+
+        }
+        #carousel-image-and-text2 .item-block img,
+        #carousel-image-and-text2 .item-block h4, 
+        #carousel-image-and-text2 .item-block p {
+                float: left;
+                position: relative;
+                display: block;
+                margin: 0;			
+        }
+        #carousel-image-and-text2 .item-block #myImage img {
+                width: 170px;
+                height: 230px;		
+                border: 0;
+                padding: 0;		
+        }
+
+
+
+        #carousel-image-and-text2 .item-block {			
+                text-decoration: none;
+                color: inherit;	
+        }					
+        #carousel-image-and-text2 .item-block h4 {
+                font: bold 13px/20px Helvetica, Arial, sans-serif;
+                color: #000;
+                width: 158px;
+                height: auto;		
+                padding: 2px 0 0 6px;
+                -webkit-transition: color 0.2s ease-out; 
+                -moz-transition: color 0.2s ease-out;
+                transition: color 0.2s ease-out;  	
+        }
+        #carousel-image-and-text2 .item-block:hover h4 {	
+                color: #1873c9;		
+        }
+        #carousel-image-and-text2 .item-block p {			
+                font: normal 13px/20px Helvetica, Arial, sans-serif;
+                color: #555;		
+                width: 158px;
+                padding: 0 0 0 6px;
+        }
+        #carousel-image-and-text2 .scrollbar-holder {
+                background: #CED7DB;
+                bottom: 0;
+                height: 1px;
+                left: 0;
+                right: 0;
+        }
+        #carousel-image-and-text2 .scrollbar {
+                background-color: #04467e !important;
+                bottom: 0;
+        }
 
         
         .styled-select select {

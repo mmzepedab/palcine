@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'palCine',        
+	'name'=>'palCine Te Lleva al Cine',        
         'language'=>'es',
         'sourceLanguage' => 'es_es',
 
@@ -61,6 +61,10 @@ return array(
                                 array('api/list', 'pattern'=>'api/<model:\w+>', 'verb'=>'GET'),
                                 array('api/view', 'pattern'=>'api/<model:\w+>/<id:\d+>', 'verb'=>'GET'),
                             
+                                // REST patterns Android
+                                array('ws/list', 'pattern'=>'ws/<model:\w+>', 'verb'=>'GET'),
+                                array('ws/view', 'pattern'=>'ws/<model:\w+>/<id:\d+>', 'verb'=>'GET'),
+                            
                                 // Other controllers
                                 '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
                                 '<controller:\w+>/<id:\d+>'=>'<controller>/view',
@@ -80,11 +84,21 @@ return array(
 //                    ),
             
 ////                //MySQL database on MAC Server
-		'db'=>array(
-			'connectionString' => 'mysql:host=127.0.0.1;port=8889;dbname=palcineweb;unix_socket:/Applications/MAMP/tmp/mysql/mysql.sock',
+//		'db'=>array(
+//			'connectionString' => 'mysql:host=127.0.0.1;port=8889;dbname=palcineweb;unix_socket:/Applications/MAMP/tmp/mysql/mysql.sock',
+//                        'emulatePrepare' => true,
+//			'username' => 'root',
+//			'password' => 'root',
+//			'charset' => 'utf8',
+//                        'tablePrefix' => 'pal_',
+//		),
+            
+            //MySQL database on godaddy server
+            'db'=>array(
+			'connectionString' => 'mysql:host=palcineweb.db.9416022.hostedresource.com;dbname=palcineweb',
                         'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => 'root',
+			'username' => 'palcineweb',
+			'password' => 'Q1w2e3r4t5',
 			'charset' => 'utf8',
                         'tablePrefix' => 'pal_',
 		),

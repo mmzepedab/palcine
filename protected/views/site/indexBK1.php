@@ -248,13 +248,7 @@ Yii::app()->clientScript->registerMetaTag('226266080832489', '', null, array('id
             <ul class="publicidad" >
              
               <li>
-                  <img src="<?php echo Yii::app()->baseUrl; ?>/images/banner1.jpg" />
-                </li>
-                <li>
-                  <img src="<?php echo Yii::app()->baseUrl; ?>/images/palCine_App_Banner.jpg" />
-                </li>
-                <li>
-                  <img src="<?php echo Yii::app()->baseUrl; ?>/images/banner3.jpg" />
+                  <a href="https://itunes.apple.com/us/app/palcine/id791104005?ls=1&mt=8"><img src="<?php echo Yii::app()->baseUrl; ?>/images/smallBanner1.jpg" /></a>
                 </li>
             </ul>
             
@@ -327,12 +321,16 @@ echo strftime("%A %d de %B del %Y");
                                     }
                                 $criteria = new CDbCriteria();
                                 $criteria->addInCondition("id", $movie_ids);
-                                $criteria->order= 'id DESC';
+                                //$criteria->order= 'id DESC';
+                                $criteria->order = ("create_time DESC");
+                                $criteria->addInCondition("is_in_theaters", array(1));
                                 //$models = Movie::model()->findAll(array('order'=>'name ASC'));
                                 $models = Movie::model()->findAll($criteria);
                             }else{
                                 $criteria = new CDbCriteria();
-                                $criteria->order = ("id DESC");
+                                //$criteria->order = ("id DESC");
+                                $criteria->order = ("create_time DESC");
+                                $criteria->addInCondition("is_in_theaters", array(1));
                                 $models = Movie::model()->findAll($criteria);
                             }
 
@@ -443,9 +441,9 @@ echo strftime("%A %d de %B del %Y");
 
 
 
-<div id="dialog" title="Selecciona tu ubicación">
-  </br>
-<div align="center">
+<div id="dialog" title="Cartelera para tu ciudad">
+    </br>
+<div align="center" style="font-weight: bold; ">
     Donde estas?
 </div>
 
@@ -457,9 +455,108 @@ echo strftime("%A %d de %B del %Y");
                     <option value="tgu">Tegucigalpa</option>
                 </select>
             </span>
-    </div>
-</br>
-</br>
+    
+    
+</div>
+  </br>
+<div id="carousel-image-and-text2" class="touchcarousel grey-blue">       
+			<ul class="touchcarousel-container">
+                            <?php 
+                            if(isset($_GET['loc'])){
+                                $criteria = new CDbCriteria();
+                                $criteria->condition = "(city_id = :location ) ";
+                                $criteria->params = array(':location'=>$_GET['loc']);
+                                $theaters = Theater::model()->findAll($criteria); 
+                                $theater_ids = array();    
+                                foreach ($theaters as $theater) {
+                                        $theater_ids[] = $theater['id'];
+
+                                }
+
+                                $criteria = new CDbCriteria();
+                                $criteria->addInCondition("theater_id", $theater_ids);
+                                $rooms = Room::model()->findAll($criteria); 
+                                $room_ids = array();    
+                                foreach ($rooms as $room) {
+                                        $room_ids[] = $room['id'];
+
+                                }
+
+                                //print_r($theater_ids);
+
+                                $criteria = new CDbCriteria();
+                                $criteria->distinct = true;  
+                                $criteria->select = ('movie_id, room_id');
+                                $criteria->addInCondition("room_id", $room_ids);
+                                //$criteria->addInCondition("movie_id", array($_GET["m_id"]));
+                                $models = RoomTime::model()->findAll($criteria);
+
+                                $movie_ids = array();    
+                                    foreach ($models as $model) {
+                                            $movie_ids[] = $model['movie_id'];
+
+                                    }
+                                $criteria = new CDbCriteria();
+                                $criteria->addInCondition("id", $movie_ids);
+                                //$criteria->order= 'id DESC';
+                                $criteria->order = ("create_time DESC");
+                                $criteria->addInCondition("is_in_theaters", array(1));
+                                //$models = Movie::model()->findAll(array('order'=>'name ASC'));
+                                $models = Movie::model()->findAll($criteria);
+                            }else{
+                                $criteria = new CDbCriteria();
+                                //$criteria->order = ("id DESC");
+                                $criteria->order = ("create_time DESC");
+                                $criteria->addInCondition("is_in_theaters", array(1));
+                                $models = Movie::model()->findAll($criteria);
+                            }
+
+                            $rows = array();
+                            foreach($models as $model)
+                                   $rows[] = $model->attributes;
+
+                            foreach($rows as $row){
+                            
+                            $movieName = $row['name'];
+                            /*if(strlen($movieName)>18){
+                                $movieName = substr($movieName, 0, 21);
+                                $movieName.=  "...";
+                            }*/
+                            $loc = '';
+                            if(isset($_GET['loc'])){
+                                $loc = $_GET['loc'];
+                                //unset(Yii::app()->request->cookies['loc']);
+                                //Yii::app()->request->cookies['loc'] = new CHttpCookie('loc', 'tgu');
+                            }
+                            print_r('<li class="touchcarousel-item">
+					<a class="item-block" style="color: #FFF;" title="'.$row['name'].'" href="'.Yii::app()->createAbsoluteUrl('movie/viewTimes',array('id'=>$row['id'],'loc'=>$loc,'m_id'=>$row['id'])) .'">
+                                            
+					    <div style="width:160px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap; "><h4>'.$movieName.'</h4></div>
+                                            
+                                            <div class="fb-like" data-href="'.$row['name'].'" href="'.Yii::app()->createAbsoluteUrl('movie/view',array('id'=>$row['id'])) .'" data-width="The pixel width of the plugin" data-height="The pixel height of the plugin" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+                                                </br></br>
+                                            <img id="myImage" src="images/movies/'.$row['image'].'" width="170" height="230" />
+                                            <div id="stars">
+                                                <img class="my-item-block"src="images/stars'.intval($row['raiting']).'.png" width="170" height="30"/>
+                                            </div>
+					       
+                                            </a>
+                                    <div align="center">
+                                        <a id="timeOpener" href="'.Yii::app()->createAbsoluteUrl('movie/viewTimes',array('m_id'=>$row['id'],'loc'=>$loc)) .'" class="blue smallButton">Horarios</a>
+                                    </div>
+                                    
+                                    
+                                </li>'
+                                    
+                                    );
+                            }
+                            ?>
+                            
+				
+							
+								
+			</ul> 
+		</div>
 
 </div>
 
@@ -583,7 +680,8 @@ $('#movieList').change(function() {
                 select.append("<option value=''>Seleccionar...</option>");
                 $(data).find('movieRoomTime').each(function(){            
                     var id = $(this).find('id').text();
-                    var value = tConvert($(this).find('time').text());
+                    //var value = tConvert($(this).find('time').text());
+                    var value = $(this).find('time').text();
                     select.append("<option value='"+$(this).find('time').text()+"'>"+value+"</option>");
                     $('#timeList').show();
                     $('#timeTitle').show();
@@ -823,7 +921,8 @@ $('#theaterList').change(function() {
                 select.append("<option value=''>Seleccionar...</option>");
                 $(data).find('movieRoomTime').each(function(){            
                     var id = $(this).find('id').text();
-                    var value = tConvert($(this).find('time').text());
+                    //var value = tConvert($(this).find('time').text());
+                    var value = $(this).find('time').text();
                     select.append("<option value='"+id+"'>"+value+"</option>");
                     $('#timeListTheater').show();
                     $('#timeTitleTheater').show();
@@ -872,8 +971,8 @@ $(function() {
   */
  
     $( "#dialog" ).dialog({
-      autoOpen: false,
-      width: 500,
+      autoOpen: true,
+      width: 1000,
       modal: true,
       show: {
       },
@@ -957,7 +1056,23 @@ $(function() {
 				loopItems: true,
 				scrollbar: true,
                                 autoplay:true,               // Autoplay enabled.
-                                autoplayDelay:2000,	          // Delay between transitions.
+                                autoplayDelay:8000,	          // Delay between transitions.
+                                autoplayStopAtAction:true,
+
+    });
+    
+    $("#carousel-image-and-text2").touchCarousel({
+        /* carousel options go here see Javascript Options section for more info */
+        				
+				pagingNav: true,
+				snapToItems: false,
+				itemsPerMove: 1,				
+				scrollToLast: true,
+                                keyboardNav: true, 
+				loopItems: true,
+				scrollbar: true,
+                                autoplay:true,               // Autoplay enabled.
+                                autoplayDelay:8000,	          // Delay between transitions.
                                 autoplayStopAtAction:true,
 
     });
@@ -967,7 +1082,7 @@ $(function() {
     minSlides: 1,
     maxSlides: 1,
     controls: false,
-    auto: true
+    auto: false
   });
     
     $('.slider1').bxSlider({

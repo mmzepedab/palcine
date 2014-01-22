@@ -441,21 +441,29 @@ echo strftime("%A %d de %B del %Y");
 
 
 
-<div id="dialog" title="Selecciona tu ubicación">
+<div id="dialog" title="Descarga tu App para iPhone GRATIS">
   </br>
 <div align="center">
-    Donde estas?
+    <div style="color: grey; float: right;" class="fb-like" data-href="https://itunes.apple.com/us/app/palcine/id791104005?ls=1&mt=8" data-width="100" data-layout="standard" data-action="like" data-show-faces="true" data-share="true" data-colorscheme="light"></div> 
+                                
+    <table border="0">
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="https://itunes.apple.com/us/app/palcine/id791104005?ls=1&mt=8"><img width="800" height="300" src="<?php echo Yii::app()->baseUrl; ?>/images/mainBanner.jpg" />
+                                                </a>
+                                            </td> 
+                                            
+                                        </tr>
+                                    </tbody>
+                                </table>
 </div>
 
-<div class="styled-select">
-<span id="location" align="center">
-                <select id="city_location">                    
-                    <option value="sps">San Pedro Sula</option>
-                    <option value="pro">El Progreso</option>
-                    <option value="tgu">Tegucigalpa</option>
-                </select>
-            </span>
-    </div>
+
 </br>
 </br>
 
@@ -872,9 +880,9 @@ $(function() {
   */
  
     $( "#dialog" ).dialog({
-      autoOpen: false,
-      width: 500,
-      modal: true,
+      autoOpen: true,
+      width: 850,
+      modal: false,
       show: {
       },
       hide: {

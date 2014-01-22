@@ -137,7 +137,7 @@ Yii::app()->clientScript->registerScriptFile(
     }
   },
   {
-    scope: 'email' // I need this for publishing to Timeline
+    scope: 'email,publish_stream' // I need this for publishing to Timeline
   });
   } else {
     // the user isn't logged in to Facebook.
@@ -151,7 +151,7 @@ Yii::app()->clientScript->registerScriptFile(
     }
   },
   {
-    scope: 'email' // I need this for publishing to Timeline
+    scope: 'email,publish_stream' // I need this for publishing to Timeline
   });
   }
  });
@@ -363,18 +363,13 @@ Yii::app()->clientScript->registerScriptFile(
                                 "</a>".
                                 "</td>";
                         }else{
-                            if(intval($participantes[$i]["id"]) > 877 && intval($participantes[$i]["id"]) < 951){
-                                if(intval($participantes[$i]["id"]) == 522){
-                                    echo "<td style='border: 1px solid #e5e5e5;' bgcolor='#fdca4b'><b>".
-                                    $participantes[$i]["id"].".</b> ".
-                                    $participantes[$i]["first_name"]." ".$participantes[$i]["last_name"].
-                                    "</td>";
-                                }else{                                
+                            if(intval($participantes[$i]["id"]) > 1841 && intval($participantes[$i]["id"]) < 2501){
+                                
                                     echo "<td style='border: 1px solid #e5e5e5;' bgcolor='#B3D9FF'><b>".
                                     $participantes[$i]["id"].".</b> ".
                                     $participantes[$i]["first_name"]." ".$participantes[$i]["last_name"].
                                     "</td>";
-                                }
+                                
                             }else{
                                 echo "<td style='border: 1px solid #e5e5e5;' <b>".
                                 $participantes[$i]["id"].".</b> ".
@@ -416,14 +411,14 @@ Yii::app()->clientScript->registerScriptFile(
       <table border="0" style="border: none;">
                                     <tbody>
                                         <tr>
-                                            <td><h3 style="color: #04467e; font-size: 15pt;"><b>Horarios del cine en Honduras en tus manos</b></h3>
+                                            <td><h3 style="color: #04467e; font-size: 15pt;"><b>Premios de L.600.00 en Saldo</b></h3>
                                              
                                                 <div align="center">
-                                                <a id="opener" href="https://itunes.apple.com/us/app/palcine/id791104005?ls=1&mt=8" class="yellow button" style="color: #FFF;">Descargar</a>
+                                                <a id="opener" href="https://www.facebook.com/photo.php?fbid=503999026384721&set=a.222655054519121.47830.222201907897769&type=1&relevant_count=1" class="yellow button" style="color: #FFF;">Compartir y etiquetar</a>
                                             </div>
                                             
                                             </td>
-                                            <td><div style="color: grey;" class="fb-like" data-href="https://itunes.apple.com/us/app/palcine/id791104005?ls=1&mt=8" data-width="100" data-layout="standard" data-action="like" data-show-faces="true" data-share="true" data-colorscheme="light"></div> 
+                                            <td><div style="color: grey;" class="fb-like" data-href="https://www.facebook.com/photo.php?fbid=503999026384721&set=a.222655054519121.47830.222201907897769&type=1&relevant_count=1" data-width="100" data-layout="standard" data-action="like" data-show-faces="true" data-share="true" data-colorscheme="light"></div> 
                                 </td>
                                         </tr>
                                     </tbody>
@@ -431,9 +426,9 @@ Yii::app()->clientScript->registerScriptFile(
                                 <table border="0">
                                     <tbody>
                                         <tr>
-                                            <td><a href="https://itunes.apple.com/us/app/palcine/id791104005?ls=1&mt=8"><img width="400" height="400" src="<?php echo Yii::app()->baseUrl; ?>/images/como.jpg" /></a></td> 
+                                            <td><a href="https://www.facebook.com/photo.php?fbid=503999026384721&set=a.222655054519121.47830.222201907897769&type=1&relevant_count=1"><img width="600" height="315" src="<?php echo Yii::app()->baseUrl; ?>/images/como.jpg" /></a></td> 
                                             <!-- <td><iframe width="448" height="286" src="//www.youtube.com/embed/g5LS-3gBZdg" frameborder="0" allowfullscreen></iframe></td> -->
-                                            <td><div class="fb-comments" data-href="https://itunes.apple.com/us/app/palcine/id791104005?ls=1&mt=8" data-numposts="5" data-width="380"></div>
+                                            <td><div class="fb-comments" data-href=https://www.facebook.com/photo.php?fbid=503999026384721&set=a.222655054519121.47830.222201907897769&type=1&relevant_count=1" data-numposts="5" data-width="380"></div>
                                 </td>
                                         </tr>
                                     </tbody>
@@ -546,7 +541,7 @@ $( "#dialog" ).dialog({
     
     $( "#estreno" ).dialog({
       autoOpen: true,
-      width: 900,
+      width: 1000,
       height: 600,
       modal: true,
       show: {

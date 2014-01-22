@@ -83,11 +83,11 @@ Yii::app()->clientScript->registerScriptFile(
     var uid = response.authResponse.userID;
     var accessToken = response.authResponse.accessToken;
 	 FB.api('/me', function(me){
-             if(me.email==undefined){                
+             /*if(me.email==undefined){                
                 FB.logout();
                 alert('Debes autorizar a palCine en Facebook para poder participar.');
                 $("#time_loading_image").hide(); 
-             }else if($('#identity').val()=="" || $('#phone').val() == ""){
+             }else */ if($('#identity').val()=="" || $('#phone').val() == ""){
                 alert('Debes completar todos los datos para participar');
                 $("#time_loading_image").hide(); 
              }else{	
@@ -184,7 +184,13 @@ Yii::app()->clientScript->registerScriptFile(
 <p></p>
 </br>
 </br>
-<div align="center" >
+<div align="center" id="colores">
+<form method="post" action="http://poll.pollcode.com/1725859" target="_blank"><table style = "width: 50%;" border=0 width="384" bgcolor="EBEBEB" cellspacing="2" cellpadding="0"><tr><td colspan="2" height="10"><font face="Verdana" size="4" color="04467E"><b>¿De que color quieren el iPhone 5C?</b></font></td></tr><tr><td width="5"><input type="radio" name="answer" value="1" id="1725859answer1"></td><td>&nbsp;<font face="Verdana" size="4" color="04467E"><label for="1725859answer1">Verde</label></font></td></tr><tr><td width="5"><input type="radio" name="answer" value="2" id="1725859answer2"></td><td>&nbsp;<font face="Verdana" size="4" color="04467E"><label for="1725859answer2">Azul</label></font></td></tr><tr><td width="5"><input type="radio" name="answer" value="3" id="1725859answer3"></td><td>&nbsp;<font face="Verdana" size="4" color="04467E"><label for="1725859answer3">Amarillo</label></font></td></tr><tr><td width="5"><input type="radio" name="answer" value="4" id="1725859answer4"></td><td>&nbsp;<font face="Verdana" size="4" color="04467E"><label for="1725859answer4">Rojo</label></font></td></tr><tr><td width="5"><input type="radio" name="answer" value="5" id="1725859answer5"></td><td>&nbsp;<font face="Verdana" size="4" color="04467E"><label for="1725859answer5">Blanco</label></font></td></tr><tr><td colspan="2" height="10"><center><input type="submit" value=" Votar">&nbsp;&nbsp;<input type="submit" name="view" value=" Ver resultados"></center></td></tr><tr><td colspan="2" align="right"></td></tr></table></form>
+
+<br/>
+<br/>
+
+
     <h3 style="color: #999; font-size: 20pt;">3 simples pasos para participar</h3>
 <table border="1" style="background-color: whitesmoke;">
     <tbody>
@@ -230,17 +236,17 @@ Yii::app()->clientScript->registerScriptFile(
             <td width="30%">
                 <div align="center" style="color: #04467e; font-size: 50pt; font-weight: bold;">2</div> 
                 
-                <h3 style="color: #04467e; text-align: center;">Compartir esta imagen </br>(por cada participación)</h3>
+                <h3 style="color: #04467e; text-align: center;">Like y Compartir esta imagen </br>(por cada participación)</h3>
                 <table border="1" style="background-color: white;">
                     <tbody>
                         <tr>
                             <td>
                                 <div align="center" style="color: #04467e; font-size: 12pt; font-weight: bold;">
                                 <br/>
-                                    <!-- <a id="shareOpener" href="https://www.facebook.com/photo.php?fbid=486446331473324&set=a.222655054519121.47830.222201907897769&type=1&relevant_count=1&ref=nf" target="_blank" class="yellow smallButton">Compartir</a><p></p> -->    
-                                <div class="fb-share-button" data-href="https://www.facebook.com/photo.php?fbid=1395683184012481&set=a.1387771961470270.1073741828.1384849471762519&type=1&theater" data-type="button_count"></div>
-                                <br/>
-                                <br/>
+                                     <a id="shareOpener" href="https://www.facebook.com/photo.php?fbid=1395683184012481&amp;set=a.1387771961470270.1073741828.1384849471762519&amp;type=1&amp;theater" target="_blank" class="yellow smallButton">Compartir</a><p></p>    
+                                <!-- <div class="fb-share-button" data-href="http://facebook.com/photo.php?fbid=1395683184012481&set=a.1387771961470270.1073741828.1384849471762519&type=1&theater" data-type="button_count"></div> -->
+                                <!-- <div class="fb-like" data-href="https://www.facebook.com/photo.php?fbid=1395683184012481&amp;set=a.1387771961470270.1073741828.1384849471762519&amp;type=1&amp;theater" data-width="300" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div> --> 
+                                
                                 </div>
                             </td>
                         </tr>
@@ -357,10 +363,19 @@ Yii::app()->clientScript->registerScriptFile(
                                 "</a>".
                                 "</td>";
                         }else{
-                        echo "<td style='border: 1px solid #e5e5e5;'><b>".
+                            if(intval($participantes[$i]["id"]) > 1841 && intval($participantes[$i]["id"]) < 2501){
+                                
+                                    echo "<td style='border: 1px solid #e5e5e5;' bgcolor='#B3D9FF'><b>".
+                                    $participantes[$i]["id"].".</b> ".
+                                    $participantes[$i]["first_name"]." ".$participantes[$i]["last_name"].
+                                    "</td>";
+                                
+                            }else{
+                                echo "<td style='border: 1px solid #e5e5e5;' <b>".
                                 $participantes[$i]["id"].".</b> ".
                                 $participantes[$i]["first_name"]." ".$participantes[$i]["last_name"].
-                                "</td>";    
+                                "</td>";
+                            }
                         }
                         
                          
@@ -388,13 +403,39 @@ Yii::app()->clientScript->registerScriptFile(
     </tbody>
 </table>
 
-<div id="estreno" title="Estreno de la semana" style="height: 700px; overflow: scroll; color: #555;">
+<div id="estreno" title="palCine App" style="height: 700px; overflow: scroll; color: #555;">
   </br>
   <div align="center">
-      <h3 style="color: #04467e; font-size: 20pt;"><b>El hobbit: la desolación de Smaug</b></h3>
-      <div style="color: grey;" class="fb-like" data-href="http://www.palcine.me/movie/19" data-width="100" data-layout="box_count" data-action="like" data-show-faces="true" data-share="false" data-colorscheme="light"></div> 
-                                </br></br>
-      <img src="<?php echo Yii::app()->baseUrl; ?>/images/estreno.jpg" />
+      
+      
+      <table border="0" style="border: none;">
+                                    <tbody>
+                                        <tr>
+                                            <td><h3 style="color: #04467e; font-size: 15pt;"><b>Premio de L.600.00 en Saldo</b></h3>
+                                             
+                                                <div align="center">
+                                                <a id="opener" href="https://www.facebook.com/photo.php?fbid=503999026384721&set=a.222655054519121.47830.222201907897769&type=1&relevant_count=1" class="yellow button" style="color: #FFF;">Compartir y etiquetar</a>
+                                            </div>
+                                            
+                                            </td>
+                                            <td><div style="color: grey;" class="fb-like" data-href="https://www.facebook.com/photo.php?fbid=503999026384721&set=a.222655054519121.47830.222201907897769&type=1&relevant_count=1" data-width="100" data-layout="standard" data-action="like" data-show-faces="true" data-share="true" data-colorscheme="light"></div> 
+                                </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table border="0">
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="https://www.facebook.com/photo.php?fbid=503999026384721&set=a.222655054519121.47830.222201907897769&type=1&relevant_count=1"><img width="600" height="315" src="<?php echo Yii::app()->baseUrl; ?>/images/como.jpg" /></a></td> 
+                                            <!-- <td><iframe width="448" height="286" src="//www.youtube.com/embed/g5LS-3gBZdg" frameborder="0" allowfullscreen></iframe></td> -->
+                                            <td><div class="fb-comments" data-href=https://www.facebook.com/photo.php?fbid=503999026384721&set=a.222655054519121.47830.222201907897769&type=1&relevant_count=1" data-numposts="5" data-width="380"></div>
+                                </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                
+      
   </div>
   </div>
 
@@ -500,8 +541,8 @@ $( "#dialog" ).dialog({
     
     $( "#estreno" ).dialog({
       autoOpen: true,
-      width: 900,
-      height: 700,
+      width: 1000,
+      height: 600,
       modal: true,
       show: {
       },
