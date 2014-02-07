@@ -454,7 +454,7 @@ echo strftime("%A %d de %B del %Y");
                                         </tr>
                                         <tr>
                                             <td>
-                                                <a href="https://itunes.apple.com/us/app/palcine/id791104005?ls=1&mt=8"><img width="800" height="300" src="<?php echo Yii::app()->baseUrl; ?>/images/mainBanner.jpg" />
+                                                <a href="https://itunes.apple.com/us/app/palcine/id791104005?ls=1&mt=8"><img width="800" height="300" src="" />
                                                 </a>
                                             </td> 
                                             
@@ -880,7 +880,7 @@ $(function() {
   */
  
     $( "#dialog" ).dialog({
-      autoOpen: true,
+      autoOpen: false,
       width: 850,
       modal: false,
       show: {

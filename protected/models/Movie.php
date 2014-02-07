@@ -154,4 +154,22 @@ class Movie extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        public function beforeSave(){
+            if(parent::beforeSave())
+            {
+                if($this->isNewRecord){
+                    $this->create_time = Yii::app()->Date->now();
+                    $this->create_user = Yii::app()->user->name;
+                    
+                }else{
+                    $this->update_time = Yii::app()->Date->now();
+                    $this->update_user = Yii::app()->user->name;
+                }
+                return true;
+            }else
+                return false;
+            
+        }
+        
 }

@@ -46,8 +46,14 @@ return array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
-		// uncomment the following to enable URLs in path-format
-		
+            
+                'Date' => array(
+     		'class'=>'application.components.Date',
+     		//And integer that holds the offset of hours from GMT e.g. 4 for GMT +4
+     		'offset' =>-6,
+		),
+            
+		// uncomment the following to enable URLs in path-format		
 		'urlManager'=>array(
 			'urlFormat'=>'path',
                         'showScriptName'=>false,

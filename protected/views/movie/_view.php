@@ -6,7 +6,7 @@
 <div class="view">
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
+	<?php echo CHtml::link(CHtml::encode($data->id), array('update', 'id'=>$data->id)); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('name')); ?>:</b>
@@ -33,6 +33,10 @@
 	<?php echo CHtml::encode($data->genre->name); ?>
 	<br />
 
+        <b><?php echo CHtml::encode($data->getAttributeLabel('is_in_theaters')); ?>:</b>
+	<?php echo CHtml::encode($data->is_in_theaters); ?>
+	<br />
+            
 	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('is_premiere')); ?>:</b>
 	<?php echo CHtml::encode($data->is_premiere); ?>
